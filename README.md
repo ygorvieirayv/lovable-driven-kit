@@ -52,9 +52,33 @@ lovable-driven-kit/
 
 ## Como usar no Lovable
 
+### Instalacao recomendada
+
 1. Copie `workspace-knowledge.md` para o Workspace Knowledge do Lovable.
 2. Copie `project-knowledge-template.md` para o Project Knowledge e preencha o que souber.
-3. Importe as skills em `skills/` no workspace Lovable.
+3. Importe a skill unica:
+
+```txt
+https://github.com/ygorvieirayv/lovable-driven-kit/tree/main/skills/ldk
+```
+
+Depois chame:
+
+```txt
+/ldk intake <ideia>
+/ldk next
+/ldk plan <feature>
+/ldk build-task <task>
+/ldk proof
+/ldk review
+/ldk doctor
+/ldk release
+```
+
+### Instalacao avancada
+
+Se quiser comandos separados no slash menu, importe as skills individuais em `skills/ldk-*`.
+
 4. No projeto conectado ao GitHub, mantenha os artefatos do app em `ldk/`:
 
 ```txt
