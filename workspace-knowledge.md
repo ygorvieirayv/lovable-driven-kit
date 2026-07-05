@@ -32,6 +32,9 @@ Se nao viu diff no GitHub, diga que nao viu.
 
 ## Artefatos do projeto
 
+O Lovable deve criar e manter automaticamente os artefatos do LDK. O usuario nao deve precisar criar esses
+arquivos manualmente.
+
 O estado do produto fica em:
 
 ```txt
@@ -50,6 +53,8 @@ ldk/
 
 Trate `ldk/project.md`, `ldk/ledger.md`, feature plans, proofs e decisions como fonte da verdade do fluxo.
 Conversa aprova, arquivo registra.
+
+Se `ldk/` nao existir quando uma skill LDK for usada, crie a estrutura necessaria para aquela etapa.
 
 ## Estados permitidos
 

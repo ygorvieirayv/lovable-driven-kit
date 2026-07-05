@@ -18,3 +18,5 @@
 
 - Instalacao documentada como importacao manual de cada skill `ldk-*`, porque o Lovable importa uma skill por
   URL/subdiretorio.
+- README reescrito para usuario novo: proposta de valor, instalacao guiada no Lovable, prompt inicial de mini
+  loja e regra explicita de que o Lovable/LDK cria e mantem a pasta `ldk/`.
