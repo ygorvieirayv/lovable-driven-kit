@@ -1,47 +1,47 @@
 # Lovable Driven Kit (LDK)
 
-Construa apps no Lovable com plano, tarefas pequenas e prova real de conclusao.
+Construa apps no Lovable com plano, tarefas pequenas e prova real de conclusão.
 
 Regra central:
 
-> Sem prova, nao e done.
+> Sem prova, não é done.
 
-O LDK e para quem usa Lovable e quer evitar o problema classico: a IA diz que "esta pronto", mas ninguem
-abriu o preview, testou o fluxo, conferiu o diff ou registrou evidencia. O kit transforma a conversa em um
+O LDK é para quem usa Lovable e quer evitar o problema clássico: a IA diz que "está pronto", mas ninguém
+abriu o preview, testou o fluxo, conferiu o diff ou registrou evidência. O kit transforma a conversa em um
 processo simples:
 
-1. voce descreve o que quer;
+1. você descreve o que quer;
 2. o Lovable organiza o escopo;
 3. ele planeja antes de construir;
 4. ele implementa uma task por vez;
-5. ele so marca `DONE` quando existe prova suficiente.
+5. ele só marca `DONE` quando existe prova suficiente.
 
-Repositorio oficial:
+Repositório oficial:
 
 ```txt
 https://github.com/ygorvieirayv/lovable-driven-kit
 ```
 
-## Para quem e
+## Para quem é
 
-- Usuarios nao tecnicos que querem criar uma loja, landing page, SaaS simples, dashboard ou app interno no
+- Usuários não técnicos que querem criar uma loja, landing page, SaaS simples, dashboard ou app interno no
   Lovable sem aceitar entrega "no olho".
-- Devs que usam Lovable como acelerador, mas querem diff, criterio de aceite, prova e menos retrabalho.
+- Devs que usam Lovable como acelerador, mas querem diff, critério de aceite, prova e menos retrabalho.
 
-## O que voce precisa lembrar
+## O que você precisa lembrar
 
-So dois comandos importam no dia a dia:
+Só dois comandos importam no dia a dia:
 
 ```txt
 /ldk-intake
 /ldk-next
 ```
 
-Use `/ldk-intake` no comeco do projeto.
+Use `/ldk-intake` no começo do projeto.
 
-Use `/ldk-next` sempre que nao souber o proximo passo. Ele deve ler o estado salvo e dizer o que fazer.
+Use `/ldk-next` sempre que não souber o próximo passo. Ele deve ler o estado salvo e dizer o que fazer.
 
-Os outros comandos aparecem quando o proprio LDK pedir:
+Os outros comandos aparecem quando o próprio LDK pedir:
 
 ```txt
 /ldk-plan
@@ -54,21 +54,21 @@ Os outros comandos aparecem quando o proprio LDK pedir:
 
 ## Como instalar no Lovable
 
-O Lovable importa **uma skill por vez**. Nao use a URL do repo inteiro para instalar o LDK completo. Como o
-LDK tem varias skills, importe os links abaixo um por um.
+O Lovable importa **uma skill por vez**. Não use a URL do repo inteiro para instalar o LDK completo. Como o
+LDK tem várias skills, importe os links abaixo um por um.
 
 ### 1. Abrir Skills
 
 Na tela inicial do Lovable:
 
-1. Clique em **Settings** ou **Configuracao**.
+1. Clique em **Settings** ou **Configuração**.
 2. Abra **Skills**.
 3. Clique em **Add**.
 4. Escolha **Import from GitHub**.
 
 ### 2. Importar cada skill
 
-Copie um link, cole em **Repository URL**, clique em **Import from GitHub** e repita para o proximo.
+Copie um link, cole em **Repository URL**, clique em **Import from GitHub** e repita para o próximo.
 
 1. `ldk-intake`
 
@@ -122,13 +122,13 @@ https://github.com/ygorvieirayv/lovable-driven-kit/tree/main/skills/ldk-release
 
 No Lovable:
 
-1. Va em **Settings** ou **Configuracao**.
+1. Vá em **Settings** ou **Configuração**.
 2. Abra **Knowledge**.
-3. Em **Workspace Knowledge**, cole o conteudo de `workspace-knowledge.md`.
+3. Em **Workspace Knowledge**, cole o conteúdo de `workspace-knowledge.md`.
 4. No projeto do app, abra **Project settings -> Knowledge**.
-5. Cole o conteudo de `project-knowledge-template.md`.
+5. Cole o conteúdo de `project-knowledge-template.md`.
 
-Voce nao precisa preencher tudo. O LDK deve perguntar o que faltar e marcar duvidas com `[VERIFY]`.
+Você não precisa preencher tudo. O LDK deve perguntar o que faltar e marcar dúvidas com `[VERIFY]`.
 
 ## Criando a primeira mini loja
 
@@ -141,28 +141,28 @@ Quero criar uma mini loja moderna, bonita e responsiva.
 
 Escopo do MVP:
 - home com visual premium;
-- catalogo de produtos;
-- cards com imagem, nome, preco e botao;
+- catálogo de produtos;
+- cards com imagem, nome, preço e botão;
 - carrinho;
 - checkout fake, sem pagamento real;
-- tela de confirmacao de pedido;
-- area admin simples para listar pedidos simulados.
+- tela de confirmação de pedido;
+- área admin simples para listar pedidos simulados.
 
-Direcao visual:
+Direção visual:
 - design limpo, atual e premium;
 - responsivo para desktop e mobile;
 - boa hierarquia visual;
 - cards elegantes;
 - cores neutras com um destaque forte.
 
-Por enquanto nao quero auth real, pagamento real, Supabase real ou integracoes externas.
+Por enquanto não quero auth real, pagamento real, Supabase real ou integrações externas.
 
 Use o Lovable Driven Kit.
-Organize o projeto, riscos, MVP e proximo passo seguro.
-Nao implemente ainda.
+Organize o projeto, riscos, MVP e próximo passo seguro.
+Não implemente ainda.
 ```
 
-Depois disso, siga o que o LDK recomendar. Se ficar em duvida, mande:
+Depois disso, siga o que o LDK recomendar. Se ficar em dúvida, mande:
 
 ```txt
 /ldk-next
@@ -170,16 +170,16 @@ Depois disso, siga o que o LDK recomendar. Se ficar em duvida, mande:
 
 ## Fluxo esperado
 
-O usuario nao precisa decorar este fluxo. Ele existe para o Lovable seguir:
+O usuário não precisa decorar este fluxo. Ele existe para o Lovable seguir:
 
 ```txt
 ideia
   -> /ldk-intake       organiza produto, riscos e MVP
   -> /ldk-plan         planeja uma feature
-  -> /ldk-build-task   constri uma task aprovada
-  -> /ldk-proof        prova ou bloqueia a conclusao
-  -> /ldk-review       revisa risco, diff e evidencia
-  -> /ldk-next         recomenda o proximo passo
+  -> /ldk-build-task   constrói uma task aprovada
+  -> /ldk-proof        prova ou bloqueia a conclusão
+  -> /ldk-review       revisa risco, diff e evidência
+  -> /ldk-next         recomenda o próximo passo
 ```
 
 Comandos de apoio:
@@ -187,10 +187,10 @@ Comandos de apoio:
 - `/ldk-doctor`: diagnostica quando o projeto parece perdido ou inconsistente.
 - `/ldk-release`: checklist antes de publicar.
 
-## Como saber se o LDK esta funcionando
+## Como saber se o LDK está funcionando
 
-Voce nao precisa criar arquivos manualmente, mas depois do `/ldk-intake` o Lovable deve criar uma pasta
-`ldk/` no projeto. Ela e a memoria do kit.
+Você não precisa criar arquivos manualmente, mas depois do `/ldk-intake` o Lovable deve criar uma pasta
+`ldk/` no projeto. Ela é a memória do kit.
 
 Estrutura esperada:
 
@@ -204,7 +204,7 @@ ldk/
   releases/
 ```
 
-Se essa pasta nao aparecer depois do intake, diga ao Lovable:
+Se essa pasta não aparecer depois do intake, diga ao Lovable:
 
 ```txt
 Use o LDK corretamente. Crie ou atualize a pasta ldk/ e registre o estado do projeto antes de continuar.
@@ -212,48 +212,48 @@ Use o LDK corretamente. Crie ou atualize a pasta ldk/ e registre o estado do pro
 
 ## Status de entrega
 
-O LDK usa tres resultados no fim de uma task:
+O LDK usa três resultados no fim de uma task:
 
-- `DONE`: tudo essencial foi coberto e a prova minima foi atingida.
-- `PARTIAL`: algo foi feito, mas falta criterio, teste, preview, diff ou evidencia.
-- `BLOCKED`: nao da para concluir sem acesso, decisao, credencial ou correcao previa.
+- `DONE`: tudo essencial foi coberto e a prova mínima foi atingida.
+- `PARTIAL`: algo foi feito, mas falta critério, teste, preview, diff ou evidência.
+- `BLOCKED`: não dá para concluir sem acesso, decisão, credencial ou correção prévia.
 
-`DONE` nao e permitido quando o Lovable nao verificou.
+`DONE` não é permitido quando o Lovable não verificou.
 
 ## Risco e prova
 
 | Risco | Exemplos | Prova esperada |
 |---|---|---|
 | trivial | copy, cor, padding | P1 visual |
-| baixo | secao simples, card estatico | P1/P2 |
-| medio | CRUD, formulario, filtros, admin simples | P2/P3 |
-| alto | auth, permissao, PII, pagamento, Supabase rules, delecao/migracao | P4 |
+| baixo | seção simples, card estático | P1/P2 |
+| médio | CRUD, formulário, filtros, admin simples | P2/P3 |
+| alto | auth, permissão, PII, pagamento, Supabase rules, deleção/migração | P4 |
 
-| Prova | Evidencia minima |
+| Prova | Evidência mínima |
 |---|---|
-| P1 | screenshot ou observacao precisa do preview |
+| P1 | screenshot ou observação precisa do preview |
 | P2 | fluxo manual executado com passos e resultado |
-| P3 | teste automatizado ou script reproduzivel passando |
-| P4 | CI verde, diff GitHub e checklist de seguranca |
+| P3 | teste automatizado ou script reproduzível passando |
+| P4 | CI verde, diff GitHub e checklist de segurança |
 
-Na duvida, suba o risco.
+Na dúvida, suba o risco.
 
 ## GitHub
 
-Conectar o app Lovable ao GitHub e recomendado. O GitHub ajuda a verificar:
+Conectar o app Lovable ao GitHub é recomendado. O GitHub ajuda a verificar:
 
 - arquivos alterados;
 - diff real;
 - CI;
 - checks do LDK;
-- se a prova bate com o codigo.
+- se a prova bate com o código.
 
-O arquivo `github/workflows/proof.yml` e um workflow opcional para copiar para `.github/workflows/proof.yml`
+O arquivo `github/workflows/proof.yml` é um workflow opcional para copiar para `.github/workflows/proof.yml`
 no repo do app. Ele roda `ldk-check` e, quando existir `package.json`, tenta rodar install, test e build.
 
 ## Para devs
 
-Este repo contem:
+Este repo contém:
 
 ```txt
 workspace-knowledge.md
@@ -266,7 +266,7 @@ github/
 tests/
 ```
 
-Validacao local:
+Validação local:
 
 ```powershell
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts\ldk-check.ps1 -Root tests\fixtures\valid
@@ -280,7 +280,7 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts\ldk-check.ps1 -R
 
 ## Fronteira do kit
 
-Arquivos do processo LDK nao sao codigo do app. Durante uma task do produto, o Lovable nao deve alterar:
+Arquivos do processo LDK não são código do app. Durante uma task do produto, o Lovable não deve alterar:
 
 - Workspace Knowledge e Project Knowledge do LDK;
 - skills `ldk-*`;
@@ -288,4 +288,4 @@ Arquivos do processo LDK nao sao codigo do app. Durante uma task do produto, o L
 - scripts `ldk-check.*`;
 - workflows/templates do kit.
 
-Se uma task de app alterar o motor do LDK, isso e drift critico: rode `/ldk-doctor` e nao marque `DONE`.
+Se uma task de app alterar o motor do LDK, isso é drift crítico: rode `/ldk-doctor` e não marque `DONE`.
