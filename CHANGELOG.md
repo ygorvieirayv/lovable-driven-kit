@@ -13,3 +13,8 @@
 - Fixtures valid/broken para testar o contrato.
 - Workflow CI do kit e workflow `github/workflows/proof.yml` para apps Lovable.
 - Smoke test Playwright base.
+
+### Changed
+
+- Instalacao documentada como importacao manual de cada skill `ldk-*`, porque o Lovable importa uma skill por
+  URL/subdiretorio.

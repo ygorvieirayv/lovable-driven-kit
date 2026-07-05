@@ -50,41 +50,86 @@ lovable-driven-kit/
     fixtures/broken/
 ```
 
-## Como usar no Lovable
+## Como instalar no Lovable
 
-### Instalacao recomendada
+O Lovable importa **uma skill por vez**. Nao use a URL do repo inteiro para instalar o LDK completo. Repo
+inteiro serve quando existe uma unica skill com `SKILL.md` na raiz. Como o LDK tem varias skills, importe os
+subdiretorios abaixo um por um.
 
-1. Copie `workspace-knowledge.md` para o Workspace Knowledge do Lovable.
-2. Copie `project-knowledge-template.md` para o Project Knowledge e preencha o que souber.
-3. Importe a skill unica pelo repo inteiro:
+### 1. Abrir a tela de Skills
 
-```txt
-https://github.com/ygorvieirayv/lovable-driven-kit
-```
+Na tela inicial do Lovable:
 
-Depois chame:
+1. Clique em **Settings** ou **Configuracao**.
+2. Abra **Skills**.
+3. Clique em **Add**.
+4. Escolha **Import from GitHub**.
 
-```txt
-/ldk intake <ideia>
-/ldk next
-/ldk plan <feature>
-/ldk build-task <task>
-/ldk proof
-/ldk review
-/ldk doctor
-/ldk release
-```
+### 2. Importar as skills uma por uma
 
-### Instalacao avancada
+Copie um link, cole no campo **Repository URL**, clique em **Import from GitHub** e repita para o proximo.
 
-Se quiser comandos separados no slash menu, importe as skills individuais em `skills/ldk-*`.
-Se a importacao por repo inteiro falhar no Lovable, tente o caminho direto da skill:
+1. `ldk-intake`
 
 ```txt
-https://github.com/ygorvieirayv/lovable-driven-kit/tree/main/skills/ldk
+https://github.com/ygorvieirayv/lovable-driven-kit/tree/main/skills/ldk-intake
 ```
 
-4. No projeto conectado ao GitHub, mantenha os artefatos do app em `ldk/`:
+2. `ldk-next`
+
+```txt
+https://github.com/ygorvieirayv/lovable-driven-kit/tree/main/skills/ldk-next
+```
+
+3. `ldk-plan`
+
+```txt
+https://github.com/ygorvieirayv/lovable-driven-kit/tree/main/skills/ldk-plan
+```
+
+4. `ldk-build-task`
+
+```txt
+https://github.com/ygorvieirayv/lovable-driven-kit/tree/main/skills/ldk-build-task
+```
+
+5. `ldk-proof`
+
+```txt
+https://github.com/ygorvieirayv/lovable-driven-kit/tree/main/skills/ldk-proof
+```
+
+6. `ldk-review`
+
+```txt
+https://github.com/ygorvieirayv/lovable-driven-kit/tree/main/skills/ldk-review
+```
+
+7. `ldk-doctor`
+
+```txt
+https://github.com/ygorvieirayv/lovable-driven-kit/tree/main/skills/ldk-doctor
+```
+
+8. `ldk-release`
+
+```txt
+https://github.com/ygorvieirayv/lovable-driven-kit/tree/main/skills/ldk-release
+```
+
+### 3. Configurar Knowledge
+
+No Lovable:
+
+1. Va em **Settings** ou **Configuracao**.
+2. Abra **Knowledge**.
+3. Em **Workspace Knowledge**, cole o conteudo de `workspace-knowledge.md`.
+4. No projeto da loja, abra **Project settings -> Knowledge**.
+5. Cole o conteudo de `project-knowledge-template.md` e preencha o que souber.
+
+### 4. Usar no projeto
+
+No projeto conectado ao GitHub, mantenha os artefatos do app em `ldk/`:
 
 ```txt
 ldk/
@@ -100,25 +145,35 @@ ldk/
   releases/
 ```
 
-5. Comece com `ldk-intake` ou, se ja existir estado em `ldk/`, rode `ldk-next`.
+Comece com:
+
+```txt
+/ldk-intake Quero criar uma mini loja moderna, bonita e responsiva.
+```
+
+Depois disso, quando nao souber o proximo passo, use:
+
+```txt
+/ldk-next
+```
 
 ## Fluxo
 
 ```txt
 ideia vaga
-  -> ldk-intake
-  -> ldk-next
-  -> ldk-plan
-  -> ldk-build-task
-  -> ldk-proof
-  -> ldk-review
-  -> ldk-next
+  -> /ldk-intake
+  -> /ldk-next
+  -> /ldk-plan
+  -> /ldk-build-task
+  -> /ldk-proof
+  -> /ldk-review
+  -> /ldk-next
 ```
 
 Apoio:
 
-- `ldk-doctor`: diagnostica drift entre Knowledge, `ldk/`, app e GitHub.
-- `ldk-release`: checklist antes de publicar.
+- `/ldk-doctor`: diagnostica drift entre Knowledge, `ldk/`, app e GitHub.
+- `/ldk-release`: checklist antes de publicar.
 
 ## Estados
 
