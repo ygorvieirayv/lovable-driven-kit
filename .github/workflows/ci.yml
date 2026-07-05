@@ -1,0 +1,39 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: PowerShell valid fixture passes
+        shell: pwsh
+        run: ./scripts/ldk-check.ps1 -Root tests/fixtures/valid
+
+      - name: PowerShell broken fixture fails
+        shell: pwsh
+        run: |
+          ./scripts/ldk-check.ps1 -Root tests/fixtures/broken
+          if ($LASTEXITCODE -eq 0) {
+            throw "Broken fixture unexpectedly passed"
+          }
+          exit 0
+
+      - name: Bash valid fixture passes
+        shell: bash
+        run: bash scripts/ldk-check.sh tests/fixtures/valid
+
+      - name: Bash broken fixture fails
+        shell: bash
+        run: |
+          if bash scripts/ldk-check.sh tests/fixtures/broken; then
+            echo "Broken fixture unexpectedly passed"
+            exit 1
+          fi

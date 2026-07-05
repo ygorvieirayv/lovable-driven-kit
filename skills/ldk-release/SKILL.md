@@ -1,0 +1,61 @@
+# ldk-release
+
+Use esta skill antes de publicar ou entregar uma versao.
+
+## Objetivo
+
+Gerar `ldk/releases/<date>.md` com decisao `GO` ou `NO-GO`.
+
+## O que revisar
+
+- `ldk/ledger.md`
+- proofs das features no escopo
+- issues abertas
+- GitHub diff/CI
+- preview desktop/mobile
+- console/logs
+- auth/admin
+- dados pessoais
+- pagamentos
+- Supabase/RLS
+- env vars
+- SEO/analytics, quando aplicavel
+
+## Checklist
+
+- Todas as features do release tem proof?
+- Alguma feature esta `partial` ou `blocked`?
+- Existe Critical/High aberto?
+- Build/test/CI estao verdes?
+- Preview principal foi aberto?
+- Mobile foi checado?
+- Fluxo principal foi testado?
+- Console/logs foram checados?
+- Env vars necessarias existem?
+- Auth/admin foram testados com papel correto?
+- Dados/pagamentos foram revisados se existirem?
+
+## Saida
+
+Crie:
+
+```txt
+ldk/releases/<yyyy-mm-dd>.md
+```
+
+Use `templates/release-report.md`.
+
+Na conversa:
+
+```md
+## LDK Release
+
+Status: GO | NO-GO
+Scope:
+Evidence:
+Blockers:
+Known limitations:
+Next safe step:
+```
+
+Use `NO-GO` se houver risco critico sem prova.

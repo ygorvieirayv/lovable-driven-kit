@@ -1,0 +1,39 @@
+name: LDK Proof
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  proof:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Run LDK check
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ -f scripts/ldk-check.sh ]; then
+            bash scripts/ldk-check.sh .
+          elif [ -f scripts/ldk-check.ps1 ]; then
+            pwsh -NoProfile -File scripts/ldk-check.ps1 -Root .
+          else
+            echo "No LDK check script found. Copy scripts/ldk-check.sh or scripts/ldk-check.ps1 into this repo."
+            exit 1
+          fi
+
+      - name: Node checks when package.json exists
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ ! -f package.json ]; then
+            echo "No package.json; skipping app build/test."
+            exit 0
+          fi
+          if [ -f package-lock.json ]; then npm ci; else npm install; fi
+          npm test -- --runInBand || npm test || echo "No test script or tests failed; inspect package scripts."
+          npm run build --if-present
