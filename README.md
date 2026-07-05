@@ -187,6 +187,29 @@ Comandos de apoio:
 - `/ldk-doctor`: diagnostica quando o projeto parece perdido ou inconsistente.
 - `/ldk-release`: checklist antes de publicar.
 
+## Como saber se o LDK esta funcionando
+
+Voce nao precisa criar arquivos manualmente, mas depois do `/ldk-intake` o Lovable deve criar uma pasta
+`ldk/` no projeto. Ela e a memoria do kit.
+
+Estrutura esperada:
+
+```txt
+ldk/
+  project.md
+  ledger.md
+  decisions/
+  features/
+  issues/
+  releases/
+```
+
+Se essa pasta nao aparecer depois do intake, diga ao Lovable:
+
+```txt
+Use o LDK corretamente. Crie ou atualize a pasta ldk/ e registre o estado do projeto antes de continuar.
+```
+
 ## Status de entrega
 
 O LDK usa tres resultados no fim de uma task:

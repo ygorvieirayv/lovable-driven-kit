@@ -20,3 +20,5 @@
   URL/subdiretorio.
 - README reescrito para usuario novo: proposta de valor, instalacao guiada no Lovable e prompt inicial de
   mini loja.
+- README voltou a incluir uma dica simples de diagnostico: apos `/ldk-intake`, o Lovable deve criar a pasta
+  `ldk/`; se nao criar, o usuario sabe o que pedir.
