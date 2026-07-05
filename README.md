@@ -56,10 +56,10 @@ lovable-driven-kit/
 
 1. Copie `workspace-knowledge.md` para o Workspace Knowledge do Lovable.
 2. Copie `project-knowledge-template.md` para o Project Knowledge e preencha o que souber.
-3. Importe a skill unica:
+3. Importe a skill unica pelo repo inteiro:
 
 ```txt
-https://github.com/ygorvieirayv/lovable-driven-kit/tree/main/skills/ldk
+https://github.com/ygorvieirayv/lovable-driven-kit
 ```
 
 Depois chame:
@@ -78,6 +78,11 @@ Depois chame:
 ### Instalacao avancada
 
 Se quiser comandos separados no slash menu, importe as skills individuais em `skills/ldk-*`.
+Se a importacao por repo inteiro falhar no Lovable, tente o caminho direto da skill:
+
+```txt
+https://github.com/ygorvieirayv/lovable-driven-kit/tree/main/skills/ldk
+```
 
 4. No projeto conectado ao GitHub, mantenha os artefatos do app em `ldk/`:
 
