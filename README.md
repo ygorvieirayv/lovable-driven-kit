@@ -184,37 +184,8 @@ ideia
 
 Comandos de apoio:
 
-- `/ldk-doctor`: diagnostica quando ledger, proof, app ou GitHub nao batem.
+- `/ldk-doctor`: diagnostica quando o projeto parece perdido ou inconsistente.
 - `/ldk-release`: checklist antes de publicar.
-
-## O que o Lovable deve criar sozinho
-
-O usuario **nao deve criar manualmente** a estrutura do LDK. Isso e regra do kit.
-
-Ao rodar `/ldk-intake`, o Lovable deve criar e manter:
-
-```txt
-ldk/
-  project.md
-  ledger.md
-  decisions/
-  features/
-    <feature>/
-      brief.md
-      plan.md
-      proof.md
-  issues/
-  releases/
-```
-
-Esses arquivos sao a memoria do projeto. Eles permitem que `/ldk-next`, `/ldk-proof` e `/ldk-doctor`
-saibam onde o projeto esta sem depender do historico do chat.
-
-Se o Lovable disser que nao sabe onde registrar o estado, diga:
-
-```txt
-Use o LDK. Crie ou atualize os arquivos em ldk/ conforme a skill atual. Eu nao vou criar isso manualmente.
-```
 
 ## Status de entrega
 
