@@ -1,3 +1,8 @@
+---
+name: ldk-build-task
+description: Use when implementing exactly one approved task from an LDK feature plan in Build mode, keeping scope small and leaving the result proof-pending. Not for planning or final proof.
+---
+
 # ldk-build-task
 
 Use esta skill em Build mode para implementar exatamente uma task aprovada.

@@ -1,3 +1,8 @@
+---
+name: ldk-doctor
+description: Use when LDK project state may have drifted: ledger, proof, app code, GitHub diff, or LDK engine files disagree. Starts read-only and reconciles only with explicit approval.
+---
+
 # ldk-doctor
 
 Use esta skill para diagnosticar drift entre Knowledge, arquivos `ldk/`, app e GitHub.

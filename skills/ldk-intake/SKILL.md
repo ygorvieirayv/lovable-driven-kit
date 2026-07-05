@@ -1,3 +1,8 @@
+---
+name: ldk-intake
+description: Use when starting a Lovable project with the Lovable Driven Kit, turning a vague idea into project context, risks, MVP scope, and the initial LDK ledger. Not for implementing app features.
+---
+
 # ldk-intake
 
 Use esta skill para transformar uma ideia vaga em contexto inicial do Lovable Driven Kit.

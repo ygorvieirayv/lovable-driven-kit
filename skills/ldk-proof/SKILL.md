@@ -1,3 +1,8 @@
+---
+name: ldk-proof
+description: Use when finishing a Lovable task and deciding DONE, PARTIAL, or BLOCKED by comparing acceptance criteria with real evidence. Required before marking anything done.
+---
+
 # ldk-proof
 
 Use esta skill ao fim de cada task para provar a entrega ou declarar `PARTIAL`/`BLOCKED`.

@@ -1,3 +1,8 @@
+---
+name: ldk-next
+description: Use when resuming a Lovable Driven Kit project and deciding the next safe step from the saved ldk/ state. This skill is read-only and should not implement changes.
+---
+
 # ldk-next
 
 Use esta skill para retomar um projeto LDK e recomendar o proximo passo seguro.

@@ -1,3 +1,8 @@
+---
+name: ldk-review
+description: Use when reviewing an implemented LDK feature against its plan, proof, diff, risk, and test evidence. Reports findings by severity and does not silently fix code.
+---
+
 # ldk-review
 
 Use esta skill para revisar uma feature depois do proof, com foco em bugs, riscos, drift e testes.

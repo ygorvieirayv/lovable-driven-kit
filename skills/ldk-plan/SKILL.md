@@ -1,3 +1,8 @@
+---
+name: ldk-plan
+description: Use when planning a single Lovable app feature before implementation: define scope, acceptance criteria, risk, proof level, and small tasks. Not for building the feature.
+---
+
 # ldk-plan
 
 Use esta skill em Plan mode para planejar uma feature antes de construir.

@@ -1,3 +1,8 @@
+---
+name: ldk-release
+description: Use before publishing or handing off a Lovable app to run an LDK go/no-go release checklist across proofs, issues, preview, CI, auth, data, and release risks.
+---
+
 # ldk-release
 
 Use esta skill antes de publicar ou entregar uma versao.
