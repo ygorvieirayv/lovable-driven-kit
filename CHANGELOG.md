@@ -22,3 +22,5 @@
   mini loja.
 - README voltou a incluir uma dica simples de diagnostico: apos `/ldk-intake`, o Lovable deve criar a pasta
   `ldk/`; se nao criar, o usuario sabe o que pedir.
+- README clarifica que o exemplo da mini loja é opcional: o usuário pode iniciar com uma frase simples, e o
+  LDK ajuda a descobrir escopo, riscos, MVP e decisões.

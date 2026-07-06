@@ -130,9 +130,26 @@ No Lovable:
 
 Você não precisa preencher tudo. O LDK deve perguntar o que faltar e marcar dúvidas com `[VERIFY]`.
 
-## Criando a primeira mini loja
+## Primeiro uso
 
-Depois de instalar as skills e o Knowledge, crie um projeto novo no Lovable e envie:
+Depois de instalar as skills e o Knowledge, crie um projeto novo no Lovable e comece com `/ldk-intake`.
+
+Você não precisa chegar com tudo definido. O LDK existe justamente para ajudar o Lovable a transformar uma
+ideia vaga em escopo, riscos, decisões, MVP, plano e próximos passos.
+
+Um prompt mínimo já funciona:
+
+```txt
+/ldk-intake
+
+Quero criar uma loja online bonita e moderna.
+
+Use o Lovable Driven Kit.
+Me ajude a organizar a ideia, decidir o MVP, identificar riscos e definir o próximo passo seguro.
+Não implemente ainda.
+```
+
+Se você já souber mais detalhes, pode adiantar. O exemplo abaixo é opcional:
 
 ```txt
 /ldk-intake
@@ -162,7 +179,7 @@ Organize o projeto, riscos, MVP e próximo passo seguro.
 Não implemente ainda.
 ```
 
-Depois disso, siga o que o LDK recomendar. Se ficar em dúvida, mande:
+Depois disso, siga o que o LDK recomendar. Se ficar em dúvida ou voltar depois de uma pausa, mande:
 
 ```txt
 /ldk-next
