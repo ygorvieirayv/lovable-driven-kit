@@ -35,7 +35,7 @@ Confira a tabela de tasks do `plan.md` quando ela existir.
 
 - Se ainda houver task essencial `ready`, `backlog` ou `in-progress`, nao marque a feature como `DONE`.
 - Se ainda houver task essencial `ready`, `backlog` ou `in-progress` e o usuario nao pediu checkpoint parcial,
-  pare e recomende `ldk-next`/`ldk-build-task` para a proxima task.
+  pare e recomende `ldk-next`/`ldk-build` para continuar a feature.
 - Se o usuario pedir conscientemente um checkpoint parcial antes do fim das tasks, registre limitacao e nao marque
   a feature como `DONE`.
 - Se uma task `proof-pending` ou `done` parece ter sido removida ou contradita por rollback, sync, outra skill ou
@@ -138,12 +138,18 @@ Atualize o ledger:
 
 Nao use `plan.md` ou `brief.md` como `Last evidence`. Plano nao e prova.
 
+Atualize o `plan.md` quando houver tabela de tasks:
+
+- se Status for `DONE`, marque tasks essenciais cobertas como `done`;
+- se Status for `PARTIAL`, deixe tasks sem prova suficiente como `proof-pending` ou `blocked`;
+- se Status for `BLOCKED`, marque a task afetada como `blocked` quando o bloqueio for especifico.
+
 ## Saída final
 
 ```md
 ## Proof of Done
 
-Task:
+Tasks:
 Feature:
 Status: DONE | PARTIAL | BLOCKED
 Risk:
@@ -174,6 +180,12 @@ Proof level achieved:
 - Critical errors known: yes/no
 - LDK engine drift detected: yes/no
 - If GitHub/CI is unavailable, limitation documented: yes/no/not applicable
+
+### Proof verdict
+Optimistic:
+- ...
+Pessimistic:
+- ...
 
 ### Evidence
 - Preview URL:

@@ -14,7 +14,7 @@ processo simples:
 2. o Lovable organiza o escopo;
 3. ele ordena as features por dependência;
 4. ele planeja antes de construir;
-5. ele implementa uma task por vez;
+5. ele executa a feature aprovada quando for seguro;
 6. ele só marca `DONE` quando existe prova suficiente.
 
 Para tarefas pequenas, o LDK deve ser leve. Ajustes de texto, cor, padding ou detalhe visual podem usar um
@@ -58,14 +58,16 @@ Use `/ldk-intake` no começo do projeto.
 
 Use `/ldk-next` sempre que não souber o próximo passo. Ele deve ler o estado salvo e dizer o que fazer.
 
-Cada comando executa só uma etapa. Quando uma etapa termina, o Lovable deve parar e aguardar o próximo comando;
-se você não souber qual é, use `/ldk-next`.
+Cada comando executa uma etapa. A exceção é `/ldk-build`: quando a feature já foi planejada e aprovada, ele pode
+executar as tasks planejadas, registrar a prova e devolver `DONE`, `PARTIAL` ou `BLOCKED`. Se você não souber o
+próximo comando, use `/ldk-next`.
 
 Os outros comandos aparecem quando o próprio LDK pedir:
 
 ```txt
 /ldk-roadmap
 /ldk-plan
+/ldk-build
 /ldk-build-task
 /ldk-proof
 /ldk-review
@@ -115,31 +117,37 @@ https://github.com/ygorvieirayv/lovable-driven-kit/tree/main/skills/ldk-roadmap
 https://github.com/ygorvieirayv/lovable-driven-kit/tree/main/skills/ldk-plan
 ```
 
-5. `ldk-build-task`
+5. `ldk-build`
+
+```txt
+https://github.com/ygorvieirayv/lovable-driven-kit/tree/main/skills/ldk-build
+```
+
+6. `ldk-build-task`
 
 ```txt
 https://github.com/ygorvieirayv/lovable-driven-kit/tree/main/skills/ldk-build-task
 ```
 
-6. `ldk-proof`
+7. `ldk-proof`
 
 ```txt
 https://github.com/ygorvieirayv/lovable-driven-kit/tree/main/skills/ldk-proof
 ```
 
-7. `ldk-review`
+8. `ldk-review`
 
 ```txt
 https://github.com/ygorvieirayv/lovable-driven-kit/tree/main/skills/ldk-review
 ```
 
-8. `ldk-doctor`
+9. `ldk-doctor`
 
 ```txt
 https://github.com/ygorvieirayv/lovable-driven-kit/tree/main/skills/ldk-doctor
 ```
 
-9. `ldk-release`
+10. `ldk-release`
 
 ```txt
 https://github.com/ygorvieirayv/lovable-driven-kit/tree/main/skills/ldk-release
@@ -221,14 +229,15 @@ ideia
   -> /ldk-intake       organiza produto, riscos e MVP
   -> /ldk-roadmap      ordena features por dependência
   -> /ldk-plan         planeja uma feature
-  -> /ldk-build-task   constrói uma task aprovada
-  -> /ldk-proof        prova ou bloqueia a conclusão
+  -> /ldk-build        executa e prova uma feature aprovada
   -> /ldk-review       revisa risco, diff e evidência
   -> /ldk-next         recomenda o próximo passo
 ```
 
 Comandos de apoio:
 
+- `/ldk-build-task`: constrói uma task específica quando você quiser modo manual ou checkpoint de risco.
+- `/ldk-proof`: prova uma feature quando o build já terminou e você quer rodar apenas a prova.
 - `/ldk-doctor`: diagnostica quando o projeto parece perdido ou inconsistente.
 - `/ldk-release`: checklist antes de publicar.
 
@@ -258,7 +267,7 @@ Use o LDK corretamente. Crie ou atualize a pasta ldk/ e registre o estado do pro
 
 ## Status de entrega
 
-O LDK usa três resultados no fim de uma task:
+O LDK usa três resultados no fim de uma feature, proof ou checkpoint:
 
 - `DONE`: tudo essencial foi coberto e a prova mínima foi atingida.
 - `PARTIAL`: algo foi feito, mas falta critério, teste, preview, diff ou evidência.
@@ -269,6 +278,14 @@ O LDK usa três resultados no fim de uma task:
 Todo proof também deve incluir um auto-check do LDK. Esse auto-check força o Lovable a responder, de forma
 explícita, se os critérios essenciais foram cobertos, se existe evidência para eles, se a prova atingida é
 suficiente e se há algum erro crítico conhecido.
+
+No `/ldk-build`, antes de editar o app, o Lovable deve fazer um veredito otimista e pessimista:
+
+- otimista: por que o plano parece seguro para executar;
+- pessimista: o que pode dar errado, virar falso `DONE` ou exigir pausa.
+
+Se o lado pessimista achar um problema simples dentro do escopo, o Lovable pode corrigir durante o build. Se achar
+decisão aberta, risco alto, escopo novo ou prova impossível, ele deve parar antes de mexer no app.
 
 ## Risco e prova
 
@@ -291,8 +308,8 @@ Na dúvida, suba o risco.
 O fluxo deve ser proporcional: tarefa trivial não precisa virar plano longo; feature média ou alta não deve ir
 direto para construção sem escopo, risco e prova clara.
 
-O fluxo também deve ser etapa por etapa: aprovar um plano não autoriza build automático, e terminar build não
-autoriza proof automático. Use `/ldk-next` quando quiser continuar.
+O fluxo continua controlado: aprovar um plano não inicia build sozinho. Mas quando você chama `/ldk-build`, ele
+pode executar a feature planejada e registrar a prova na mesma etapa, desde que o risco permita.
 
 Regras que sempre valem:
 
@@ -310,7 +327,8 @@ fake. Pagamento real e provedor externo entram depois, quando forem escolhidos c
 
 Para testar se o Lovable está obedecendo o fluxo, use o checklist
 [evaluation/mini-store-checklist.md](evaluation/mini-store-checklist.md). Ele mede se o Lovable fez intake,
-ordenou dependências, planejou quando precisava, construiu uma task por vez, pediu proof antes de `DONE` e
+ordenou dependências, planejou quando precisava, executou a feature aprovada sem puxar escopo solto, registrou
+proof antes de `DONE` e
 manteve a cerimônia proporcional ao risco.
 
 ## GitHub

@@ -10,6 +10,7 @@ Use estes nomes para os comandos/skills:
 - `ldk-next`
 - `ldk-roadmap`
 - `ldk-plan`
+- `ldk-build`
 - `ldk-build-task`
 - `ldk-proof`
 - `ldk-review`
@@ -23,8 +24,8 @@ para que o usuario acompanhe e aprove com evidencia.
 
 1. Antes de construir mudancas relevantes, use Plan mode.
 2. Defina escopo, risco, criterios de aceite e prova minima.
-3. Implemente uma task por vez.
-4. Ao terminar uma task, deixe `proof-pending`; nao execute `ldk-proof` no mesmo comando.
+3. Para feature aprovada e segura, use `ldk-build` para executar as tasks planejadas em sequencia e provar a feature.
+4. Use `ldk-build-task` apenas quando quiser uma task especifica, checkpoint manual ou risco alto.
 5. Use `DONE` apenas quando houver evidencia suficiente.
 6. Se a prova minima nao foi atingida, use `PARTIAL` ou `BLOCKED`.
 7. Nunca invente verificacao.
@@ -36,16 +37,18 @@ Execute apenas a skill/comando invocado pelo usuario.
 - `ldk-intake` faz intake e para.
 - `ldk-roadmap` faz roadmap e para.
 - `ldk-plan` faz plano/aprovacao do plano e para.
-- `ldk-build-task` implementa uma task e para em `proof-pending`.
+- `ldk-build` executa a feature aprovada, registra tasks, prova e para.
+- `ldk-build-task` implementa uma task especifica e para em `proof-pending`.
 - `ldk-proof` prova/bloqueia e para.
 - `ldk-review` revisa e para.
 
-Nao sugira agrupar tasks aprovadas, mesmo quando elas tocam o mesmo arquivo. Se a divisao do plano estiver ruim,
-recomende revisar o plano com `ldk-plan` ou `ldk-doctor`; nao construa T2+T3 no mesmo `ldk-build-task`.
+`ldk-build` pode executar varias tasks da mesma feature aprovada porque esse e o escopo dele. `ldk-build-task`
+continua sendo manual e executa uma task por vez.
 
 Nao encadeie para a proxima skill na mesma resposta, mesmo que o usuario diga "pode continuar". Essa aprovacao
-vale apenas para concluir a etapa atual. Ao final, diga que a etapa esta pronta e aguardando o proximo comando.
-Se o usuario nao souber o que fazer, ele deve usar `/ldk-next`.
+vale apenas para concluir a etapa atual. Excecao: dentro de `ldk-build`, build e proof fazem parte da mesma etapa.
+Ao final, diga que a etapa esta pronta e aguardando o proximo comando. Se o usuario nao souber o que fazer, ele
+deve usar `/ldk-next`.
 
 Regras "Sempre":
 
@@ -64,13 +67,22 @@ Regras "Sempre":
 
 Use cerimonia proporcional:
 
-- trivial: AC curto, uma mudanca pequena, prova P1 e proof curto.
-- baixo: plano curto, uma ou poucas tasks, prova P1/P2.
-- medio: plano completo, tasks pequenas, prova P2/P3.
+- trivial: AC curto, uma mudanca pequena, `ldk-build` leve e prova P1.
+- baixo: plano curto, `ldk-build` executa a feature aprovada e prova P1/P2.
+- medio: plano completo; `ldk-build` pode seguir se nao houver decisao aberta, dado sensivel ou integracao critica.
 - alto: plano completo, risco explicito, prova P4 e revisao antes de release.
 
 Nao force fluxo pesado para copy, cor, padding ou ajuste visual pequeno. Tambem nao simplifique auth,
 pagamento, PII, Supabase rules, migracao ou delecao.
+
+Antes de `ldk-build` editar o app, ele deve fazer um pre-flight:
+
+- veredito otimista: por que a execucao parece segura;
+- veredito pessimista: o que pode dar errado ou virar falso `DONE`;
+- decisao antes de executar: seguir, pausar ou bloquear.
+
+Se o veredito pessimista achar problema simples dentro do escopo, corrija durante o build. Se achar decisao aberta,
+risco alto, escopo novo ou prova impossivel, pare antes de editar.
 
 Para loja/e-commerce vaga, o default seguro e vitrine/catalogo/carrinho local/checkout fake. Pagamento real,
 checkout real, Shopify, gateway, frete real, auth real e Supabase nao entram no MVP sem pedido explicito.
@@ -209,6 +221,9 @@ verify
 `proof-pending` ou `done`, ou quando o usuario pedir conscientemente um checkpoint parcial. Checkpoint parcial nao
 pode marcar a feature como `DONE`.
 
+`ldk-build` tambem pode escrever o proof da feature, desde que ele tenha executado ou validado as tasks essenciais
+e consiga atingir a prova minima. Isso nao exige um comando separado de `ldk-proof`.
+
 Para alto risco, como auth, permissoes, dados pessoais, pagamento real, delecao, migracao ou Supabase
 policies/RLS, o Lovable pode implementar, mas `DONE` exige prova forte. Se a prova nao existir, marque
 `PARTIAL` ou `BLOCKED` e explique o proximo passo seguro.
@@ -219,13 +234,15 @@ Nao altere o motor do LDK como efeito colateral de uma task do app. Isso inclui 
 templates, scripts, workflows e regras do kit. Se um diff de produto tocar o motor do LDK, trate como drift
 critico, nao marque `DONE` e rode `ldk-doctor`.
 
-## Saida obrigatoria ao fim de task
+## Saida obrigatoria ao fim de build/proof
 
-Toda resposta final apos uma task deve conter:
+Toda resposta final apos build/proof deve conter:
 
 1. O que mudou
 2. Arquivos alterados
 3. AC cobertos
 4. Prova executada
-5. Status: DONE/PARTIAL/BLOCKED
-6. Etapa concluida e aguardando proximo comando
+5. Veredito otimista
+6. Veredito pessimista
+7. Status: DONE/PARTIAL/BLOCKED
+8. Etapa concluida e aguardando proximo comando

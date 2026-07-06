@@ -10,10 +10,13 @@ Estas regras valem em qualquer nivel de risco.
 - Nao escolha plataforma, provedor ou integracao sem pedido explicito do usuario; registre `[VERIFY]` ou deixe fora
   de escopo.
 - Quando houver backend, seguranca ou dado sensivel, valide no servidor ou na regra de acesso correta.
-- Implemente uma task de app por vez.
+- `ldk-build` pode executar tasks planejadas da mesma feature em sequencia e provar a feature.
+- Fora de `ldk-build`, implemente uma task de app por vez.
 - Nao agrupe duas ou mais tasks aprovadas no mesmo `ldk-build-task`. Se elas deveriam ser uma unica task,
   revise o plano antes de construir.
 - Execute apenas o comando LDK invocado; nao encadeie automaticamente para a proxima skill.
+- Excecao: `ldk-build` inclui build e proof da feature aprovada no proprio escopo.
+- Antes de `ldk-build` editar app, faca veredito otimista/pessimista e decida seguir, pausar ou bloquear.
 - Nao altere motor do LDK como efeito colateral de uma task do app.
 - Mudancas externas ao fluxo LDK (rollback, sync, outra skill ou prompt solto) nao sao erro por si so.
 - Em projeto ja iniciado, nao trate codigo preexistente fora da feature/task LDK ativa como drift.

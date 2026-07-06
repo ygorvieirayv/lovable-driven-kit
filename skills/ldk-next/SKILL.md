@@ -42,24 +42,24 @@ iniciado, seja cauteloso: nao trate codigo preexistente ou arquivos fora da feat
 Compare somente os arquivos/AC esperados da feature ativa. Se uma task `proof-pending` ou `done` parece ter sido
 removida ou contradita pelo codigo atual, chame isso de possivel drift externo e recomende `ldk-doctor`.
 
-Nao sugira executar duas ou mais tasks aprovadas juntas. Mesmo quando tasks tocam o mesmo arquivo, recomende apenas
-a proxima task `ready`/`in-progress`. Se a divisao do plano parecer ruim, a alternativa consciente deve ser revisar
-o plano antes do build, nao agrupar tasks no `ldk-build-task`.
+Prefira `ldk-build` para feature aprovada e segura. Ele pode executar as tasks planejadas em sequencia e provar a
+feature. Use `ldk-build-task` apenas para task especifica, checkpoint manual, risco alto ou quando o usuario pedir
+granularidade.
 
 Regua de cerimonia:
 
-- trivial: ajuste pequeno e reversivel; pode ir direto para `ldk-build-task` com AC de uma linha e proof P1.
-- baixo: plano curto com objetivo, AC, fora de escopo e prova P1/P2.
-- medio: plano normal com tasks pequenas e proof P2/P3.
+- trivial: ajuste pequeno e reversivel; use `ldk-build` leve com AC de uma linha e proof P1.
+- baixo: plano curto com objetivo, AC, fora de escopo e prova P1/P2; depois use `ldk-build`.
+- medio: plano normal com tasks pequenas e proof P2/P3; use `ldk-build` se nao houver decisao aberta critica.
 - alto: plano explicito, risco claro, proof forte P4 e revisao antes de release.
 
 Se ja houver feature ativa em `approved`, `building` ou `proof-pending`, resolva essa feature antes de puxar
 uma nova do roadmap.
 
 Enquanto houver task essencial `ready`, `backlog` ou `in-progress`, nao recomende `ldk-proof` como proximo passo
-nem como alternativa consciente. O proximo passo deve ser a proxima task `ready`/`in-progress`, ou `ldk-doctor` se
-o plano/estado estiver incoerente. `ldk-proof` so entra depois que todas as tasks essenciais estiverem
-`proof-pending` ou `done`.
+nem como alternativa consciente. O proximo passo deve ser `ldk-build` para continuar a feature, `ldk-build-task`
+se o usuario quiser granularidade, ou `ldk-doctor` se o plano/estado estiver incoerente. `ldk-proof` so entra
+isoladamente depois que todas as tasks essenciais estiverem `proof-pending` ou `done`.
 
 | Situacao | Proximo passo |
 |---|---|
@@ -67,15 +67,16 @@ o plano/estado estiver incoerente. `ldk-proof` so entra depois que todas as task
 | Ledger/proof/app divergentes | `ldk-doctor` |
 | Task `proof-pending`/`done` contradita pelo codigo atual | `ldk-doctor` |
 | Feature em `proof-pending` | `ldk-proof` |
-| Feature em `building` com task `ready`/`in-progress` | `ldk-build-task` da proxima task |
-| Feature em `building` com todas as tasks `proof-pending` | `ldk-doctor` para alinhar o ledger antes de `ldk-proof` |
-| Feature em `approved` | `ldk-build-task` |
+| Feature `approved`/`building` com risco trivial/baixo | `ldk-build` |
+| Feature `approved`/`building` com risco medio sem bloqueio critico | `ldk-build` |
+| Feature `approved`/`building` com risco alto ou decisao critica aberta | `ldk-build-task` ou resolver bloqueio |
+| Feature em `building` com todas as tasks `proof-pending` | `ldk-build` para finalizar prova, ou `ldk-proof` se o usuario pedir proof isolado |
 | Feature em `planned` | pedir aprovacao do plano ou continuar `ldk-plan` |
 | Projeto tem varias features e nao existe `ldk/roadmap.md` | `ldk-roadmap` |
 | Roadmap ausente, desatualizado ou divergente do ledger | `ldk-roadmap` |
 | Roadmap indica feature `blocked` como proxima | resolver bloqueio ou `ldk-roadmap` |
 | Roadmap indica feature `ready` | `ldk-plan` da feature indicada |
-| Feature em `idea` trivial e bem definida | `ldk-build-task` com AC curto e proof P1 |
+| Feature em `idea` trivial e bem definida | `ldk-build` com AC curto e proof P1 |
 | Feature em `idea` baixo/medio/alto ou vaga | `ldk-plan` |
 | Feature em `partial` ou `blocked` | tratar limitacao ou `ldk-doctor` |
 | Feature em `done` | `ldk-review` ou proxima feature |
@@ -96,5 +97,5 @@ Por que:
 Alternativa consciente:
 ```
 
-Termine perguntando se o usuario quer seguir com o passo recomendado. Nao ofereca uma alternativa que execute mais
-de uma task aprovada ou que rode proof antes das tasks essenciais terminarem. Nao execute automaticamente.
+Termine perguntando se o usuario quer seguir com o passo recomendado. Nao execute automaticamente. Se recomendar
+`ldk-build`, deixe claro que ele pode concluir a feature aprovada e trazer proof no mesmo comando.

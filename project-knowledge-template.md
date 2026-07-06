@@ -47,7 +47,8 @@
 - Sem PII desnecessaria em log/analytics/console.
 - Auth, pagamento real, RLS, delecao e migracao nunca sao triviais.
 - Nao assumir Shopify, gateway, frete real, Supabase ou integracao externa sem pedido explicito.
-- Cada comando LDK executa uma etapa e para. Para continuar, use `/ldk-next`.
+- `ldk-build` pode executar e provar uma feature aprovada. Fora dele, cada comando LDK executa uma etapa e para.
+  Para continuar, use `/ldk-next`.
 
 ## Pendencias [VERIFY]
 - 
@@ -60,7 +61,8 @@ Use:
 - `ldk-next` para descobrir o proximo passo seguro.
 - `ldk-roadmap` para ordenar features por dependencia.
 - `ldk-plan` para planejar uma feature.
-- `ldk-build-task` para implementar uma task por vez.
+- `ldk-build` para executar e provar uma feature aprovada.
+- `ldk-build-task` para implementar uma task especifica.
 - `ldk-proof` para provar ou bloquear a conclusao.
 - `ldk-review` para revisar diff, risco e testes.
 - `ldk-doctor` para diagnosticar drift.

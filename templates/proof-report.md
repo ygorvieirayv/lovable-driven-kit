@@ -1,11 +1,16 @@
 # Proof of Done
 
-Task:
+Tasks:
 Feature:
 Status: DONE | PARTIAL | BLOCKED
 Risk: trivial | baixo | medio | alto
 Proof level required: P1 | P2 | P3 | P4
 Proof level achieved: P1 | P2 | P3 | P4 | none
+
+## Pre-flight before execution
+- Optimistic:
+- Pessimistic:
+- Decision before execution: proceed | pause | blocked | not recorded
 
 ## Changed files
 - 
@@ -31,6 +36,10 @@ Proof level achieved: P1 | P2 | P3 | P4 | none
 - Critical errors known: yes/no
 - LDK engine drift detected: yes/no
 - If GitHub/CI is unavailable, limitation documented: yes/no/not applicable
+
+## Proof verdict
+- Optimistic:
+- Pessimistic:
 
 ## Evidence
 - Preview URL:

@@ -40,7 +40,7 @@ Se `ldk/project.md` ou `ldk/ledger.md` nao existir, recomende `ldk-intake`.
 - Se uma feature nova entrar no roadmap, registre ou recomende registrar no ledger.
 - Ao registrar no ledger, preserve exatamente o formato de `templates/task-ledger.md`.
 - Nao altere motor do LDK.
-- Execute somente roadmap. Nao rode `ldk-plan` nem `ldk-build-task` nesta skill.
+- Execute somente roadmap. Nao rode `ldk-plan`, `ldk-build` nem `ldk-build-task` nesta skill.
 
 ## Ledger contract
 

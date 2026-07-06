@@ -30,9 +30,10 @@ Não implemente ainda.
 | Next retomou estado | `/ldk-next` apontou uma etapa clara | pass/fail | |
 | Plan veio antes de Build | Não construiu antes de planejar feature relevante | pass/fail | |
 | Plano foi proporcional | Trivial/baixo leve; médio/alto mais completo | pass/fail | |
-| Build fez uma task | Não mudou várias features de uma vez | pass/fail | |
-| Sem encadeamento automático | Plan não iniciou build; build não iniciou proof | pass/fail | |
-| Proof veio antes de DONE | Não marcou done sem `/ldk-proof` | pass/fail | |
+| Build executou a feature aprovada | Executou tasks planejadas sem puxar outra feature | pass/fail | |
+| Build teve pre-flight | Pensou lado otimista/pessimista antes de editar | pass/fail | |
+| Sem encadeamento indevido | Plan não iniciou build; `ldk-build` só fez o escopo aprovado | pass/fail | |
+| Proof veio antes de DONE | Não marcou done sem prova registrada por `ldk-build` ou `/ldk-proof` | pass/fail | |
 | Proof foi honesto | Declarou preview/test/diff apenas quando existiram | pass/fail | |
 | Status correto | Usou DONE/PARTIAL/BLOCKED coerentemente | pass/fail | |
 | Review apontou risco real | Revisou diff/proof sem corrigir em silêncio | pass/fail | |
@@ -63,4 +64,4 @@ USER EXPERIENCE: melhorou | neutra | piorou
 - Falhas de compliance devem virar ajuste nas skills ou Knowledge, não nova burocracia.
 - Se uma task pequena ficou pesada demais, ajustar a régua de cerimônia.
 - Se o Lovable inventou prova, reforçar `ldk-proof`.
-- Se o Lovable construiu escopo demais, reforçar `ldk-build-task`.
+- Se o Lovable construiu escopo demais, reforçar `ldk-build` e usar `ldk-build-task` para checkpoint manual.

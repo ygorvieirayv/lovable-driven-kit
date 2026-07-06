@@ -7,7 +7,7 @@
 - Primeiro MVP do Lovable Driven Kit (LDK).
 - Workspace Knowledge e Project Knowledge template.
 - Contratos `state-markers.md` e `engine-boundary.md`.
-- Skills `ldk-intake`, `ldk-next`, `ldk-roadmap`, `ldk-plan`, `ldk-build-task`, `ldk-proof`, `ldk-review`,
+- Skills `ldk-intake`, `ldk-next`, `ldk-roadmap`, `ldk-plan`, `ldk-build`, `ldk-build-task`, `ldk-proof`, `ldk-review`,
   `ldk-doctor` e `ldk-release`.
 - Templates para projeto, ledger, brief, plan, proof, decisions, issues e releases.
 - `scripts/ldk-check.ps1` e `scripts/ldk-check.sh` para validacao deterministica do ledger/proof.
@@ -49,7 +49,9 @@
   validador falha quando aponta para `plan.md` ou `brief.md`.
 - Planos agora exigem tabela de tasks machine-readable com IDs `T...` e `State`; `ldk-build-task` deve atualizar
   a task executada antes de parar.
-- `ldk-next` e `ldk-build-task` agora bloqueiam sugestao de agrupar tasks aprovadas no mesmo build.
+- `ldk-next` e `ldk-build-task` bloqueiam sugestao de agrupar tasks aprovadas no mesmo `ldk-build-task` manual.
 - Regras adicionadas para lidar com rollback, sync, outras skills e projetos ja iniciados sem tratar codigo antigo
   fora da feature ativa como drift.
 - `ldk-next` nao deve sugerir `ldk-proof` enquanto houver task essencial `ready`, `backlog` ou `in-progress`.
+- Adicionada skill `ldk-build` para executar e provar uma feature aprovada com pre-flight otimista/pessimista,
+  reduzindo microaprovacoes em features triviais/baixas e medias seguras.

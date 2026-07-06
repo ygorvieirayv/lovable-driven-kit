@@ -1,11 +1,12 @@
 ---
 name: ldk-build-task
-description: Use when implementing exactly one approved LDK task in Build mode, or one clearly trivial change with explicit acceptance criteria, keeping scope small and leaving the result proof-pending. Not for planning or final proof.
+description: Use when implementing exactly one approved LDK task in manual/granular mode, or when high-risk/checkpointed work should not use feature autopilot. Keeps scope small and leaves the task proof-pending. Not for planning or final proof.
 ---
 
 # ldk-build-task
 
-Use esta skill em Build mode para implementar exatamente uma task aprovada.
+Use esta skill em Build mode para implementar exatamente uma task aprovada. Para feature aprovada e segura, prefira
+`ldk-build`.
 
 ## Objetivo
 

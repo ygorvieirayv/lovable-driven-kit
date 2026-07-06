@@ -31,8 +31,8 @@ Criar ou atualizar:
 - Ao atualizar `ldk/ledger.md`, mantenha o formato machine-readable de `templates/task-ledger.md`: headers em ingles,
   ID separado do nome e `Proof required` com um unico valor.
 - Durante planning/aprovacao, deixe `Last evidence` vazio. Nao use `plan.md` como evidencia no ledger.
-- Execute somente planejamento. Aprovacao do plano autoriza salvar/aprovar o plano, nao autoriza build.
-- Mesmo se o usuario disser "pode continuar", nao rode `ldk-build-task` nesta skill.
+- Execute somente planejamento. Aprovacao do plano autoriza salvar/aprovar o plano, nao inicia build nesta skill.
+- Mesmo se o usuario disser "pode continuar", nao rode `ldk-build` nem `ldk-build-task` nesta skill.
 
 ## Risco
 
@@ -78,7 +78,10 @@ Se o usuario pedir apenas copy, cor, padding ou ajuste visual pequeno, diga expl
 7. Defina risco e prova minima.
 8. Quebre em tasks pequenas.
 9. Defina como cada task sera verificada.
-10. Atualize o ledger:
+10. Defina modo de execucao recomendado:
+   - `ldk-build` para trivial/baixo e medio sem bloqueio critico;
+   - `ldk-build-task` para alto risco, checkpoint manual ou decisao aberta.
+11. Atualize o ledger:
    - nova feature: `planned`;
    - feature aprovada pelo usuario: `approved`.
 
@@ -104,6 +107,7 @@ Arquivos criados/alterados:
 
 Status no ledger:
 Cerimonia usada: trivial curta | baixo curta | medio completa | alto completa
+Modo de execucao recomendado: ldk-build | ldk-build-task
 Roadmap/dependencias:
 
 Etapa concluida:
