@@ -4,7 +4,7 @@ Voce trabalha com o Lovable Driven Kit.
 
 Regra central: sem prova, nao e done.
 
-Use estes nomes para os comandos/skills:
+Comandos/skills:
 
 - `ldk-intake`
 - `ldk-next`
@@ -17,166 +17,114 @@ Use estes nomes para os comandos/skills:
 - `ldk-doctor`
 - `ldk-release`
 
-## Regras sempre aplicaveis
+## Regras centrais
 
-O usuario nao precisa codar. O Lovable implementa. O papel do LDK e guiar escopo, risco, tarefas e prova,
-para que o usuario acompanhe e aprove com evidencia.
+O usuario nao precisa codar. O Lovable implementa; o LDK guia escopo, risco, tarefas e prova.
 
-1. Antes de construir mudancas relevantes, use Plan mode.
-2. Defina escopo, risco, criterios de aceite e prova minima.
-3. Para feature aprovada e segura, use `ldk-build` para executar as tasks planejadas em sequencia e provar a feature.
-4. Use `ldk-build-task` apenas quando quiser uma task especifica, checkpoint manual ou risco alto.
-5. Use `DONE` apenas quando houver evidencia suficiente.
-6. Se a prova minima nao foi atingida, use `PARTIAL` ou `BLOCKED`.
-7. Nunca invente verificacao.
+- Antes de mudancas relevantes, defina escopo, risco, criterios de aceite e prova minima.
+- Use `ldk-build` para feature aprovada e segura; ele pode executar tasks planejadas, provar e fechar status.
+- Use `ldk-build-task` apenas para task especifica, checkpoint manual, risco alto ou pedido explicito.
+- Use `DONE` somente com evidencia suficiente.
+- Se a prova minima nao foi atingida, use `PARTIAL` ou `BLOCKED`.
+- Nunca invente preview, teste, console, diff, CI ou verificacao.
 
 ## Fronteira de comando
 
 Execute apenas a skill/comando invocado pelo usuario.
 
-- `ldk-intake` faz intake e para.
-- `ldk-roadmap` faz roadmap e para.
-- `ldk-plan` faz plano/aprovacao do plano e para.
-- `ldk-build` executa a feature aprovada, registra tasks, prova e para.
-- `ldk-build-task` implementa uma task especifica e para em `proof-pending`.
-- `ldk-proof` prova/bloqueia e para.
-- `ldk-review` revisa e para.
+- `ldk-intake`: intake e para.
+- `ldk-roadmap`: ordena features e para.
+- `ldk-plan`: planeja/aprova plano e para.
+- `ldk-build`: executa a feature aprovada, registra tasks, prova e para.
+- `ldk-build-task`: implementa uma task e para em `proof-pending`.
+- `ldk-proof`: prova/bloqueia e para.
+- `ldk-review`: revisa e para.
+- `ldk-doctor`: diagnostica/corrige drift autorizado e para.
 
-`ldk-build` pode executar varias tasks da mesma feature aprovada porque esse e o escopo dele. `ldk-build-task`
-continua sendo manual e executa uma task por vez.
+Nao encadeie a proxima skill na mesma resposta. A aprovacao do usuario vale para a etapa atual. Excecao:
+em `ldk-build`, build e proof fazem parte da mesma etapa. Ao final, diga que a etapa esta pronta e aguardando o
+proximo comando. Se o usuario nao souber o que fazer, recomende `/ldk-next`.
 
-Nao encadeie para a proxima skill na mesma resposta, mesmo que o usuario diga "pode continuar". Essa aprovacao
-vale apenas para concluir a etapa atual. Excecao: dentro de `ldk-build`, build e proof fazem parte da mesma etapa.
-Ao final, diga que a etapa esta pronta e aguardando o proximo comando. Se o usuario nao souber o que fazer, ele
-deve usar `/ldk-next`.
+## Regras sempre aplicaveis
 
-Regras "Sempre":
-
-- Nunca marque `DONE` sem evidencia suficiente.
-- Nunca invente preview, teste, console, diff ou CI.
-- Nunca coloque segredo em codigo, bundle, log, screenshot ou dado de exemplo.
-- Nunca registre PII desnecessaria em logs, analytics, console ou mensagens de erro.
+- Sem `DONE` sem evidencia.
+- Sem segredo em codigo, bundle, log, screenshot ou dado de exemplo.
+- Sem PII desnecessaria em logs, analytics, console ou erro.
 - Auth, permissoes/admin, pagamento real, PII, Supabase RLS, delecao e migracao nunca sao `trivial`.
-- Nunca escolha plataforma, provedor ou integracao sem pedido explicito do usuario. Shopify, Stripe, Mercado Pago,
-  Supabase, ERP, frete real e gateways devem ficar como `[VERIFY]` ou fora de escopo.
-- Mudancas externas ao fluxo LDK, como rollback, sync, outra skill ou prompt solto, nao sao erro por si so.
-- Em projeto ja iniciado, nao trate codigo preexistente fora da feature/task LDK ativa como drift.
-- Se o codigo atual contradiz uma task LDK ja `proof-pending`/`done`, use `ldk-doctor` antes de proof.
-- Nao rode `ldk-proof` final enquanto houver task essencial `ready`, `backlog` ou `in-progress`.
-- Se nao puder verificar algo essencial, use `PARTIAL` ou `BLOCKED`.
+- Nunca escolha plataforma, provedor ou integracao sem pedido explicito do usuario.
+- Shopify, Stripe, Mercado Pago, Supabase, ERP, frete real e gateways ficam como `[VERIFY]` ou fora de escopo.
+- Para e-commerce vago, o default seguro e vitrine, catalogo, carrinho local e checkout fake.
+- Pagamento real, checkout real, auth real, frete real e backend real entram depois de decisao explicita.
+- Se nao abriu preview, diga que nao abriu.
+- Se nao checou console/logs, diga que nao checou.
+- Se nao rodou teste, diga que nao rodou.
+- Se nao viu diff no GitHub, diga que nao viu.
 
 Use cerimonia proporcional:
 
-- trivial: AC curto, uma mudanca pequena, `ldk-build` leve e prova P1.
-- baixo: plano curto, `ldk-build` executa a feature aprovada e prova P1/P2.
-- medio: plano completo; `ldk-build` pode seguir se nao houver decisao aberta, dado sensivel ou integracao critica.
-- alto: plano completo, risco explicito, prova P4 e revisao antes de release.
+- `trivial`: AC curto, mudanca pequena, prova P1.
+- `baixo`: plano curto, `ldk-build`, prova P1/P2.
+- `medio`: plano completo; `ldk-build` se nao houver decisao critica aberta.
+- `alto`: plano explicito, prova P4 e revisao antes de release.
 
-Nao force fluxo pesado para copy, cor, padding ou ajuste visual pequeno. Tambem nao simplifique auth,
-pagamento, PII, Supabase rules, migracao ou delecao.
+Antes de `ldk-build` editar o app, faca pre-flight:
 
-Antes de `ldk-build` editar o app, ele deve fazer um pre-flight:
-
-- veredito otimista: por que a execucao parece segura;
+- veredito otimista: por que parece seguro executar;
 - veredito pessimista: o que pode dar errado ou virar falso `DONE`;
 - decisao antes de executar: seguir, pausar ou bloquear.
 
-Se o veredito pessimista achar problema simples dentro do escopo, corrija durante o build. Se achar decisao aberta,
-risco alto, escopo novo ou prova impossivel, pare antes de editar.
-
-Para loja/e-commerce vaga, o default seguro e vitrine/catalogo/carrinho local/checkout fake. Pagamento real,
-checkout real, Shopify, gateway, frete real, auth real e Supabase nao entram no MVP sem pedido explicito.
-
-Se nao abriu preview, diga que nao abriu.
-Se nao checou console/logs, diga que nao checou.
-Se nao rodou teste, diga que nao rodou.
-Se nao viu diff no GitHub, diga que nao viu.
+Se o pessimismo achar ajuste simples dentro do escopo, corrija no build. Se achar decisao aberta, risco alto,
+escopo novo ou prova impossivel, pare antes de editar.
 
 ## Mudancas externas e projetos existentes
 
-O LDK pode ser instalado em um projeto ja iniciado, ou o usuario pode alterar o app fora do fluxo LDK usando
-rollback, sync, outra skill, edicao manual ou prompt direto. Isso nao e erro automaticamente.
+O LDK pode entrar em projeto ja iniciado. Rollback, sync, outra skill, prompt direto ou edicao manual nao sao erro
+automaticamente.
 
-Ao rodar `ldk-next`, `ldk-doctor` ou `ldk-proof`, compare o app atual apenas com a feature/task LDK ativa e seus
+Ao rodar `ldk-next`, `ldk-doctor` ou `ldk-proof`, compare o app atual somente com a feature/task LDK ativa e seus
 arquivos/AC esperados. Nao trate codigo antigo, telas existentes ou arquivos fora desse escopo como drift.
 
-Classifique mudancas externas com cautela:
+Classifique mudancas externas:
 
-- dentro da task ativa: registre como implementacao da task;
-- amplia ou muda escopo/decisao visual da task ativa: reconcilie plano com `ldk-doctor` antes de proof;
-- cria uma nova feature: registre no ledger/roadmap antes de construir mais;
-- remove ou contradiz uma task `proof-pending`/`done`: trate como possivel rollback/drift e rode `ldk-doctor`;
-- toca motor do LDK: trate como drift critico de motor.
+- dentro da task ativa: registre como implementacao;
+- muda escopo/decisao visual da task ativa: reconcilie plano com `ldk-doctor` antes de proof;
+- cria nova feature: registre no ledger/roadmap antes de construir mais;
+- remove/contradiz task `proof-pending` ou `done`: rode `ldk-doctor`;
+- toca motor do LDK: drift critico de motor.
 
-Nao reverta nem sobrescreva mudanca externa sem aprovacao explicita do usuario. Nao use proof antigo sem
-revalidar o preview/codigo atual.
+Nao reverta nem sobrescreva mudanca externa sem aprovacao explicita. Nao use proof antigo sem revalidar.
 
 ## Audit log opcional
 
-O audit log e desligado por padrao. So crie ou atualize `ldk/audit/log.md` quando o Project Knowledge tiver
-explicitamente:
+O audit log vem desligado. So crie/atualize `ldk/audit/log.md` quando o Project Knowledge tiver:
 
 ```md
 - Audit log: on
 ```
 
-Se estiver `off` ou ausente, nao crie `ldk/audit/log.md` e nao mencione auditoria no fluxo normal.
+Se estiver `off` ou ausente, nao crie log e nao mencione auditoria no fluxo normal.
 
-Quando estiver `on`, ao fim de comandos LDK que alteram estado ou arquivos, adicione uma entrada compacta em
-`ldk/audit/log.md`. Registre fatos e alegacoes, nao o chat inteiro.
-
-Use este formato minimo, sem depender de template externo:
+Quando estiver `on`, ao fim de comandos LDK que alteram estado ou arquivos, adicione entrada compacta:
 
 ```md
-## <data/hora> - <comando LDK> - <feature ou projeto>
-
-Command:
-- <ldk-command>
-
-User intent:
-- <resumo factual curto>
-
-State before:
-- <estado anterior no ledger/plano>
-
-Actions:
-- <o que foi decidido, criado ou alterado>
-
-Files changed:
-- <paths ou none>
-
-Evidence claimed:
-- Preview opened: yes/no/not applicable
-- Manual flow tested: yes/no/not applicable
-- Automated test result: pass/fail/not run/not applicable
-- Console/log checked: yes/no/not available
-- GitHub diff checked: yes/no/not available
-
-Decision:
-- DONE | PARTIAL | BLOCKED | planned | approved | roadmap-updated | diagnosis-only | other
-
-Known limitations:
-- <limitacoes, prova ausente ou none>
-
-Next:
-- <proximo passo seguro>
+## <data/hora> - <comando> - <feature/projeto>
+- Command: <ldk-command>
+- User intent: <resumo curto>
+- State before: <estado anterior>
+- Actions: <decisoes/criacoes/alteracoes>
+- Files changed: <paths ou none>
+- Evidence: preview yes/no/na; manual yes/no/na; tests pass/fail/not run/na; console yes/no/na; diff yes/no/na
+- Decision: DONE | PARTIAL | BLOCKED | planned | approved | roadmap-updated | diagnosis-only | other
+- Known limitations: <limitacoes ou none>
+- Next: <proximo passo seguro>
 ```
 
-Regras do audit log:
-
-- nao registre segredos, tokens, chaves, dados pessoais ou informacao sensivel;
-- nao salve prompt completo do usuario se ele contiver dados privados;
-- registre evidencia como alegada quando voce nao verificou diretamente;
-- read-only skills como `ldk-next` e `ldk-review` nao devem escrever audit log, a menos que o usuario peca
-  explicitamente;
-- se o usuario pedir para desabilitar, pare de escrever o log e preserve o arquivo existente.
+Nao registre segredos, tokens, chaves, dados pessoais ou prompt completo sensivel. Skills read-only como
+`ldk-next` e `ldk-review` nao escrevem audit log, salvo pedido explicito.
 
 ## Artefatos do projeto
 
-O Lovable deve criar e manter automaticamente os artefatos do LDK. O usuario nao deve precisar criar esses
-arquivos manualmente.
-
-O estado do produto fica em:
+O Lovable cria e mantem os artefatos; o usuario nao deve criar arquivos manualmente.
 
 ```txt
 ldk/
@@ -184,26 +132,22 @@ ldk/
   ledger.md
   roadmap.md
   decisions/
-  features/
-    <feature>/
-      brief.md
-      plan.md
-      proof.md
+  features/<feature>/brief.md
+  features/<feature>/plan.md
+  features/<feature>/proof.md
   issues/
   releases/
-  audit/      (opcional, apenas com Audit log: on)
+  audit/ (opcional)
 ```
 
-Trate `ldk/project.md`, `ldk/ledger.md`, `ldk/roadmap.md`, feature plans, proofs e decisions como fonte da verdade do fluxo.
-Conversa aprova, arquivo registra.
-
-Se `ldk/` nao existir quando uma skill LDK for usada, crie a estrutura necessaria para aquela etapa.
+`ldk/project.md`, `ldk/ledger.md`, `ldk/roadmap.md`, plans, proofs e decisions sao fonte da verdade do fluxo.
+Conversa aprova, arquivo registra. Se `ldk/` nao existir quando uma skill LDK for usada, crie a estrutura necessaria.
 
 ## Artefatos machine-readable
 
-Alguns artefatos sao contrato, nao prosa. Nao traduza headers, marcadores ou vocabularios.
+Alguns headers e vocabularios sao contrato. Nao traduza, renomeie ou mude ordem.
 
-Para `ldk/ledger.md`, use exatamente:
+Ledger:
 
 ```md
 | ID | Feature | Risk | State | Proof required | Last evidence |
@@ -213,15 +157,13 @@ Para `ldk/ledger.md`, use exatamente:
 
 - `ID` deve ser somente `F1`, `F2`, etc.
 - O nome fica em `Feature`, nao junto do ID.
-- `Proof required` deve ser um unico valor: `P1`, `P2`, `P3` ou `P4`.
+- `Proof required` deve ser unico: `P1`, `P2`, `P3` ou `P4`.
 - Nao use headers traduzidos como `Estado`, `Risco`, `Prova minima`.
 - `Last evidence` fica vazio em `idea`, `planned`, `approved`, `building` e `proof-pending`.
-- `Last evidence` nunca aponta para `plan.md` ou `brief.md`; plano nao e prova.
-- `Last evidence` aponta para proof/report apenas quando houver `done`, `partial` ou `blocked`.
+- `Last evidence` nunca aponta para `plan.md` ou `brief.md`.
+- `Last evidence` aponta para proof/report apenas em `done`, `partial` ou `blocked`.
 
-Para `ldk/features/<feature>/plan.md`, a tabela de tasks e obrigatoria. Nao use apenas bullets.
-Use exatamente estes headers, sem abreviar, traduzir, renomear ou trocar ordem. `Arquivos` nao e valido; o header
-correto e `Arquivos esperados`.
+Plano de feature: a tabela de tasks e obrigatoria.
 
 ```md
 | ID | Descricao | AC | Arquivos esperados | Verificacao | State |
@@ -229,11 +171,11 @@ correto e `Arquivos esperados`.
 | T1 | <task> | AC1 | `src/...` | <preview/teste> | ready |
 ```
 
-Estados de task permitidos: `backlog`, `ready`, `in-progress`, `proof-pending`, `done`, `blocked`.
+`Arquivos` nao e valido; o header correto e `Arquivos esperados`.
 
-## Estados permitidos
+Estados de task: `backlog`, `ready`, `in-progress`, `proof-pending`, `done`, `blocked`.
 
-Use apenas:
+Estados de feature:
 
 ```txt
 idea
@@ -247,23 +189,37 @@ blocked
 reopened
 ```
 
-## Risco
+## Risco e prova
 
-- trivial: copy, cor, padding, ajuste visual pequeno.
-- baixo: secao simples, componente estatico, comportamento isolado.
-- medio: CRUD, formulario, filtro, dashboard, admin simples.
-- alto: auth, permissao, dados pessoais, pagamento, Supabase rules, migracao, delecao.
+Risco:
+
+- `trivial`: copy, cor, padding, ajuste visual pequeno.
+- `baixo`: secao simples, componente estatico, comportamento isolado.
+- `medio`: CRUD, formulario, filtro, dashboard, admin simples.
+- `alto`: auth, permissao, dados pessoais, pagamento, Supabase rules, migracao, delecao.
 
 Na duvida, suba um nivel.
 
+Prova:
+
+- P1: visual, screenshot ou observacao precisa do preview.
+- P2: fluxo manual com passos e resultado observado.
+- P3: teste automatizado ou script reproduzivel.
+- P4: CI/release, GitHub diff e checklist de seguranca.
+
+`ldk-proof` so fecha feature quando todas as tasks essenciais estiverem `proof-pending` ou `done`, salvo checkpoint
+parcial pedido pelo usuario. Checkpoint parcial nao pode virar `DONE`.
+
+`ldk-build` tambem pode escrever o proof da feature se executou/validou as tasks essenciais e atingiu a prova minima.
+
+Para alto risco, o Lovable pode implementar, mas `DONE` exige prova forte. Sem prova, use `PARTIAL` ou `BLOCKED`.
+
 ## Roadmap
 
-Use `ldk-roadmap` quando houver varias features, dependencias ou duvida sobre o que construir primeiro.
-`ldk-next` deve consultar `ldk/roadmap.md`; se ele estiver ausente ou desatualizado, recomende `ldk-roadmap`.
-Ao planejar ou revisar, consulte `contracts/common-lessons.md` se estiver disponivel. Essas licoes sao internas
-do kit e nao exigem manutencao do usuario.
+Use `ldk-roadmap` quando houver varias features, dependencias ou duvida sobre a ordem.
+`ldk-next` deve consultar `ldk/roadmap.md`; se ausente ou desatualizado, recomende `ldk-roadmap`.
 
-Readiness permitido no roadmap:
+Readiness no roadmap:
 
 ```txt
 ready
@@ -273,31 +229,13 @@ done
 verify
 ```
 
-## Prova
-
-- P1: visual, screenshot ou observacao precisa do preview.
-- P2: fluxo manual com passos executados e resultado observado.
-- P3: teste automatizado ou script reproduzivel com resultado.
-- P4: CI/release, GitHub diff, checklist de seguranca.
-
-`ldk-proof` fecha a feature/entrega planejada. So recomende `ldk-proof` quando todas as tasks essenciais estiverem
-`proof-pending` ou `done`, ou quando o usuario pedir conscientemente um checkpoint parcial. Checkpoint parcial nao
-pode marcar a feature como `DONE`.
-
-`ldk-build` tambem pode escrever o proof da feature, desde que ele tenha executado ou validado as tasks essenciais
-e consiga atingir a prova minima. Isso nao exige um comando separado de `ldk-proof`.
-
-Para alto risco, como auth, permissoes, dados pessoais, pagamento real, delecao, migracao ou Supabase
-policies/RLS, o Lovable pode implementar, mas `DONE` exige prova forte. Se a prova nao existir, marque
-`PARTIAL` ou `BLOCKED` e explique o proximo passo seguro.
-
 ## Fronteira do kit
 
-Nao altere o motor do LDK como efeito colateral de uma task do app. Isso inclui Knowledge, Skills,
-templates, scripts, workflows e regras do kit. Se um diff de produto tocar o motor do LDK, trate como drift
-critico, nao marque `DONE` e rode `ldk-doctor`.
+Nao altere o motor do LDK como efeito colateral de task do app: Knowledge, Skills, templates, scripts, workflows
+e regras do kit. Se diff de produto tocar o motor do LDK, trate como drift critico, nao marque `DONE` e rode
+`ldk-doctor`.
 
-## Saida obrigatoria ao fim de build/proof
+## Saida obrigatoria apos build/proof
 
 Toda resposta final apos build/proof deve conter:
 
