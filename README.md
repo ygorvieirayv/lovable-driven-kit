@@ -153,9 +153,31 @@ https://github.com/ygorvieirayv/lovable-driven-kit/tree/main/skills/ldk-doctor
 https://github.com/ygorvieirayv/lovable-driven-kit/tree/main/skills/ldk-release
 ```
 
+### 3. O que cada skill faz
+
+Uso:
+
+- **manual**: você chama pelo comando quando quiser aquela etapa.
+- **auto + manual**: o fluxo do LDK pode recomendar ou encaixar essa etapa, mas você também pode chamar pelo comando.
+- **externa**: não é para importar no Lovable.
+
+| Skill | O que faz | Uso |
+|---|---|---|
+| `ldk-intake` | Começa o projeto: organiza ideia, MVP, riscos, decisões abertas e cria a memória inicial em `ldk/`. | manual |
+| `ldk-next` | Lê o estado salvo e diz o próximo passo seguro. Não implementa nada. | manual |
+| `ldk-roadmap` | Ordena as features por dependência e decide o que deve vir primeiro. | auto + manual |
+| `ldk-plan` | Planeja uma feature: escopo, critérios de aceite, risco, prova esperada e tasks. | auto + manual |
+| `ldk-build` | Executa uma feature aprovada com menos microcerimônia: pensa antes, implementa, prova e retorna `DONE`, `PARTIAL` ou `BLOCKED`. | manual para iniciar; auto dentro da feature |
+| `ldk-build-task` | Executa uma task específica quando você quer controle manual, checkpoint ou trabalho de risco maior. | manual |
+| `ldk-proof` | Registra a prova e decide se a entrega pode ser `DONE`, `PARTIAL` ou `BLOCKED`. | auto + manual |
+| `ldk-review` | Revisa uma feature implementada contra plano, prova, diff, riscos e evidências. | manual |
+| `ldk-doctor` | Diagnostica e corrige drift quando ledger, plano, proof, app ou GitHub parecem incoerentes. | auto + manual |
+| `ldk-release` | Faz checklist antes de publicar ou entregar o app. | manual |
+| `ldk-evaluate` | Audita o projeto com outra IA usando logs, ledger, planos, proofs e diff. | externa |
+
 Não importe `ldk-evaluate` no Lovable. Ela é uma skill externa de auditoria, explicada mais abaixo.
 
-### 3. Adicionar Knowledge
+### 4. Adicionar Knowledge
 
 No Lovable:
 
