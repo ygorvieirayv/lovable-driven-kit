@@ -41,6 +41,8 @@ Procure:
 - ledger com prova em intervalo como `P1/P2`;
 - ledger com `Last evidence` apontando para `plan.md` ou `brief.md`;
 - ledger com `Last evidence` preenchido em estado `idea`, `planned`, `approved`, `building` ou `proof-pending`;
+- plan.md sem tabela de tasks machine-readable;
+- task em bullet sem `State` persistido;
 - roadmap aponta proxima feature ja concluida ou bloqueada;
 - roadmap e ledger discordam sobre estado/ordem;
 - `[VERIFY]` critico aberto em feature `done`;

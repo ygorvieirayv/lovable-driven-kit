@@ -17,11 +17,13 @@ Implementar uma task do plano e deixar a entrega pronta para prova.
 - Excecao: para tarefa `trivial` claramente definida, pode construir sem plano formal longo se houver registro minimo
   com AC explicito, prova P1 e linha no ledger.
 - Implemente uma task por vez.
+- A task deve existir na tabela de tasks do `plan.md`. Se o plano tiver apenas bullets, pare e rode `ldk-doctor` ou
+  `ldk-plan` para normalizar o plano antes de construir.
 - Nao aumente escopo sem aprovar novo plano.
 - Nao edite motor do LDK.
 - Aplique `contracts/always-rules.md`, se disponivel.
 - Nao marque task ou feature como `done` diretamente.
-- Ao terminar a implementacao, deixe estado como `proof-pending` e pare. Nao rode `ldk-proof` nesta skill.
+- Ao terminar a implementacao, deixe a task executada como `proof-pending` e pare. Nao rode `ldk-proof` nesta skill.
 
 ## Antes de construir
 
@@ -47,6 +49,7 @@ minimo antes de construir:
 Confirme:
 
 - task ativa;
+- estado da task (`ready` ou `in-progress`);
 - AC coberto;
 - arquivos esperados;
 - verificacao esperada;
@@ -66,9 +69,10 @@ Confirme:
 ## Ao terminar
 
 1. Liste arquivos alterados.
-2. Atualize a task para `proof-pending` se o plano mantiver task states.
-3. Atualize o ledger para `proof-pending`.
-4. Pare e aguarde o proximo comando.
+2. Atualize a task executada no `plan.md` para `proof-pending`.
+3. Se ainda houver tasks `ready`, `in-progress` ou `backlog`, mantenha o ledger da feature como `building`.
+4. Se todas as tasks essenciais estiverem `proof-pending` ou `done`, atualize o ledger da feature para `proof-pending`.
+5. Pare e aguarde o proximo comando.
 
 ## Saida
 
@@ -81,7 +85,8 @@ O que mudou:
 Arquivos alterados:
 AC alvo:
 Verificacao ainda pendente:
-Status: proof-pending
+Task status: proof-pending
+Feature status: building | proof-pending
 Etapa concluida: build-task pronta e aguardando proximo comando
 ```
 

@@ -185,6 +185,7 @@ if (-not (Test-Path -LiteralPath $ledger)) {
 $featureRoot = Join-Path $RootAbs "ldk\features"
 if (Test-Path -LiteralPath $featureRoot) {
   foreach ($plan in Get-ChildItem -Path $featureRoot -Recurse -Filter "plan.md" -ErrorAction SilentlyContinue) {
+    $taskRows = 0
     foreach ($line in (Get-Content -Encoding UTF8 -LiteralPath $plan.FullName)) {
       if ($line -notmatch '^\|') { continue }
       if ($line -match '^\|\s*(-+|ID)\s*\|') { continue }
@@ -192,12 +193,16 @@ if (Test-Path -LiteralPath $featureRoot) {
       if ($cells.Count -lt 8) { continue }
       $id = CleanCell $cells[1]
       $state = CleanCell $cells[$cells.Count - 2]
+      if ($id -match '^T[A-Za-z0-9_-]+$') { $taskRows++ }
       if ($id -notmatch '^T[A-Za-z0-9_-]+$') {
         ErrorMsg "$(Rel $plan.FullName): task row ID '$id' must start with T (example: T1)"
       }
       if ($allowedTaskState -notcontains $state) {
         ErrorMsg "$(Rel $plan.FullName): invalid task state '$state'"
       }
+    }
+    if ($taskRows -eq 0) {
+      ErrorMsg "$(Rel $plan.FullName): missing machine-readable task table with T rows"
     }
   }
 }

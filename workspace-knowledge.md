@@ -120,6 +120,16 @@ Para `ldk/ledger.md`, use exatamente:
 - `Last evidence` nunca aponta para `plan.md` ou `brief.md`; plano nao e prova.
 - `Last evidence` aponta para proof/report apenas quando houver `done`, `partial` ou `blocked`.
 
+Para `ldk/features/<feature>/plan.md`, a tabela de tasks e obrigatoria. Nao use apenas bullets.
+
+```md
+| ID | Descricao | AC | Arquivos esperados | Verificacao | State |
+|----|-----------|----|--------------------|-------------|-------|
+| T1 | <task> | AC1 | `src/...` | <preview/teste> | ready |
+```
+
+Estados de task permitidos: `backlog`, `ready`, `in-progress`, `proof-pending`, `done`, `blocked`.
+
 ## Estados permitidos
 
 Use apenas:

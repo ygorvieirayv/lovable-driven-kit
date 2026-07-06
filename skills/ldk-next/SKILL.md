@@ -52,7 +52,8 @@ uma nova do roadmap.
 | Nao existe `ldk/project.md` ou `ldk/ledger.md` | `ldk-intake` |
 | Ledger/proof/app divergentes | `ldk-doctor` |
 | Feature em `proof-pending` | `ldk-proof` |
-| Feature em `building` | continuar `ldk-build-task` |
+| Feature em `building` com task `ready`/`in-progress` | `ldk-build-task` da proxima task |
+| Feature em `building` com todas as tasks `proof-pending` | `ldk-doctor` para alinhar o ledger antes de `ldk-proof` |
 | Feature em `approved` | `ldk-build-task` |
 | Feature em `planned` | pedir aprovacao do plano ou continuar `ldk-plan` |
 | Projeto tem varias features e nao existe `ldk/roadmap.md` | `ldk-roadmap` |

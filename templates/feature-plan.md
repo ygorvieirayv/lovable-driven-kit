@@ -11,9 +11,15 @@ Proof required: P2
 <Como construir em alto nivel.>
 
 ## Tasks
+
+This table is mandatory and machine-readable. Do not replace it with bullet-only tasks.
+Keep the exact columns and one row per task. Initial task state is usually `ready`.
+
 | ID | Descricao | AC | Arquivos esperados | Verificacao | State |
 |----|-----------|----|--------------------|-------------|-------|
 | T1 | <...> | AC1 | `<path>` | <preview/teste/check> | ready |
+
+Allowed task states: `backlog`, `ready`, `in-progress`, `proof-pending`, `done`, `blocked`.
 
 ## Estrategia de prova
 - P1:

@@ -47,3 +47,5 @@
   `ldk-build-task` não inicia proof automaticamente.
 - `Last evidence` agora é reservado para proof/report: fica vazio antes de `done`/`partial`/`blocked`, e o
   validador falha quando aponta para `plan.md` ou `brief.md`.
+- Planos agora exigem tabela de tasks machine-readable com IDs `T...` e `State`; `ldk-build-task` deve atualizar
+  a task executada antes de parar.

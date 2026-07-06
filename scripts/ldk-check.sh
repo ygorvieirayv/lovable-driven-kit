@@ -135,15 +135,18 @@ fi
 
 if [ -d "$ROOT/ldk/features" ]; then
   while IFS= read -r plan; do
+    task_rows=0
     while IFS= read -r line; do
       echo "$line" | grep -qE '^\|' || continue
       echo "$line" | grep -qE '^\|[[:space:]]*(-+|ID)[[:space:]]*\|' && continue
       id="$(printf '%s\n' "$line" | awk -F'|' '{v=$2; gsub(/^[ \t]+|[ \t]+$/, "", v); print v}')"
       state="$(printf '%s\n' "$line" | awk -F'|' '{v=$(NF-1); gsub(/^[ \t]+|[ \t]+$/, "", v); print v}')"
+      echo "$id" | grep -qE '^T[A-Za-z0-9_-]+$' && task_rows=$((task_rows + 1))
       echo "$id" | grep -qE '^T[A-Za-z0-9_-]+$' || error "$(rel "$plan"): task row ID '$id' must start with T (example: T1)"
       valid_in "$state" backlog ready in-progress proof-pending done blocked || \
         error "$(rel "$plan"): invalid task state '$state'"
     done < "$plan"
+    [ "$task_rows" -gt 0 ] || error "$(rel "$plan"): missing machine-readable task table with T rows"
   done < <(find "$ROOT/ldk/features" -name plan.md -type f)
 fi
 
