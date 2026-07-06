@@ -16,6 +16,9 @@ processo simples:
 4. ele implementa uma task por vez;
 5. ele só marca `DONE` quando existe prova suficiente.
 
+Para tarefas pequenas, o LDK deve ser leve. Ajustes de texto, cor, padding ou detalhe visual podem usar um
+plano curto e uma prova P1. O rigor aumenta quando o risco aumenta.
+
 Repositório oficial:
 
 ```txt
@@ -271,6 +274,16 @@ suficiente e se há algum erro crítico conhecido.
 | P4 | CI verde, diff GitHub e checklist de segurança |
 
 Na dúvida, suba o risco.
+
+O fluxo deve ser proporcional: tarefa trivial não precisa virar plano longo; feature média ou alta não deve ir
+direto para construção sem escopo, risco e prova clara.
+
+## Avaliar o LDK
+
+Para testar se o Lovable está obedecendo o fluxo, use o checklist
+[evaluation/mini-store-checklist.md](evaluation/mini-store-checklist.md). Ele mede se o Lovable fez intake,
+planejou quando precisava, construiu uma task por vez, pediu proof antes de `DONE` e manteve a cerimônia
+proporcional ao risco.
 
 ## GitHub
 

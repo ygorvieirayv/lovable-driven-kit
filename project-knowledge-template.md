@@ -34,6 +34,12 @@
 ## Regras do projeto
 - 
 
+## Cerimonia proporcional
+- trivial: AC curto, uma mudanca pequena e prova P1.
+- baixo: plano curto e prova P1/P2.
+- medio: plano completo e prova P2/P3.
+- alto: plano completo, risco explicito, prova P4 e revisao antes de release.
+
 ## Pendencias [VERIFY]
 - 
 

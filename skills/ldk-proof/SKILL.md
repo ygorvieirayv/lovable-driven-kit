@@ -20,6 +20,7 @@ Sem prova, não é done.
 - `ldk/ledger.md`
 - `ldk/features/<feature>/brief.md`
 - `ldk/features/<feature>/plan.md`
+- registro minimo de AC no ledger ou no plan curto, se for tarefa trivial
 - arquivos alterados ou GitHub diff, se disponível
 - Preview, console/logs e testes, quando acessíveis
 
@@ -31,6 +32,14 @@ Sem prova, não é done.
 - P4: exige CI verde, diff GitHub e checklist de segurança/release.
 
 `Proof level achieved` precisa ser maior ou igual ao `Proof level required`.
+
+## Cerimonia proporcional
+
+- P1/trivial: proof curto e honesto e suficiente. Deve cobrir AC, observacao visual e self-check.
+- P2/baixo: proof curto e honesto com passos manuais executados e resultado observado.
+- P3/P4 ou risco medio/alto: use o formato completo, com testes, diff, CI/release e limitacoes quando aplicavel.
+
+Nao adicione burocracia para uma mudanca pequena, mas nunca pule evidencia.
 
 ## Regras para status
 

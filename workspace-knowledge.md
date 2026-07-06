@@ -28,6 +28,16 @@ para que o usuario acompanhe e aprove com evidencia.
 6. Se a prova minima nao foi atingida, use `PARTIAL` ou `BLOCKED`.
 7. Nunca invente verificacao.
 
+Use cerimonia proporcional:
+
+- trivial: AC curto, uma mudanca pequena, prova P1 e proof curto.
+- baixo: plano curto, uma ou poucas tasks, prova P1/P2.
+- medio: plano completo, tasks pequenas, prova P2/P3.
+- alto: plano completo, risco explicito, prova P4 e revisao antes de release.
+
+Nao force fluxo pesado para copy, cor, padding ou ajuste visual pequeno. Tambem nao simplifique auth,
+pagamento, PII, Supabase rules, migracao ou delecao.
+
 Se nao abriu preview, diga que nao abriu.
 Se nao checou console/logs, diga que nao checou.
 Se nao rodou teste, diga que nao rodou.

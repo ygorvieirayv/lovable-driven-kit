@@ -33,10 +33,20 @@ Se houver diff em arquivos de motor LDK, leia `contracts/engine-boundary.md` e r
 
 ## Como decidir
 
+Escolha sempre o caminho mais leve que ainda preserve a regra "sem prova, nao e done".
+
+Regua de cerimonia:
+
+- trivial: ajuste pequeno e reversivel; pode ir direto para `ldk-build-task` com AC de uma linha e proof P1.
+- baixo: plano curto com objetivo, AC, fora de escopo e prova P1/P2.
+- medio: plano normal com tasks pequenas e proof P2/P3.
+- alto: plano explicito, risco claro, proof forte P4 e revisao antes de release.
+
 | Situacao | Proximo passo |
 |---|---|
 | Nao existe `ldk/project.md` ou `ldk/ledger.md` | `ldk-intake` |
-| Feature em `idea` | `ldk-plan` |
+| Feature em `idea` trivial e bem definida | `ldk-build-task` com AC curto e proof P1 |
+| Feature em `idea` baixo/medio/alto ou vaga | `ldk-plan` |
 | Feature em `planned` | pedir aprovacao do plano ou continuar `ldk-plan` |
 | Feature em `approved` | `ldk-build-task` |
 | Feature em `building` | continuar `ldk-build-task` |

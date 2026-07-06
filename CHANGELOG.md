@@ -30,3 +30,7 @@
 - `ldk-proof` ganhou `LDK self-check`, e `ldk-check` agora valida esses gates em proofs `DONE`.
 - `ldk-check` agora falha linhas de ledger/task sem prefixos `F...`/`T...` e alinha a tolerância de
   indentação entre Bash e PowerShell.
+- Skills e Workspace Knowledge agora usam cerimônia proporcional: tarefas triviais/baixas ficam leves, enquanto
+  médio/alto risco mantêm plano e prova mais fortes.
+- Adicionado `evaluation/mini-store-checklist.md` para medir se o Lovable obedece o fluxo do LDK em um teste
+  prático de mini loja.

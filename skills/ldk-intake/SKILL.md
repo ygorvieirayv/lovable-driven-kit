@@ -44,8 +44,14 @@ Criar ou atualizar:
 4. Defina MVP:
    - essencial;
    - depois do MVP;
-   - primeira feature a planejar.
+   - primeira feature ou tarefa a executar.
 5. Crie o ledger inicial.
+
+## Proximo passo proporcional
+
+- Se a primeira demanda for vaga, baixa/media/alta ou envolver risco, recomende `ldk-plan`.
+- Se a primeira demanda for trivial e bem definida, registre um AC curto, risco `trivial`, prova `P1` e recomende
+  `ldk-build-task` sem plano longo.
 
 ## Saida em arquivo
 
@@ -72,6 +78,6 @@ Responda com:
 3. MVP proposto.
 4. Arquivos criados/alterados.
 5. Pendencias `[VERIFY]`.
-6. Proximo passo seguro: `ldk-plan` para a primeira feature.
+6. Proximo passo seguro: `ldk-plan` ou `ldk-build-task`, conforme o risco e clareza.
 
 Nao implemente nada nesta skill.

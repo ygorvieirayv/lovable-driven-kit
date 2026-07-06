@@ -1,6 +1,6 @@
 ---
 name: ldk-build-task
-description: Use when implementing exactly one approved task from an LDK feature plan in Build mode, keeping scope small and leaving the result proof-pending. Not for planning or final proof.
+description: Use when implementing exactly one approved LDK task in Build mode, or one clearly trivial change with explicit acceptance criteria, keeping scope small and leaving the result proof-pending. Not for planning or final proof.
 ---
 
 # ldk-build-task
@@ -13,7 +13,9 @@ Implementar uma task do plano e deixar a entrega pronta para prova.
 
 ## Regras
 
-- Use Build mode apenas depois de existir plano aprovado.
+- Use Build mode depois de existir plano aprovado.
+- Excecao: para tarefa `trivial` claramente definida, pode construir sem plano formal longo se houver registro minimo
+  com AC explicito, prova P1 e linha no ledger.
 - Implemente uma task por vez.
 - Nao aumente escopo sem aprovar novo plano.
 - Nao edite motor do LDK.
@@ -30,6 +32,15 @@ Leia:
 - `ldk/features/<feature>/plan.md`
 - `contracts/engine-boundary.md`, se disponivel
 
+Para tarefa trivial sem plano formal longo, leia `ldk/project.md`, `ldk/ledger.md` e confirme que existe registro
+minimo antes de construir:
+
+- feature/task;
+- AC de uma linha;
+- fora de escopo;
+- risco `trivial`;
+- prova minima `P1`.
+
 Confirme:
 
 - task ativa;
@@ -42,6 +53,7 @@ Confirme:
 
 - Mantenha mudancas cirurgicas.
 - Preserve padroes do app.
+- Para trivial/baixo, nao transforme a task em refatoracao ou mudanca de produto maior.
 - Para auth, pagamento, PII, Supabase rules, delecao ou migracao, trate como alto risco.
 - Valide input no servidor quando houver backend.
 - Nao coloque segredos no codigo, bundle ou logs.

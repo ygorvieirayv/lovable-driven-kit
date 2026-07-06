@@ -24,6 +24,7 @@ Criar ou atualizar:
 - Defina risco e prova minima antes de construir.
 - Nao liste arquivos de motor LDK como alvo de task de produto.
 - Confirme o plano antes de mudar estado para `approved`.
+- Use cerimonia proporcional: trivial/baixo nao deve virar burocracia maior que a mudanca.
 
 ## Risco
 
@@ -47,6 +48,16 @@ Mapeamento recomendado:
 - baixo -> P1/P2
 - medio -> P2/P3
 - alto -> P4
+
+## Cerimonia proporcional
+
+- trivial: se o pedido ja esta claro, nao crie plano formal longo. Registre objetivo, AC de uma linha, risco `trivial`,
+  prova `P1` e recomende `ldk-build-task`.
+- baixo: use plano curto com objetivo, ACs, fora de escopo, uma ou poucas tasks e prova P1/P2.
+- medio: use o plano completo com tasks pequenas, verificacao por task e estrategia de prova.
+- alto: use plano completo, liste riscos, dependencias, seguranca, rollback e prova P4.
+
+Se o usuario pedir apenas copy, cor, padding ou ajuste visual pequeno, diga explicitamente que o plano sera leve.
 
 ## Roteiro
 
@@ -80,6 +91,7 @@ Arquivos criados/alterados:
 - ...
 
 Status no ledger:
+Cerimonia usada: trivial curta | baixo curta | medio completa | alto completa
 
 Proximo passo seguro:
 ```
