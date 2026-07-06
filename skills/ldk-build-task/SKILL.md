@@ -19,6 +19,8 @@ Implementar uma task do plano e deixar a entrega pronta para prova.
 - Implemente uma task por vez.
 - A task deve existir na tabela de tasks do `plan.md`. Se o plano tiver apenas bullets, pare e rode `ldk-doctor` ou
   `ldk-plan` para normalizar o plano antes de construir.
+- Se o usuario pedir duas ou mais tasks aprovadas no mesmo comando, escolha a proxima task `ready` e explique que
+  as demais ficam para os proximos comandos. Para fundir tasks, revise o plano antes.
 - Nao aumente escopo sem aprovar novo plano.
 - Nao edite motor do LDK.
 - Aplique `contracts/always-rules.md`, se disponivel.

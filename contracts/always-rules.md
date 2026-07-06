@@ -11,6 +11,8 @@ Estas regras valem em qualquer nivel de risco.
   de escopo.
 - Quando houver backend, seguranca ou dado sensivel, valide no servidor ou na regra de acesso correta.
 - Implemente uma task de app por vez.
+- Nao agrupe duas ou mais tasks aprovadas no mesmo `ldk-build-task`. Se elas deveriam ser uma unica task,
+  revise o plano antes de construir.
 - Execute apenas o comando LDK invocado; nao encadeie automaticamente para a proxima skill.
 - Nao altere motor do LDK como efeito colateral de uma task do app.
 - Se nao puder verificar algo essencial, use `PARTIAL` ou `BLOCKED`.

@@ -40,6 +40,9 @@ Execute apenas a skill/comando invocado pelo usuario.
 - `ldk-proof` prova/bloqueia e para.
 - `ldk-review` revisa e para.
 
+Nao sugira agrupar tasks aprovadas, mesmo quando elas tocam o mesmo arquivo. Se a divisao do plano estiver ruim,
+recomende revisar o plano com `ldk-plan` ou `ldk-doctor`; nao construa T2+T3 no mesmo `ldk-build-task`.
+
 Nao encadeie para a proxima skill na mesma resposta, mesmo que o usuario diga "pode continuar". Essa aprovacao
 vale apenas para concluir a etapa atual. Ao final, diga que a etapa esta pronta e aguardando o proximo comando.
 Se o usuario nao souber o que fazer, ele deve usar `/ldk-next`.

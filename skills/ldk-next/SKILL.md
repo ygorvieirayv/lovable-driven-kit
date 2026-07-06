@@ -37,6 +37,10 @@ Se houver diff em arquivos de motor LDK, leia `contracts/engine-boundary.md` e r
 
 Escolha sempre o caminho mais leve que ainda preserve a regra "sem prova, nao e done".
 
+Nao sugira executar duas ou mais tasks aprovadas juntas. Mesmo quando tasks tocam o mesmo arquivo, recomende apenas
+a proxima task `ready`/`in-progress`. Se a divisao do plano parecer ruim, a alternativa consciente deve ser revisar
+o plano antes do build, nao agrupar tasks no `ldk-build-task`.
+
 Regua de cerimonia:
 
 - trivial: ajuste pequeno e reversivel; pode ir direto para `ldk-build-task` com AC de uma linha e proof P1.
@@ -81,4 +85,5 @@ Por que:
 Alternativa consciente:
 ```
 
-Termine perguntando se o usuario quer seguir com o passo recomendado. Nao execute automaticamente.
+Termine perguntando se o usuario quer seguir com o passo recomendado. Nao ofereca uma alternativa que execute mais
+de uma task aprovada. Nao execute automaticamente.
