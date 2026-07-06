@@ -57,3 +57,4 @@
   reduzindo microaprovacoes em features triviais/baixas e medias seguras.
 - Header da tabela de tasks agora e contrato literal: `Arquivos esperados` nao pode ser abreviado para `Arquivos`.
 - Adicionado audit log opcional, desligado por padrao, controlado por `Audit log: on/off` no Project Knowledge.
+- Adicionada skill externa `ldk-evaluate` para auditoria por outra IA; nao deve ser importada no Lovable.

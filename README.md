@@ -153,6 +153,8 @@ https://github.com/ygorvieirayv/lovable-driven-kit/tree/main/skills/ldk-doctor
 https://github.com/ygorvieirayv/lovable-driven-kit/tree/main/skills/ldk-release
 ```
 
+Não importe `ldk-evaluate` no Lovable. Ela é uma skill externa de auditoria, explicada mais abaixo.
+
 ### 3. Adicionar Knowledge
 
 No Lovable:
@@ -366,6 +368,27 @@ Para desligar, volte para:
 ```
 
 Esse log é pensado para avaliação externa do processo, não para o Lovable julgar a si mesmo.
+
+### Skill externa de avaliação
+
+O repo também contém:
+
+```txt
+skills/ldk-evaluate
+```
+
+Essa skill **não é para importar no Lovable**. Ela é para usar em outra IA ou outro agente avaliador depois que o
+projeto avançou.
+
+Fluxo recomendado:
+
+1. Habilite `Audit log: on` no Project Knowledge se quiser rastreabilidade melhor.
+2. Crie o app normalmente no Lovable.
+3. Exporte ou sincronize o projeto no GitHub.
+4. Em outra IA, use `ldk-evaluate` para ler `ldk/audit/log.md`, ledger, roadmap, plans, proofs e diff.
+5. Peça um relatório de aderência do LDK, qualidade da prova, cerimônia e riscos.
+
+O objetivo é separar executor e avaliador: o Lovable executa; outra IA julga a execução.
 
 ## Para devs
 
