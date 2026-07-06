@@ -8,6 +8,7 @@ Use estes nomes para os comandos/skills:
 
 - `ldk-intake`
 - `ldk-next`
+- `ldk-roadmap`
 - `ldk-plan`
 - `ldk-build-task`
 - `ldk-proof`
@@ -27,6 +28,15 @@ para que o usuario acompanhe e aprove com evidencia.
 5. Use `DONE` apenas quando houver evidencia suficiente.
 6. Se a prova minima nao foi atingida, use `PARTIAL` ou `BLOCKED`.
 7. Nunca invente verificacao.
+
+Regras "Sempre":
+
+- Nunca marque `DONE` sem evidencia suficiente.
+- Nunca invente preview, teste, console, diff ou CI.
+- Nunca coloque segredo em codigo, bundle, log, screenshot ou dado de exemplo.
+- Nunca registre PII desnecessaria em logs, analytics, console ou mensagens de erro.
+- Auth, permissoes/admin, pagamento real, PII, Supabase RLS, delecao e migracao nunca sao `trivial`.
+- Se nao puder verificar algo essencial, use `PARTIAL` ou `BLOCKED`.
 
 Use cerimonia proporcional:
 
@@ -54,6 +64,7 @@ O estado do produto fica em:
 ldk/
   project.md
   ledger.md
+  roadmap.md
   decisions/
   features/
     <feature>/
@@ -64,7 +75,7 @@ ldk/
   releases/
 ```
 
-Trate `ldk/project.md`, `ldk/ledger.md`, feature plans, proofs e decisions como fonte da verdade do fluxo.
+Trate `ldk/project.md`, `ldk/ledger.md`, `ldk/roadmap.md`, feature plans, proofs e decisions como fonte da verdade do fluxo.
 Conversa aprova, arquivo registra.
 
 Se `ldk/` nao existir quando uma skill LDK for usada, crie a estrutura necessaria para aquela etapa.
@@ -93,6 +104,23 @@ reopened
 - alto: auth, permissao, dados pessoais, pagamento, Supabase rules, migracao, delecao.
 
 Na duvida, suba um nivel.
+
+## Roadmap
+
+Use `ldk-roadmap` quando houver varias features, dependencias ou duvida sobre o que construir primeiro.
+`ldk-next` deve consultar `ldk/roadmap.md`; se ele estiver ausente ou desatualizado, recomende `ldk-roadmap`.
+Ao planejar ou revisar, consulte `contracts/common-lessons.md` se estiver disponivel. Essas licoes sao internas
+do kit e nao exigem manutencao do usuario.
+
+Readiness permitido no roadmap:
+
+```txt
+ready
+blocked
+later
+done
+verify
+```
 
 ## Prova
 

@@ -61,6 +61,28 @@ backlog -> ready -> in-progress -> proof-pending -> done
 
 Task `done` so e permitida quando a verificacao da task passou ou quando o proof final cobre a task.
 
+## Roadmap
+
+Arquivo:
+
+```txt
+ldk/roadmap.md
+```
+
+Readiness permitido:
+
+- `ready`
+- `blocked`
+- `later`
+- `done`
+- `verify`
+
+Regra:
+
+- Uma feature `blocked` nao deve ir para `ldk-plan` sem decisao consciente do usuario.
+- Uma feature `ready` precisa ter dependencias essenciais resolvidas ou declaradas como `[VERIFY]`.
+- Se o ledger e o roadmap discordarem, rode `ldk-roadmap` ou `ldk-doctor`.
+
 ## Proof
 
 Arquivo:

@@ -23,6 +23,7 @@ Estes arquivos pertencem ao app e podem mudar pelo fluxo normal:
 
 - `ldk/project.md`
 - `ldk/ledger.md`
+- `ldk/roadmap.md`
 - `ldk/decisions/**`
 - `ldk/features/**`
 - `ldk/issues/**`

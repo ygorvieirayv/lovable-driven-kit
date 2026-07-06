@@ -13,6 +13,7 @@ Criar ou atualizar:
 
 - `ldk/project.md`
 - `ldk/ledger.md`
+- `ldk/roadmap.md` inicial, quando houver mais de uma feature ou dependencias claras
 - primeiras pendencias `[VERIFY]`
 
 ## Regras de conversa
@@ -23,6 +24,7 @@ Criar ou atualizar:
 - Nao invente regra de negocio, compliance, pagamento ou permissao.
 - Marque incertezas com `[VERIFY]`.
 - Confirme antes de gravar.
+- Aplique `contracts/always-rules.md`, se disponivel.
 
 ## Roteiro
 
@@ -49,7 +51,8 @@ Criar ou atualizar:
 
 ## Proximo passo proporcional
 
-- Se a primeira demanda for vaga, baixa/media/alta ou envolver risco, recomende `ldk-plan`.
+- Se o MVP tiver varias features ou ordem importante, recomende `ldk-roadmap`.
+- Se a primeira demanda for vaga, baixa/media/alta ou envolver risco sem dependencias relevantes, recomende `ldk-plan`.
 - Se a primeira demanda for trivial e bem definida, registre um AC curto, risco `trivial`, prova `P1` e recomende
   `ldk-build-task` sem plano longo.
 
@@ -61,13 +64,14 @@ Se `ldk/` nao existir, crie:
 ldk/
   project.md
   ledger.md
+  roadmap.md
   decisions/
   features/
   issues/
   releases/
 ```
 
-Use `templates/project.md` e `templates/task-ledger.md` como formato.
+Use `templates/project.md`, `templates/task-ledger.md` e `templates/roadmap.md` como formato.
 
 ## Saida final na conversa
 
@@ -78,6 +82,6 @@ Responda com:
 3. MVP proposto.
 4. Arquivos criados/alterados.
 5. Pendencias `[VERIFY]`.
-6. Proximo passo seguro: `ldk-plan` ou `ldk-build-task`, conforme o risco e clareza.
+6. Proximo passo seguro: `ldk-roadmap`, `ldk-plan` ou `ldk-build-task`, conforme dependencia, risco e clareza.
 
 Nao implemente nada nesta skill.

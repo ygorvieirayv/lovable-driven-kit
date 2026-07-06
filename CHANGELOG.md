@@ -7,7 +7,8 @@
 - Primeiro MVP do Lovable Driven Kit (LDK).
 - Workspace Knowledge e Project Knowledge template.
 - Contratos `state-markers.md` e `engine-boundary.md`.
-- Skills `ldk-intake`, `ldk-next`, `ldk-plan`, `ldk-build-task`, `ldk-proof`, `ldk-review`, `ldk-doctor` e `ldk-release`.
+- Skills `ldk-intake`, `ldk-next`, `ldk-roadmap`, `ldk-plan`, `ldk-build-task`, `ldk-proof`, `ldk-review`,
+  `ldk-doctor` e `ldk-release`.
 - Templates para projeto, ledger, brief, plan, proof, decisions, issues e releases.
 - `scripts/ldk-check.ps1` e `scripts/ldk-check.sh` para validacao deterministica do ledger/proof.
 - Fixtures valid/broken para testar o contrato.
@@ -34,3 +35,7 @@
   médio/alto risco mantêm plano e prova mais fortes.
 - Adicionado `evaluation/mini-store-checklist.md` para medir se o Lovable obedece o fluxo do LDK em um teste
   prático de mini loja.
+- Adicionada skill `ldk-roadmap`, template `roadmap.md` e contrato de roadmap para ordenar features por
+  dependência antes de planejar.
+- Adicionados contratos internos `always-rules.md` e `common-lessons.md` para piso de segurança e lições
+  comuns sem criar um loop público de aprendizado.

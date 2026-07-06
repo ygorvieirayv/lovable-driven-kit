@@ -18,9 +18,11 @@ Sem prova, não é done.
 ## O que ler
 
 - `ldk/ledger.md`
+- `ldk/roadmap.md`, se existir
 - `ldk/features/<feature>/brief.md`
 - `ldk/features/<feature>/plan.md`
 - registro minimo de AC no ledger ou no plan curto, se for tarefa trivial
+- `contracts/always-rules.md`, se disponivel
 - arquivos alterados ou GitHub diff, se disponível
 - Preview, console/logs e testes, quando acessíveis
 
@@ -80,6 +82,8 @@ Regra:
 - Se qualquer gate essencial for `no`, status não pode ser `DONE`.
 - Se `Critical errors known: yes`, status deve ser `BLOCKED`.
 - Se `LDK engine drift detected: yes`, status deve ser `BLOCKED` e o próximo passo é `/ldk-doctor`.
+- Se houver segredo exposto, PII em log, auth/pagamento/RLS sem prova forte, delecao/migracao insegura ou proof falso,
+  status deve ser `BLOCKED`.
 - Se a limitação é falta de GitHub/CI em prova P3/P4, status deve ser `PARTIAL` ou `BLOCKED`, não `DONE`.
 - Para P1/P2, GitHub/CI pode ser `not available`, desde que a evidência visual/manual exigida exista.
 

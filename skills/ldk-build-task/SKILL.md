@@ -19,6 +19,7 @@ Implementar uma task do plano e deixar a entrega pronta para prova.
 - Implemente uma task por vez.
 - Nao aumente escopo sem aprovar novo plano.
 - Nao edite motor do LDK.
+- Aplique `contracts/always-rules.md`, se disponivel.
 - Nao marque task ou feature como `done` diretamente.
 - Ao terminar a implementacao, deixe estado como `proof-pending` e rode `ldk-proof`.
 
@@ -28,9 +29,11 @@ Leia:
 
 - `ldk/project.md`
 - `ldk/ledger.md`
+- `ldk/roadmap.md`, se existir
 - `ldk/features/<feature>/brief.md`
 - `ldk/features/<feature>/plan.md`
 - `contracts/engine-boundary.md`, se disponivel
+- `contracts/always-rules.md`, se disponivel
 
 Para tarefa trivial sem plano formal longo, leia `ldk/project.md`, `ldk/ledger.md` e confirme que existe registro
 minimo antes de construir:
@@ -57,6 +60,7 @@ Confirme:
 - Para auth, pagamento, PII, Supabase rules, delecao ou migracao, trate como alto risco.
 - Valide input no servidor quando houver backend.
 - Nao coloque segredos no codigo, bundle ou logs.
+- Nao registre PII desnecessaria em logs, console, analytics ou mensagens de erro.
 - Se falhar 2-3 vezes no mesmo ponto, pare e marque `BLOCKED` ou peca input.
 
 ## Ao terminar

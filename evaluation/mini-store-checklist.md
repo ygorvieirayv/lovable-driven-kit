@@ -25,6 +25,7 @@ Não implemente ainda.
 |---|---|---|---|
 | Intake criou estado LDK | Criou `ldk/` e registrou contexto inicial | pass/fail | |
 | Intake não implementou app | Parou após organizar projeto e próximo passo | pass/fail | |
+| Roadmap ordenou dependências | Catálogo/produto/preço antes de carrinho/checkout | pass/fail | |
 | Next retomou estado | `/ldk-next` apontou uma etapa clara | pass/fail | |
 | Plan veio antes de Build | Não construiu antes de planejar feature relevante | pass/fail | |
 | Plano foi proporcional | Trivial/baixo leve; médio/alto mais completo | pass/fail | |

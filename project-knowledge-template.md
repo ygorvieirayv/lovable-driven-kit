@@ -17,6 +17,7 @@
 ## Fonte da verdade
 - Contexto do produto: `ldk/project.md`
 - Ledger: `ldk/ledger.md`
+- Roadmap: `ldk/roadmap.md`
 - Features: `ldk/features/`
 - Decisoes: `ldk/decisions/`
 - Provas: `ldk/features/*/proof.md`
@@ -40,6 +41,12 @@
 - medio: plano completo e prova P2/P3.
 - alto: plano completo, risco explicito, prova P4 e revisao antes de release.
 
+## Regras sempre
+- Sem prova falsa.
+- Sem segredo no bundle/log.
+- Sem PII desnecessaria em log/analytics/console.
+- Auth, pagamento real, RLS, delecao e migracao nunca sao triviais.
+
 ## Pendencias [VERIFY]
 - 
 
@@ -49,6 +56,7 @@ Use:
 
 - `ldk-intake` para organizar ideia e contexto.
 - `ldk-next` para descobrir o proximo passo seguro.
+- `ldk-roadmap` para ordenar features por dependencia.
 - `ldk-plan` para planejar uma feature.
 - `ldk-build-task` para implementar uma task por vez.
 - `ldk-proof` para provar ou bloquear a conclusao.

@@ -22,6 +22,7 @@ Se existir `scripts/ldk-check.*`, rode o script.
 Se nao existir, valide manualmente:
 
 - `ldk/ledger.md` existe;
+- `ldk/roadmap.md` existe quando o projeto tem varias features;
 - estados validos;
 - `done` tem proof;
 - proof `DONE` tem prova suficiente.
@@ -34,6 +35,8 @@ Procure:
 - proof diz `DONE`, mas `Proof level achieved` e insuficiente;
 - feature com plan/brief mas sem ledger;
 - ledger aponta evidence quebrada;
+- roadmap aponta proxima feature ja concluida ou bloqueada;
+- roadmap e ledger discordam sobre estado/ordem;
 - `[VERIFY]` critico aberto em feature `done`;
 - task em `done` sem proof correspondente.
 

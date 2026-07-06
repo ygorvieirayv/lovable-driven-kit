@@ -13,6 +13,7 @@ Ler o estado gravado em `ldk/` e responder:
 
 - onde estamos;
 - qual feature/task esta ativa;
+- se o roadmap esta presente e coerente;
 - qual risco e prova se aplicam;
 - qual comando/skill rodar agora;
 - se ha drift que exige `ldk-doctor`.
@@ -25,9 +26,10 @@ Leia somente o necessario:
 
 1. `ldk/project.md`
 2. `ldk/ledger.md`
-3. feature ativa em `ldk/features/<feature>/`
-4. proof da feature, se existir
-5. GitHub diff ou lista de arquivos alterados, se disponivel
+3. `ldk/roadmap.md`, se existir
+4. feature ativa em `ldk/features/<feature>/`
+5. proof da feature, se existir
+6. GitHub diff ou lista de arquivos alterados, se disponivel
 
 Se houver diff em arquivos de motor LDK, leia `contracts/engine-boundary.md` e recomende `ldk-doctor`.
 
@@ -42,18 +44,25 @@ Regua de cerimonia:
 - medio: plano normal com tasks pequenas e proof P2/P3.
 - alto: plano explicito, risco claro, proof forte P4 e revisao antes de release.
 
+Se ja houver feature ativa em `approved`, `building` ou `proof-pending`, resolva essa feature antes de puxar
+uma nova do roadmap.
+
 | Situacao | Proximo passo |
 |---|---|
 | Nao existe `ldk/project.md` ou `ldk/ledger.md` | `ldk-intake` |
+| Ledger/proof/app divergentes | `ldk-doctor` |
+| Feature em `proof-pending` | `ldk-proof` |
+| Feature em `building` | continuar `ldk-build-task` |
+| Feature em `approved` | `ldk-build-task` |
+| Feature em `planned` | pedir aprovacao do plano ou continuar `ldk-plan` |
+| Projeto tem varias features e nao existe `ldk/roadmap.md` | `ldk-roadmap` |
+| Roadmap ausente, desatualizado ou divergente do ledger | `ldk-roadmap` |
+| Roadmap indica feature `blocked` como proxima | resolver bloqueio ou `ldk-roadmap` |
+| Roadmap indica feature `ready` | `ldk-plan` da feature indicada |
 | Feature em `idea` trivial e bem definida | `ldk-build-task` com AC curto e proof P1 |
 | Feature em `idea` baixo/medio/alto ou vaga | `ldk-plan` |
-| Feature em `planned` | pedir aprovacao do plano ou continuar `ldk-plan` |
-| Feature em `approved` | `ldk-build-task` |
-| Feature em `building` | continuar `ldk-build-task` |
-| Feature em `proof-pending` | `ldk-proof` |
 | Feature em `partial` ou `blocked` | tratar limitacao ou `ldk-doctor` |
 | Feature em `done` | `ldk-review` ou proxima feature |
-| Ledger/proof/app divergentes | `ldk-doctor` |
 
 ## Saida
 
@@ -65,6 +74,7 @@ Use formato curto:
 Onde estamos:
 Risco:
 Prova minima:
+Roadmap:
 Proximo passo:
 Por que:
 Alternativa consciente:

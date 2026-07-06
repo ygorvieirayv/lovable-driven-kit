@@ -14,7 +14,9 @@ Gerar `ldk/releases/<date>.md` com decisao `GO` ou `NO-GO`.
 ## O que revisar
 
 - `ldk/ledger.md`
+- `ldk/roadmap.md`
 - proofs das features no escopo
+- `contracts/always-rules.md`, se disponivel
 - issues abertas
 - GitHub diff/CI
 - preview desktop/mobile
@@ -39,6 +41,8 @@ Gerar `ldk/releases/<date>.md` com decisao `GO` ou `NO-GO`.
 - Env vars necessarias existem?
 - Auth/admin foram testados com papel correto?
 - Dados/pagamentos foram revisados se existirem?
+- Roadmap nao deixou feature fundacional pendente no release?
+- Segredos/PII/logs foram checados?
 
 ## Saida
 

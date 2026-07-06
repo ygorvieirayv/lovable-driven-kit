@@ -25,6 +25,8 @@ Criar ou atualizar:
 - Nao liste arquivos de motor LDK como alvo de task de produto.
 - Confirme o plano antes de mudar estado para `approved`.
 - Use cerimonia proporcional: trivial/baixo nao deve virar burocracia maior que a mudanca.
+- Antes de planejar, respeite `ldk/roadmap.md` quando existir.
+- Aplique `contracts/always-rules.md` e consulte `contracts/common-lessons.md`, se disponiveis.
 
 ## Risco
 
@@ -61,14 +63,16 @@ Se o usuario pedir apenas copy, cor, padding ou ajuste visual pequeno, diga expl
 
 ## Roteiro
 
-1. Leia `ldk/project.md` e `ldk/ledger.md`.
+1. Leia `ldk/project.md`, `ldk/ledger.md` e `ldk/roadmap.md`, se existir.
 2. Confirme o nome/slug da feature.
-3. Escreva objetivo, usuario, escopo e fora de escopo.
-4. Escreva ACs no formato observavel.
-5. Defina risco e prova minima.
-6. Quebre em tasks pequenas.
-7. Defina como cada task sera verificada.
-8. Atualize o ledger:
+3. Se a feature estiver `blocked` no roadmap, nao planeje sem decisao consciente do usuario.
+4. Se o roadmap estiver ausente/desatualizado em projeto com dependencias, recomende `ldk-roadmap`.
+5. Escreva objetivo, usuario, escopo e fora de escopo.
+6. Escreva ACs no formato observavel.
+7. Defina risco e prova minima.
+8. Quebre em tasks pequenas.
+9. Defina como cada task sera verificada.
+10. Atualize o ledger:
    - nova feature: `planned`;
    - feature aprovada pelo usuario: `approved`.
 
@@ -92,6 +96,7 @@ Arquivos criados/alterados:
 
 Status no ledger:
 Cerimonia usada: trivial curta | baixo curta | medio completa | alto completa
+Roadmap/dependencias:
 
 Proximo passo seguro:
 ```

@@ -12,9 +12,10 @@ processo simples:
 
 1. você descreve o que quer;
 2. o Lovable organiza o escopo;
-3. ele planeja antes de construir;
-4. ele implementa uma task por vez;
-5. ele só marca `DONE` quando existe prova suficiente.
+3. ele ordena as features por dependência;
+4. ele planeja antes de construir;
+5. ele implementa uma task por vez;
+6. ele só marca `DONE` quando existe prova suficiente.
 
 Para tarefas pequenas, o LDK deve ser leve. Ajustes de texto, cor, padding ou detalhe visual podem usar um
 plano curto e uma prova P1. O rigor aumenta quando o risco aumenta.
@@ -60,6 +61,7 @@ Use `/ldk-next` sempre que não souber o próximo passo. Ele deve ler o estado s
 Os outros comandos aparecem quando o próprio LDK pedir:
 
 ```txt
+/ldk-roadmap
 /ldk-plan
 /ldk-build-task
 /ldk-proof
@@ -98,37 +100,43 @@ https://github.com/ygorvieirayv/lovable-driven-kit/tree/main/skills/ldk-intake
 https://github.com/ygorvieirayv/lovable-driven-kit/tree/main/skills/ldk-next
 ```
 
-3. `ldk-plan`
+3. `ldk-roadmap`
+
+```txt
+https://github.com/ygorvieirayv/lovable-driven-kit/tree/main/skills/ldk-roadmap
+```
+
+4. `ldk-plan`
 
 ```txt
 https://github.com/ygorvieirayv/lovable-driven-kit/tree/main/skills/ldk-plan
 ```
 
-4. `ldk-build-task`
+5. `ldk-build-task`
 
 ```txt
 https://github.com/ygorvieirayv/lovable-driven-kit/tree/main/skills/ldk-build-task
 ```
 
-5. `ldk-proof`
+6. `ldk-proof`
 
 ```txt
 https://github.com/ygorvieirayv/lovable-driven-kit/tree/main/skills/ldk-proof
 ```
 
-6. `ldk-review`
+7. `ldk-review`
 
 ```txt
 https://github.com/ygorvieirayv/lovable-driven-kit/tree/main/skills/ldk-review
 ```
 
-7. `ldk-doctor`
+8. `ldk-doctor`
 
 ```txt
 https://github.com/ygorvieirayv/lovable-driven-kit/tree/main/skills/ldk-doctor
 ```
 
-8. `ldk-release`
+9. `ldk-release`
 
 ```txt
 https://github.com/ygorvieirayv/lovable-driven-kit/tree/main/skills/ldk-release
@@ -208,6 +216,7 @@ O usuário não precisa decorar este fluxo. Ele existe para o Lovable seguir:
 ```txt
 ideia
   -> /ldk-intake       organiza produto, riscos e MVP
+  -> /ldk-roadmap      ordena features por dependência
   -> /ldk-plan         planeja uma feature
   -> /ldk-build-task   constrói uma task aprovada
   -> /ldk-proof        prova ou bloqueia a conclusão
@@ -231,6 +240,7 @@ Estrutura esperada:
 ldk/
   project.md
   ledger.md
+  roadmap.md
   decisions/
   features/
   issues/
@@ -278,12 +288,20 @@ Na dúvida, suba o risco.
 O fluxo deve ser proporcional: tarefa trivial não precisa virar plano longo; feature média ou alta não deve ir
 direto para construção sem escopo, risco e prova clara.
 
+Regras que sempre valem:
+
+- sem prova falsa;
+- sem `DONE` sem evidência;
+- sem segredo em código, bundle ou logs;
+- sem PII desnecessária em logs, analytics, console ou mensagens de erro;
+- auth, permissão, pagamento real, RLS, deleção e migração nunca são triviais.
+
 ## Avaliar o LDK
 
 Para testar se o Lovable está obedecendo o fluxo, use o checklist
 [evaluation/mini-store-checklist.md](evaluation/mini-store-checklist.md). Ele mede se o Lovable fez intake,
-planejou quando precisava, construiu uma task por vez, pediu proof antes de `DONE` e manteve a cerimônia
-proporcional ao risco.
+ordenou dependências, planejou quando precisava, construiu uma task por vez, pediu proof antes de `DONE` e
+manteve a cerimônia proporcional ao risco.
 
 ## GitHub
 
