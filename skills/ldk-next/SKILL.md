@@ -56,6 +56,11 @@ Regua de cerimonia:
 Se ja houver feature ativa em `approved`, `building` ou `proof-pending`, resolva essa feature antes de puxar
 uma nova do roadmap.
 
+Enquanto houver task essencial `ready`, `backlog` ou `in-progress`, nao recomende `ldk-proof` como proximo passo
+nem como alternativa consciente. O proximo passo deve ser a proxima task `ready`/`in-progress`, ou `ldk-doctor` se
+o plano/estado estiver incoerente. `ldk-proof` so entra depois que todas as tasks essenciais estiverem
+`proof-pending` ou `done`.
+
 | Situacao | Proximo passo |
 |---|---|
 | Nao existe `ldk/project.md` ou `ldk/ledger.md` | `ldk-intake` |
@@ -92,4 +97,4 @@ Alternativa consciente:
 ```
 
 Termine perguntando se o usuario quer seguir com o passo recomendado. Nao ofereca uma alternativa que execute mais
-de uma task aprovada. Nao execute automaticamente.
+de uma task aprovada ou que rode proof antes das tasks essenciais terminarem. Nao execute automaticamente.

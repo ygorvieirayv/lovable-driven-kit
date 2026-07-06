@@ -52,3 +52,4 @@
 - `ldk-next` e `ldk-build-task` agora bloqueiam sugestao de agrupar tasks aprovadas no mesmo build.
 - Regras adicionadas para lidar com rollback, sync, outras skills e projetos ja iniciados sem tratar codigo antigo
   fora da feature ativa como drift.
+- `ldk-next` nao deve sugerir `ldk-proof` enquanto houver task essencial `ready`, `backlog` ou `in-progress`.

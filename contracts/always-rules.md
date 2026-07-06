@@ -18,4 +18,5 @@ Estas regras valem em qualquer nivel de risco.
 - Mudancas externas ao fluxo LDK (rollback, sync, outra skill ou prompt solto) nao sao erro por si so.
 - Em projeto ja iniciado, nao trate codigo preexistente fora da feature/task LDK ativa como drift.
 - Se codigo atual contradiz uma task LDK ja `proof-pending`/`done`, rode `ldk-doctor` antes de proof.
+- Nao rode `ldk-proof` final enquanto houver task essencial `ready`, `backlog` ou `in-progress`.
 - Se nao puder verificar algo essencial, use `PARTIAL` ou `BLOCKED`.

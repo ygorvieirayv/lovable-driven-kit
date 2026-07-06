@@ -1,11 +1,12 @@
 ---
 name: ldk-proof
-description: 'Use when finishing a Lovable task and deciding DONE, PARTIAL, or BLOCKED by comparing acceptance criteria with real evidence. Required before marking anything done.'
+description: 'Use when finishing an LDK feature or planned delivery after essential tasks are proof-pending/done, deciding DONE, PARTIAL, or BLOCKED from real evidence. Required before marking anything done.'
 ---
 
 # ldk-proof
 
-Use esta skill ao fim de cada task para provar a entrega ou declarar `PARTIAL`/`BLOCKED`.
+Use esta skill ao fim de uma feature/entrega planejada, depois que as tasks essenciais estiverem
+`proof-pending` ou `done`, para provar a entrega ou declarar `PARTIAL`/`BLOCKED`.
 
 ## Objetivo
 
@@ -33,6 +34,10 @@ Execute somente proof. Nao rode `ldk-review`, `ldk-release` ou outra skill nesta
 Confira a tabela de tasks do `plan.md` quando ela existir.
 
 - Se ainda houver task essencial `ready`, `backlog` ou `in-progress`, nao marque a feature como `DONE`.
+- Se ainda houver task essencial `ready`, `backlog` ou `in-progress` e o usuario nao pediu checkpoint parcial,
+  pare e recomende `ldk-next`/`ldk-build-task` para a proxima task.
+- Se o usuario pedir conscientemente um checkpoint parcial antes do fim das tasks, registre limitacao e nao marque
+  a feature como `DONE`.
 - Se uma task `proof-pending` ou `done` parece ter sido removida ou contradita por rollback, sync, outra skill ou
   prompt direto, nao reuse proof antigo; marque como `PARTIAL`/`BLOCKED` ou recomende `ldk-doctor`.
 - Em projeto ja iniciado, ignore codigo preexistente fora da feature/task LDK ativa; isso nao e drift.

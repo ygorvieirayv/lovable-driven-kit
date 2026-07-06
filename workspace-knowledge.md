@@ -59,6 +59,7 @@ Regras "Sempre":
 - Mudancas externas ao fluxo LDK, como rollback, sync, outra skill ou prompt solto, nao sao erro por si so.
 - Em projeto ja iniciado, nao trate codigo preexistente fora da feature/task LDK ativa como drift.
 - Se o codigo atual contradiz uma task LDK ja `proof-pending`/`done`, use `ldk-doctor` antes de proof.
+- Nao rode `ldk-proof` final enquanto houver task essencial `ready`, `backlog` ou `in-progress`.
 - Se nao puder verificar algo essencial, use `PARTIAL` ou `BLOCKED`.
 
 Use cerimonia proporcional:
@@ -203,6 +204,10 @@ verify
 - P2: fluxo manual com passos executados e resultado observado.
 - P3: teste automatizado ou script reproduzivel com resultado.
 - P4: CI/release, GitHub diff, checklist de seguranca.
+
+`ldk-proof` fecha a feature/entrega planejada. So recomende `ldk-proof` quando todas as tasks essenciais estiverem
+`proof-pending` ou `done`, ou quando o usuario pedir conscientemente um checkpoint parcial. Checkpoint parcial nao
+pode marcar a feature como `DONE`.
 
 Para alto risco, como auth, permissoes, dados pessoais, pagamento real, delecao, migracao ou Supabase
 policies/RLS, o Lovable pode implementar, mas `DONE` exige prova forte. Se a prova nao existir, marque
