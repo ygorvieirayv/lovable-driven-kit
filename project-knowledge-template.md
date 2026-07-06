@@ -35,6 +35,12 @@
 ## Regras do projeto
 - 
 
+## Auditoria LDK
+- Audit log: off
+- Audit log file: `ldk/audit/log.md`
+- Para habilitar, troque para `Audit log: on`.
+- Para desabilitar, volte para `Audit log: off`.
+
 ## Cerimonia proporcional
 - trivial: AC curto, uma mudanca pequena e prova P1.
 - baixo: plano curto e prova P1/P2.

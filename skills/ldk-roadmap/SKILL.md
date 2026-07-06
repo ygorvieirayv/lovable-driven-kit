@@ -42,6 +42,11 @@ Se `ldk/project.md` ou `ldk/ledger.md` nao existir, recomende `ldk-intake`.
 - Nao altere motor do LDK.
 - Execute somente roadmap. Nao rode `ldk-plan`, `ldk-build` nem `ldk-build-task` nesta skill.
 
+## Audit log opcional
+
+Se o Project Knowledge tiver `Audit log: on`, adicione uma entrada compacta em `ldk/audit/log.md` ao final.
+Se estiver `off` ou ausente, nao crie log.
+
 ## Ledger contract
 
 Se precisar adicionar linhas em `ldk/ledger.md`, nao traduza nem reestruture a tabela:

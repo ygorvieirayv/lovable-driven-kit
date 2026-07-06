@@ -37,6 +37,11 @@ Criar ou atualizar:
 - Execute somente planejamento. Aprovacao do plano autoriza salvar/aprovar o plano, nao inicia build nesta skill.
 - Mesmo se o usuario disser "pode continuar", nao rode `ldk-build` nem `ldk-build-task` nesta skill.
 
+## Audit log opcional
+
+Se o Project Knowledge tiver `Audit log: on`, adicione uma entrada compacta em `ldk/audit/log.md` ao final.
+Se estiver `off` ou ausente, nao crie log.
+
 ## Risco
 
 - trivial: copy, cor, padding, ajuste visual pequeno.

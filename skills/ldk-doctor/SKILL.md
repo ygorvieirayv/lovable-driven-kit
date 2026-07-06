@@ -121,3 +121,5 @@ Regras:
 - Reexecutar check relevante.
 - Sem aprovacao explicita, nao alterar nada.
 - Nao reverta nem sobrescreva mudanca externa do usuario sem aprovacao explicita.
+- Se o Project Knowledge tiver `Audit log: on` e uma correcao for aplicada, adicione uma entrada compacta em
+  `ldk/audit/log.md`. Se estiver `off` ou ausente, nao crie log.

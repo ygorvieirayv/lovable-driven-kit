@@ -70,3 +70,8 @@ Etapa concluida:
 ```
 
 Use `NO-GO` se houver risco critico sem prova.
+
+## Audit log opcional
+
+Se o Project Knowledge tiver `Audit log: on`, adicione uma entrada compacta em `ldk/audit/log.md` ao final.
+Se estiver `off` ou ausente, nao crie log.

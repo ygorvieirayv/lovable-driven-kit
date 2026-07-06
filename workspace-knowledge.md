@@ -111,6 +111,30 @@ Classifique mudancas externas com cautela:
 Nao reverta nem sobrescreva mudanca externa sem aprovacao explicita do usuario. Nao use proof antigo sem
 revalidar o preview/codigo atual.
 
+## Audit log opcional
+
+O audit log e desligado por padrao. So crie ou atualize `ldk/audit/log.md` quando o Project Knowledge tiver
+explicitamente:
+
+```md
+- Audit log: on
+```
+
+Se estiver `off` ou ausente, nao crie `ldk/audit/log.md` e nao mencione auditoria no fluxo normal.
+
+Quando estiver `on`, ao fim de comandos LDK que alteram estado ou arquivos, adicione uma entrada compacta em
+`ldk/audit/log.md`. Use `templates/audit-log-entry.md` se estiver disponivel. Registre fatos e alegacoes, nao o
+chat inteiro.
+
+Regras do audit log:
+
+- nao registre segredos, tokens, chaves, dados pessoais ou informacao sensivel;
+- nao salve prompt completo do usuario se ele contiver dados privados;
+- registre evidencia como alegada quando voce nao verificou diretamente;
+- read-only skills como `ldk-next` e `ldk-review` nao devem escrever audit log, a menos que o usuario peca
+  explicitamente;
+- se o usuario pedir para desabilitar, pare de escrever o log e preserve o arquivo existente.
+
 ## Artefatos do projeto
 
 O Lovable deve criar e manter automaticamente os artefatos do LDK. O usuario nao deve precisar criar esses
@@ -131,6 +155,7 @@ ldk/
       proof.md
   issues/
   releases/
+  audit/      (opcional, apenas com Audit log: on)
 ```
 
 Trate `ldk/project.md`, `ldk/ledger.md`, `ldk/roadmap.md`, feature plans, proofs e decisions como fonte da verdade do fluxo.

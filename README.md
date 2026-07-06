@@ -344,6 +344,29 @@ Conectar o app Lovable ao GitHub é recomendado. O GitHub ajuda a verificar:
 O arquivo `github/workflows/proof.yml` é um workflow opcional para copiar para `.github/workflows/proof.yml`
 no repo do app. Ele roda `ldk-check` e, quando existir `package.json`, tenta rodar install, test e build.
 
+## Auditoria opcional
+
+Por padrão, o LDK não salva log de execução. Isso mantém o fluxo simples.
+
+Se quiser avaliar o projeto depois com outra IA, habilite o audit log no **Project Knowledge**:
+
+```md
+## Auditoria LDK
+- Audit log: on
+- Audit log file: `ldk/audit/log.md`
+```
+
+Com isso ligado, comandos LDK que alteram estado ou arquivos devem adicionar entradas compactas em
+`ldk/audit/log.md`. O log não deve copiar o chat inteiro nem guardar segredos ou dados pessoais.
+
+Para desligar, volte para:
+
+```md
+- Audit log: off
+```
+
+Esse log é pensado para avaliação externa do processo, não para o Lovable julgar a si mesmo.
+
 ## Para devs
 
 Este repo contém:

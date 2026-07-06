@@ -135,6 +135,11 @@ Atualize tambem o `plan.md`:
 - se Status for `PARTIAL`, deixe tasks sem prova suficiente como `proof-pending` ou `blocked`;
 - se Status for `BLOCKED`, marque a task afetada como `blocked` quando o bloqueio for especifico.
 
+## Audit log opcional
+
+Se o Project Knowledge tiver `Audit log: on`, adicione uma entrada compacta em `ldk/audit/log.md` ao final.
+Registre pre-flight, actions, evidence claimed, decision e next. Se estiver `off` ou ausente, nao crie log.
+
 ## Saida
 
 ```md

@@ -79,6 +79,11 @@ Confirme:
 4. Se todas as tasks essenciais estiverem `proof-pending` ou `done`, atualize o ledger da feature para `proof-pending`.
 5. Pare e aguarde o proximo comando.
 
+## Audit log opcional
+
+Se o Project Knowledge tiver `Audit log: on`, adicione uma entrada compacta em `ldk/audit/log.md` ao final.
+Se estiver `off` ou ausente, nao crie log.
+
 ## Saida
 
 ```md
