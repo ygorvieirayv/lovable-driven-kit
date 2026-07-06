@@ -24,3 +24,9 @@
   `ldk/`; se nao criar, o usuario sabe o que pedir.
 - README clarifica que o exemplo da mini loja é opcional: o usuário pode iniciar com uma frase simples, e o
   LDK ajuda a descobrir escopo, riscos, MVP e decisões.
+- README reconcilia o público leigo com o rigor P4: o Lovable implementa partes técnicas, mas o LDK pode
+  bloquear `DONE` em auth, pagamento, PII ou RLS até existir prova forte.
+- Workspace Knowledge esclarece que o usuário não precisa codar; o Lovable implementa, e o LDK exige prova.
+- `ldk-proof` ganhou `LDK self-check`, e `ldk-check` agora valida esses gates em proofs `DONE`.
+- `ldk-check` agora falha linhas de ledger/task sem prefixos `F...`/`T...` e alinha a tolerância de
+  indentação entre Bash e PowerShell.

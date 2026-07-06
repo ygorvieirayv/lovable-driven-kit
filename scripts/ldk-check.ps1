@@ -70,7 +70,8 @@ if (-not (Test-Path -LiteralPath $ledger)) {
   ErrorMsg "missing ldk/ledger.md"
 } else {
   foreach ($line in (Get-Content -Encoding UTF8 -LiteralPath $ledger)) {
-    if ($line -notmatch '^\|\s*F[A-Za-z0-9_-]+\s*\|') { continue }
+    if ($line -notmatch '^\|') { continue }
+    if ($line -match '^\|\s*(-+|ID)\s*\|') { continue }
     $cells = $line.Trim() -split '\|'
     if ($cells.Count -lt 8) {
       ErrorMsg "ldk/ledger.md: malformed row: $line"
@@ -84,6 +85,9 @@ if (-not (Test-Path -LiteralPath $ledger)) {
     $required = CleanCell $cells[5]
     $evidence = CleanCell $cells[6]
 
+    if ($id -notmatch '^F[A-Za-z0-9_-]+$') {
+      ErrorMsg "ldk/ledger.md: row ID '$id' must start with F (example: F1)"
+    }
     if ($allowedRisk -notcontains $risk) {
       ErrorMsg "ldk/ledger.md: ${id} has invalid Risk '$risk'"
     }
@@ -128,6 +132,25 @@ if (-not (Test-Path -LiteralPath $ledger)) {
         ErrorMsg "$(Rel $proofPath): DONE proof has not covered AC"
       }
 
+      $selfChecksYes = @(
+        "Required proof identified",
+        "All essential AC covered",
+        "Evidence exists for every covered AC",
+        "Proof level achieved >= required"
+      )
+      foreach ($check in $selfChecksYes) {
+        $pattern = "(?mi)^[ \t]*-[ \t]*" + [regex]::Escape($check) + ":[ \t]*yes\b"
+        if ($proofText -notmatch $pattern) {
+          ErrorMsg "$(Rel $proofPath): DONE proof self-check '$check' must be yes"
+        }
+      }
+      if ($proofText -notmatch '(?mi)^[ \t]*-[ \t]*Critical errors known:[ \t]*no\b') {
+        ErrorMsg "$(Rel $proofPath): DONE proof self-check 'Critical errors known' must be no"
+      }
+      if ($proofText -notmatch '(?mi)^[ \t]*-[ \t]*LDK engine drift detected:[ \t]*no\b') {
+        ErrorMsg "$(Rel $proofPath): DONE proof self-check 'LDK engine drift detected' must be no"
+      }
+
       $requiredRank = RankProof $required
       if ($requiredRank -ge 1 -and $proofText -notmatch '(?mi)^[ \t]*-[ \t]*Screenshot or visual observation:[ \t]*\S') {
         ErrorMsg "$(Rel $proofPath): P1+ proof needs screenshot or visual observation"
@@ -154,10 +177,15 @@ $featureRoot = Join-Path $RootAbs "ldk\features"
 if (Test-Path -LiteralPath $featureRoot) {
   foreach ($plan in Get-ChildItem -Path $featureRoot -Recurse -Filter "plan.md" -ErrorAction SilentlyContinue) {
     foreach ($line in (Get-Content -Encoding UTF8 -LiteralPath $plan.FullName)) {
-      if ($line -notmatch '^\|\s*T[A-Za-z0-9_-]+\s*\|') { continue }
+      if ($line -notmatch '^\|') { continue }
+      if ($line -match '^\|\s*(-+|ID)\s*\|') { continue }
       $cells = $line.Trim() -split '\|'
       if ($cells.Count -lt 8) { continue }
+      $id = CleanCell $cells[1]
       $state = CleanCell $cells[$cells.Count - 2]
+      if ($id -notmatch '^T[A-Za-z0-9_-]+$') {
+        ErrorMsg "$(Rel $plan.FullName): task row ID '$id' must start with T (example: T1)"
+      }
       if ($allowedTaskState -notcontains $state) {
         ErrorMsg "$(Rel $plan.FullName): invalid task state '$state'"
       }

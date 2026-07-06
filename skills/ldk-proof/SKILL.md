@@ -1,6 +1,6 @@
 ---
 name: ldk-proof
-description: Use when finishing a Lovable task and deciding DONE, PARTIAL, or BLOCKED by comparing acceptance criteria with real evidence. Required before marking anything done.
+description: 'Use when finishing a Lovable task and deciding DONE, PARTIAL, or BLOCKED by comparing acceptance criteria with real evidence. Required before marking anything done.'
 ---
 
 # ldk-proof
@@ -9,26 +9,26 @@ Use esta skill ao fim de cada task para provar a entrega ou declarar `PARTIAL`/`
 
 ## Objetivo
 
-Gerar `ldk/features/<feature>/proof.md` e atualizar `ldk/ledger.md` sem aceitar `DONE` sem evidencia.
+Gerar `ldk/features/<feature>/proof.md` e atualizar `ldk/ledger.md` sem aceitar `DONE` sem evidência.
 
 ## Regra central
 
-Sem prova, nao e done.
+Sem prova, não é done.
 
 ## O que ler
 
 - `ldk/ledger.md`
 - `ldk/features/<feature>/brief.md`
 - `ldk/features/<feature>/plan.md`
-- arquivos alterados ou GitHub diff, se disponivel
-- Preview, console/logs e testes, quando acessiveis
+- arquivos alterados ou GitHub diff, se disponível
+- Preview, console/logs e testes, quando acessíveis
 
-## Nivel de prova
+## Nível de prova
 
-- P1: exige screenshot ou observacao precisa do preview.
+- P1: exige screenshot ou observação precisa do preview.
 - P2: exige fluxo manual executado, passos e resultado observado.
-- P3: exige teste automatizado ou script reproduzivel com resultado `pass`.
-- P4: exige CI verde, diff GitHub e checklist de seguranca/release.
+- P3: exige teste automatizado ou script reproduzível com resultado `pass`.
+- P4: exige CI verde, diff GitHub e checklist de segurança/release.
 
 `Proof level achieved` precisa ser maior ou igual ao `Proof level required`.
 
@@ -38,8 +38,8 @@ Use `DONE` apenas quando:
 
 - todos os AC essenciais estao `covered`;
 - prova atingida >= prova exigida;
-- nao ha erro critico conhecido;
-- limitacoes restantes nao bloqueiam o objetivo.
+- não há erro crítico conhecido;
+- limitações restantes não bloqueiam o objetivo.
 
 Use `PARTIAL` quando:
 
@@ -47,31 +47,54 @@ Use `PARTIAL` quando:
 
 Use `BLOCKED` quando:
 
-- falta acesso, credencial, decisao, dado externo ou correcao previa;
-- a verificacao nao pode ser executada;
+- falta acesso, credencial, decisão, dado externo ou correção prévia;
+- a verificação não pode ser executada;
 - apareceu drift de motor LDK.
+
+## Auto-check antes do status
+
+Antes de escolher `DONE`, `PARTIAL` ou `BLOCKED`, preencha mentalmente e depois registre no proof a seção
+`LDK self-check`.
+
+Gates obrigatórios:
+
+- Required proof identified: yes/no
+- All essential AC covered: yes/no
+- Evidence exists for every covered AC: yes/no
+- Proof level achieved >= required: yes/no
+- Critical errors known: yes/no
+- LDK engine drift detected: yes/no
+- If GitHub/CI is unavailable, limitation documented: yes/no/not applicable
+
+Regra:
+
+- Se qualquer gate essencial for `no`, status não pode ser `DONE`.
+- Se `Critical errors known: yes`, status deve ser `BLOCKED`.
+- Se `LDK engine drift detected: yes`, status deve ser `BLOCKED` e o próximo passo é `/ldk-doctor`.
+- Se a limitação é falta de GitHub/CI em prova P3/P4, status deve ser `PARTIAL` ou `BLOCKED`, não `DONE`.
+- Para P1/P2, GitHub/CI pode ser `not available`, desde que a evidência visual/manual exigida exista.
 
 ## Nunca inventar
 
-Se nao abriu preview, registre:
+Se não abriu preview, registre:
 
 ```txt
 Preview opened: no
 ```
 
-Se nao rodou teste:
+Se não rodou teste:
 
 ```txt
 Automated test result: not run
 ```
 
-Se console/log nao esta disponivel:
+Se console/log não está disponível:
 
 ```txt
 Console/log errors checked: not available
 ```
 
-## Saida em arquivo
+## Saída em arquivo
 
 Grave `ldk/features/<feature>/proof.md` usando `templates/proof-report.md`.
 
@@ -82,7 +105,7 @@ Atualize o ledger:
 - `blocked` se Status for `BLOCKED`;
 - `Last evidence` deve apontar para o proof.
 
-## Saida final
+## Saída final
 
 ```md
 ## Proof of Done
@@ -109,6 +132,15 @@ Proof level achieved:
 - Automated test available: yes/no
 - Automated test result: pass/fail/not run/not available
 - CI result: pass/fail/not run/not available
+
+### LDK self-check
+- Required proof identified: yes/no
+- All essential AC covered: yes/no
+- Evidence exists for every covered AC: yes/no
+- Proof level achieved >= required: yes/no
+- Critical errors known: yes/no
+- LDK engine drift detected: yes/no
+- If GitHub/CI is unavailable, limitation documented: yes/no/not applicable
 
 ### Evidence
 - Preview URL:

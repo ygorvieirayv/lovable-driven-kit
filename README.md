@@ -28,6 +28,19 @@ https://github.com/ygorvieirayv/lovable-driven-kit
   Lovable sem aceitar entrega "no olho".
 - Devs que usam Lovable como acelerador, mas querem diff, critério de aceite, prova e menos retrabalho.
 
+## E quando tem login, pagamento ou dados?
+
+O LDK não espera que o usuário programe. O Lovable pode implementar login, pagamento, Supabase, RLS e outras
+partes técnicas.
+
+O papel do LDK é outro: impedir que algo arriscado seja tratado como pronto sem evidência. Em features de
+alto risco, como auth, permissões, dados pessoais, pagamento real ou regras de Supabase, o kit pode pedir
+GitHub, CI, revisão ou outro tipo de prova forte antes de aceitar `DONE`.
+
+Isso é intencional. Se a prova ainda não existe, o resultado correto é `PARTIAL` ou `BLOCKED`, com o próximo
+passo explicado pelo Lovable. O bloqueio não é uma falha do kit; é a proteção que evita publicar algo sensível
+no escuro.
+
 ## O que você precisa lembrar
 
 Só dois comandos importam no dia a dia:
@@ -236,6 +249,10 @@ O LDK usa três resultados no fim de uma task:
 - `BLOCKED`: não dá para concluir sem acesso, decisão, credencial ou correção prévia.
 
 `DONE` não é permitido quando o Lovable não verificou.
+
+Todo proof também deve incluir um auto-check do LDK. Esse auto-check força o Lovable a responder, de forma
+explícita, se os critérios essenciais foram cobertos, se existe evidência para eles, se a prova atingida é
+suficiente e se há algum erro crítico conhecido.
 
 ## Risco e prova
 

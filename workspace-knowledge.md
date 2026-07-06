@@ -17,6 +17,9 @@ Use estes nomes para os comandos/skills:
 
 ## Regras sempre aplicaveis
 
+O usuario nao precisa codar. O Lovable implementa. O papel do LDK e guiar escopo, risco, tarefas e prova,
+para que o usuario acompanhe e aprove com evidencia.
+
 1. Antes de construir mudancas relevantes, use Plan mode.
 2. Defina escopo, risco, criterios de aceite e prova minima.
 3. Implemente uma task por vez.
@@ -87,6 +90,10 @@ Na duvida, suba um nivel.
 - P2: fluxo manual com passos executados e resultado observado.
 - P3: teste automatizado ou script reproduzivel com resultado.
 - P4: CI/release, GitHub diff, checklist de seguranca.
+
+Para alto risco, como auth, permissoes, dados pessoais, pagamento real, delecao, migracao ou Supabase
+policies/RLS, o Lovable pode implementar, mas `DONE` exige prova forte. Se a prova nao existir, marque
+`PARTIAL` ou `BLOCKED` e explique o proximo passo seguro.
 
 ## Fronteira do kit
 

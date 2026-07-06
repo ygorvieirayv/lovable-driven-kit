@@ -7,4 +7,4 @@ Proof required: P3
 ## Tasks
 | ID | Descricao | AC | Arquivos esperados | Verificacao | State |
 |----|-----------|----|--------------------|-------------|-------|
-| T1 | Criar checkout fake | AC1 | `src/App.tsx` | teste automatizado | weird |
+| 1 | Criar checkout fake | AC1 | `src/App.tsx` | teste automatizado | weird |

@@ -23,6 +23,15 @@ Proof level achieved: P1 | P2 | P3 | P4 | none
 - Automated test result: pass/fail/not run/not available
 - CI result: pass/fail/not run/not available
 
+## LDK self-check
+- Required proof identified: yes/no
+- All essential AC covered: yes/no
+- Evidence exists for every covered AC: yes/no
+- Proof level achieved >= required: yes/no
+- Critical errors known: yes/no
+- LDK engine drift detected: yes/no
+- If GitHub/CI is unavailable, limitation documented: yes/no/not applicable
+
 ## Evidence
 - Preview URL:
 - Screenshot or visual observation:

@@ -23,6 +23,15 @@ Proof level achieved: P2
 - Automated test result: not run
 - CI result: not run
 
+## LDK self-check
+- Required proof identified: yes
+- All essential AC covered: yes
+- Evidence exists for every covered AC: yes
+- Proof level achieved >= required: yes
+- Critical errors known: no
+- LDK engine drift detected: no
+- If GitHub/CI is unavailable, limitation documented: not applicable
+
 ## Evidence
 - Preview URL: https://example.lovable.app
 - Screenshot or visual observation: Catalog cards appeared with name, price and CTA.
