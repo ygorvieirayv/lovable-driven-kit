@@ -65,6 +65,16 @@ else
     valid_in "$state" idea planned approved building proof-pending done partial blocked reopened || error "ldk/ledger.md: $id has invalid State '$state'"
     valid_in "$required" P1 P2 P3 P4 || error "ldk/ledger.md: $id has invalid Proof required '$required'"
 
+    if [ -n "$evidence" ] && [ "$evidence" != "-" ]; then
+      echo "$evidence" | grep -qiE '(^|/)(plan|brief)\.md$' && \
+        error "ldk/ledger.md: $id Last evidence must not point to plan/brief '$evidence'"
+      case "$state" in
+        idea|planned|approved|building|proof-pending)
+          error "ldk/ledger.md: $id state '$state' must keep Last evidence empty"
+          ;;
+      esac
+    fi
+
     if [ "$state" = "done" ]; then
       if [ -z "$evidence" ] || [ "$evidence" = "-" ]; then
         error "ldk/ledger.md: $id is done but Last evidence is empty"

@@ -98,6 +98,15 @@ if (-not (Test-Path -LiteralPath $ledger)) {
       ErrorMsg "ldk/ledger.md: ${id} has invalid Proof required '$required'"
     }
 
+    if (-not [string]::IsNullOrWhiteSpace($evidence) -and $evidence -ne "-") {
+      if ($evidence -match '(?i)(^|/)(plan|brief)\.md$') {
+        ErrorMsg "ldk/ledger.md: ${id} Last evidence must not point to plan/brief '$evidence'"
+      }
+      if (@("idea", "planned", "approved", "building", "proof-pending") -contains $state) {
+        ErrorMsg "ldk/ledger.md: ${id} state '$state' must keep Last evidence empty"
+      }
+    }
+
     if ($state -eq "done") {
       if ([string]::IsNullOrWhiteSpace($evidence) -or $evidence -eq "-") {
         ErrorMsg "ldk/ledger.md: ${id} is done but Last evidence is empty"

@@ -45,3 +45,5 @@
   feature e `Proof required` deve usar um único nível.
 - Reforçada a fronteira de comando: cada skill executa uma etapa e para; `ldk-plan` não inicia build e
   `ldk-build-task` não inicia proof automaticamente.
+- `Last evidence` agora é reservado para proof/report: fica vazio antes de `done`/`partial`/`blocked`, e o
+  validador falha quando aponta para `plan.md` ou `brief.md`.

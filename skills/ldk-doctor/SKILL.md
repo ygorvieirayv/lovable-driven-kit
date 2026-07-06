@@ -39,6 +39,8 @@ Procure:
 - ledger com headers traduzidos ou colunas fora do contrato;
 - ledger com ID misturado ao nome da feature;
 - ledger com prova em intervalo como `P1/P2`;
+- ledger com `Last evidence` apontando para `plan.md` ou `brief.md`;
+- ledger com `Last evidence` preenchido em estado `idea`, `planned`, `approved`, `building` ou `proof-pending`;
 - roadmap aponta proxima feature ja concluida ou bloqueada;
 - roadmap e ledger discordam sobre estado/ordem;
 - `[VERIFY]` critico aberto em feature `done`;

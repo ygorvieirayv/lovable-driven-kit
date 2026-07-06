@@ -41,6 +41,9 @@ Valores permitidos:
 
 Regra:
 
+- `Last evidence` deve ficar vazio em `idea`, `planned`, `approved`, `building` e `proof-pending`.
+- `Last evidence` nao deve apontar para `plan.md` ou `brief.md`; plano nao e prova.
+- `partial` e `blocked` podem apontar para um proof/report que explique a limitacao.
 - `done` exige `Last evidence` apontando para um proof existente.
 - `done` exige proof com `Status: DONE`.
 - `done` exige `Proof level achieved >= Proof level required`.

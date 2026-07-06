@@ -29,6 +29,7 @@ Criar ou atualizar:
 - Aplique `contracts/always-rules.md` e consulte `contracts/common-lessons.md`, se disponiveis.
 - Ao atualizar `ldk/ledger.md`, mantenha o formato machine-readable de `templates/task-ledger.md`: headers em ingles,
   ID separado do nome e `Proof required` com um unico valor.
+- Durante planning/aprovacao, deixe `Last evidence` vazio. Nao use `plan.md` como evidencia no ledger.
 - Execute somente planejamento. Aprovacao do plano autoriza salvar/aprovar o plano, nao autoriza build.
 - Mesmo se o usuario disser "pode continuar", nao rode `ldk-build-task` nesta skill.
 

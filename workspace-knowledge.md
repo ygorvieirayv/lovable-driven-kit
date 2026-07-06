@@ -116,6 +116,9 @@ Para `ldk/ledger.md`, use exatamente:
 - O nome fica em `Feature`, nao junto do ID.
 - `Proof required` deve ser um unico valor: `P1`, `P2`, `P3` ou `P4`.
 - Nao use headers traduzidos como `Estado`, `Risco`, `Prova minima`.
+- `Last evidence` fica vazio em `idea`, `planned`, `approved`, `building` e `proof-pending`.
+- `Last evidence` nunca aponta para `plan.md` ou `brief.md`; plano nao e prova.
+- `Last evidence` aponta para proof/report apenas quando houver `done`, `partial` ou `blocked`.
 
 ## Estados permitidos
 

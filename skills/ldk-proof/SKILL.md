@@ -120,6 +120,8 @@ Atualize o ledger:
 - `blocked` se Status for `BLOCKED`;
 - `Last evidence` deve apontar para o proof.
 
+Nao use `plan.md` ou `brief.md` como `Last evidence`. Plano nao e prova.
+
 ## Saída final
 
 ```md

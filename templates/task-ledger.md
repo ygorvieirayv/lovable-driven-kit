@@ -13,4 +13,10 @@ Do not translate or rename this table. Keep the exact columns and value vocabula
 - State: `idea`, `planned`, `approved`, `building`, `proof-pending`, `done`, `partial`, `blocked`, `reopened`
 - Proof required: `P1`, `P2`, `P3`, `P4`
 
+## Last evidence
+
+- Empty for `idea`, `planned`, `approved`, `building`, and `proof-pending`.
+- Never point to `plan.md` or `brief.md`.
+- Use only proof/report evidence for `done`, `partial`, or `blocked`.
+
 `done` exige proof existente e suficiente.

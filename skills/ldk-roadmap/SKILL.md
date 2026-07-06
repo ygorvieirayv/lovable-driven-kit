@@ -57,6 +57,7 @@ Se precisar adicionar linhas em `ldk/ledger.md`, nao traduza nem reestruture a t
 - `Risk`: `trivial`, `baixo`, `medio` ou `alto`.
 - `State`: valor canonico como `idea`, `planned`, `blocked`.
 - `Proof required`: um unico valor `P1`/`P2`/`P3`/`P4`, nao intervalo.
+- `Last evidence`: vazio para `idea`, `planned`, `approved`, `building` e `proof-pending`.
 
 ## Heuristicas de dependencia
 
