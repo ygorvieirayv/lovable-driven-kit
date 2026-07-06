@@ -26,6 +26,7 @@ Use `ldk-build` como caminho padrao quando:
 
 - a feature esta `approved`, `building` ou com tasks `ready`/`in-progress`;
 - existe `plan.md` com tabela de tasks;
+- a tabela de tasks usa exatamente os headers `ID | Descricao | AC | Arquivos esperados | Verificacao | State`;
 - o risco e `trivial`, `baixo` ou `medio` sem decisao aberta critica;
 - o usuario quer resultado, nao operar T1/T2/T3 manualmente.
 
@@ -81,6 +82,7 @@ Use o veredito pessimista como ferramenta de qualidade:
 
 Pare imediatamente se encontrar:
 
+- tabela de tasks sem headers exatos; recomende `ldk-doctor` para normalizar antes de construir;
 - `[VERIFY]` que afeta a feature atual;
 - arquivo fora do escopo que seria necessario alterar;
 - segredo, PII, auth, pagamento real, RLS, migracao ou delecao nao planejados;

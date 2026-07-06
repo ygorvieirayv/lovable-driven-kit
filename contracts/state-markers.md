@@ -76,6 +76,7 @@ Contrato machine-readable para tasks:
 - Todo `plan.md` precisa ter uma tabela de tasks.
 - Nao substitua a tabela por bullets.
 - Headers obrigatorios: `ID`, `Descricao`, `AC`, `Arquivos esperados`, `Verificacao`, `State`.
+- Nao abrevie `Arquivos esperados` para `Arquivos`.
 - Cada task precisa de ID separado (`T1`, `T2`, `T3`) e `State` canonico.
 
 Task `done` so e permitida quando a verificacao da task passou ou quando o proof final cobre a task.

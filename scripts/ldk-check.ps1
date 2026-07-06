@@ -64,6 +64,7 @@ $allowedRisk = @("trivial", "baixo", "medio", "alto")
 $allowedState = @("idea", "planned", "approved", "building", "proof-pending", "done", "partial", "blocked", "reopened")
 $allowedProof = @("P1", "P2", "P3", "P4")
 $allowedTaskState = @("backlog", "ready", "in-progress", "proof-pending", "done", "blocked")
+$expectedTaskHeader = @("ID", "Descricao", "AC", "Arquivos esperados", "Verificacao", "State")
 
 $ledger = Join-Path $RootAbs "ldk\ledger.md"
 if (-not (Test-Path -LiteralPath $ledger)) {
@@ -186,11 +187,24 @@ $featureRoot = Join-Path $RootAbs "ldk\features"
 if (Test-Path -LiteralPath $featureRoot) {
   foreach ($plan in Get-ChildItem -Path $featureRoot -Recurse -Filter "plan.md" -ErrorAction SilentlyContinue) {
     $taskRows = 0
+    $taskHeaderFound = $false
     foreach ($line in (Get-Content -Encoding UTF8 -LiteralPath $plan.FullName)) {
       if ($line -notmatch '^\|') { continue }
-      if ($line -match '^\|\s*(-+|ID)\s*\|') { continue }
       $cells = $line.Trim() -split '\|'
       if ($cells.Count -lt 8) { continue }
+      $first = CleanCell $cells[1]
+      if ($first -eq "ID") {
+        $taskHeaderFound = $true
+        $actualHeader = @()
+        for ($i = 1; $i -le 6; $i++) {
+          $actualHeader += CleanCell $cells[$i]
+        }
+        if (($actualHeader -join "|") -ne ($expectedTaskHeader -join "|")) {
+          ErrorMsg "$(Rel $plan.FullName): task table header must be exactly '| ID | Descricao | AC | Arquivos esperados | Verificacao | State |'"
+        }
+        continue
+      }
+      if ($line -match '^\|\s*-+\s*\|') { continue }
       $id = CleanCell $cells[1]
       $state = CleanCell $cells[$cells.Count - 2]
       if ($id -match '^T[A-Za-z0-9_-]+$') { $taskRows++ }
@@ -203,6 +217,9 @@ if (Test-Path -LiteralPath $featureRoot) {
     }
     if ($taskRows -eq 0) {
       ErrorMsg "$(Rel $plan.FullName): missing machine-readable task table with T rows"
+    }
+    if (-not $taskHeaderFound) {
+      ErrorMsg "$(Rel $plan.FullName): missing exact task table header '| ID | Descricao | AC | Arquivos esperados | Verificacao | State |'"
     }
   }
 }

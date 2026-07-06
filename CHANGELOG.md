@@ -55,3 +55,4 @@
 - `ldk-next` nao deve sugerir `ldk-proof` enquanto houver task essencial `ready`, `backlog` ou `in-progress`.
 - Adicionada skill `ldk-build` para executar e provar uma feature aprovada com pre-flight otimista/pessimista,
   reduzindo microaprovacoes em features triviais/baixas e medias seguras.
+- Header da tabela de tasks agora e contrato literal: `Arquivos esperados` nao pode ser abreviado para `Arquivos`.

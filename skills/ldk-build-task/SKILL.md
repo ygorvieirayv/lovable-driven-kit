@@ -20,6 +20,8 @@ Implementar uma task do plano e deixar a entrega pronta para prova.
 - Implemente uma task por vez.
 - A task deve existir na tabela de tasks do `plan.md`. Se o plano tiver apenas bullets, pare e rode `ldk-doctor` ou
   `ldk-plan` para normalizar o plano antes de construir.
+- A tabela deve usar exatamente os headers `ID | Descricao | AC | Arquivos esperados | Verificacao | State`.
+  Se o header estiver abreviado como `Arquivos`, pare e rode `ldk-doctor` antes de construir.
 - Se o usuario pedir duas ou mais tasks aprovadas no mesmo comando, escolha a proxima task `ready` e explique que
   as demais ficam para os proximos comandos. Para fundir tasks, revise o plano antes.
 - Nao aumente escopo sem aprovar novo plano.

@@ -136,9 +136,26 @@ fi
 if [ -d "$ROOT/ldk/features" ]; then
   while IFS= read -r plan; do
     task_rows=0
+    task_header_found=0
     while IFS= read -r line; do
       echo "$line" | grep -qE '^\|' || continue
-      echo "$line" | grep -qE '^\|[[:space:]]*(-+|ID)[[:space:]]*\|' && continue
+      first="$(printf '%s\n' "$line" | awk -F'|' '{v=$2; gsub(/^[ \t]+|[ \t]+$/, "", v); print v}')"
+      if [ "$first" = "ID" ]; then
+        task_header_found=1
+        header="$(printf '%s\n' "$line" | awk -F'|' '{
+          out="";
+          for (i=2; i<=NF-1; i++) {
+            v=$i;
+            gsub(/^[ \t]+|[ \t]+$/, "", v);
+            out=(out == "" ? v : out "|" v);
+          }
+          print out
+        }')"
+        [ "$header" = "ID|Descricao|AC|Arquivos esperados|Verificacao|State" ] || \
+          error "$(rel "$plan"): task table header must be exactly '| ID | Descricao | AC | Arquivos esperados | Verificacao | State |'"
+        continue
+      fi
+      echo "$line" | grep -qE '^\|[[:space:]]*-+[[:space:]]*\|' && continue
       id="$(printf '%s\n' "$line" | awk -F'|' '{v=$2; gsub(/^[ \t]+|[ \t]+$/, "", v); print v}')"
       state="$(printf '%s\n' "$line" | awk -F'|' '{v=$(NF-1); gsub(/^[ \t]+|[ \t]+$/, "", v); print v}')"
       echo "$id" | grep -qE '^T[A-Za-z0-9_-]+$' && task_rows=$((task_rows + 1))
@@ -147,6 +164,7 @@ if [ -d "$ROOT/ldk/features" ]; then
         error "$(rel "$plan"): invalid task state '$state'"
     done < "$plan"
     [ "$task_rows" -gt 0 ] || error "$(rel "$plan"): missing machine-readable task table with T rows"
+    [ "$task_header_found" -eq 1 ] || error "$(rel "$plan"): missing exact task table header '| ID | Descricao | AC | Arquivos esperados | Verificacao | State |'"
   done < <(find "$ROOT/ldk/features" -name plan.md -type f)
 fi
 

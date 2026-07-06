@@ -22,6 +22,9 @@ Criar ou atualizar:
 - Criterios de aceite precisam ser binarios e verificaveis.
 - Cada task precisa apontar AC, arquivos esperados, verificacao e estado.
 - Use a tabela machine-readable de tasks de `templates/feature-plan.md`; nao use apenas bullets.
+- A tabela de tasks deve usar exatamente estes headers, sem abreviar, traduzir, renomear ou trocar ordem:
+  `ID | Descricao | AC | Arquivos esperados | Verificacao | State`.
+- `Arquivos` nao e header valido; use sempre `Arquivos esperados`.
 - Defina risco e prova minima antes de construir.
 - Nao liste arquivos de motor LDK como alvo de task de produto.
 - Confirme o plano antes de mudar estado para `approved`.

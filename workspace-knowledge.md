@@ -159,6 +159,8 @@ Para `ldk/ledger.md`, use exatamente:
 - `Last evidence` aponta para proof/report apenas quando houver `done`, `partial` ou `blocked`.
 
 Para `ldk/features/<feature>/plan.md`, a tabela de tasks e obrigatoria. Nao use apenas bullets.
+Use exatamente estes headers, sem abreviar, traduzir, renomear ou trocar ordem. `Arquivos` nao e valido; o header
+correto e `Arquivos esperados`.
 
 ```md
 | ID | Descricao | AC | Arquivos esperados | Verificacao | State |

@@ -13,7 +13,8 @@ Proof required: P2
 ## Tasks
 
 This table is mandatory and machine-readable. Do not replace it with bullet-only tasks.
-Keep the exact columns and one row per task. Initial task state is usually `ready`.
+Keep the exact columns and one row per task. Do not rename or abbreviate headers; `Arquivos` is invalid.
+Initial task state is usually `ready`.
 
 | ID | Descricao | AC | Arquivos esperados | Verificacao | State |
 |----|-----------|----|--------------------|-------------|-------|
