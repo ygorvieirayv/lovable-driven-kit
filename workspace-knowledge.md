@@ -56,6 +56,9 @@ Regras "Sempre":
 - Auth, permissoes/admin, pagamento real, PII, Supabase RLS, delecao e migracao nunca sao `trivial`.
 - Nunca escolha plataforma, provedor ou integracao sem pedido explicito do usuario. Shopify, Stripe, Mercado Pago,
   Supabase, ERP, frete real e gateways devem ficar como `[VERIFY]` ou fora de escopo.
+- Mudancas externas ao fluxo LDK, como rollback, sync, outra skill ou prompt solto, nao sao erro por si so.
+- Em projeto ja iniciado, nao trate codigo preexistente fora da feature/task LDK ativa como drift.
+- Se o codigo atual contradiz uma task LDK ja `proof-pending`/`done`, use `ldk-doctor` antes de proof.
 - Se nao puder verificar algo essencial, use `PARTIAL` ou `BLOCKED`.
 
 Use cerimonia proporcional:
@@ -75,6 +78,25 @@ Se nao abriu preview, diga que nao abriu.
 Se nao checou console/logs, diga que nao checou.
 Se nao rodou teste, diga que nao rodou.
 Se nao viu diff no GitHub, diga que nao viu.
+
+## Mudancas externas e projetos existentes
+
+O LDK pode ser instalado em um projeto ja iniciado, ou o usuario pode alterar o app fora do fluxo LDK usando
+rollback, sync, outra skill, edicao manual ou prompt direto. Isso nao e erro automaticamente.
+
+Ao rodar `ldk-next`, `ldk-doctor` ou `ldk-proof`, compare o app atual apenas com a feature/task LDK ativa e seus
+arquivos/AC esperados. Nao trate codigo antigo, telas existentes ou arquivos fora desse escopo como drift.
+
+Classifique mudancas externas com cautela:
+
+- dentro da task ativa: registre como implementacao da task;
+- amplia ou muda escopo/decisao visual da task ativa: reconcilie plano com `ldk-doctor` antes de proof;
+- cria uma nova feature: registre no ledger/roadmap antes de construir mais;
+- remove ou contradiz uma task `proof-pending`/`done`: trate como possivel rollback/drift e rode `ldk-doctor`;
+- toca motor do LDK: trate como drift critico de motor.
+
+Nao reverta nem sobrescreva mudanca externa sem aprovacao explicita do usuario. Nao use proof antigo sem
+revalidar o preview/codigo atual.
 
 ## Artefatos do projeto
 

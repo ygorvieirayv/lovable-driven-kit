@@ -15,4 +15,7 @@ Estas regras valem em qualquer nivel de risco.
   revise o plano antes de construir.
 - Execute apenas o comando LDK invocado; nao encadeie automaticamente para a proxima skill.
 - Nao altere motor do LDK como efeito colateral de uma task do app.
+- Mudancas externas ao fluxo LDK (rollback, sync, outra skill ou prompt solto) nao sao erro por si so.
+- Em projeto ja iniciado, nao trate codigo preexistente fora da feature/task LDK ativa como drift.
+- Se codigo atual contradiz uma task LDK ja `proof-pending`/`done`, rode `ldk-doctor` antes de proof.
 - Se nao puder verificar algo essencial, use `PARTIAL` ou `BLOCKED`.

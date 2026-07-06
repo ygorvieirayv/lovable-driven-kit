@@ -50,3 +50,5 @@
 - Planos agora exigem tabela de tasks machine-readable com IDs `T...` e `State`; `ldk-build-task` deve atualizar
   a task executada antes de parar.
 - `ldk-next` e `ldk-build-task` agora bloqueiam sugestao de agrupar tasks aprovadas no mesmo build.
+- Regras adicionadas para lidar com rollback, sync, outras skills e projetos ja iniciados sem tratar codigo antigo
+  fora da feature ativa como drift.

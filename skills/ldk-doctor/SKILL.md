@@ -65,6 +65,18 @@ Procure:
 - arquivos fora do escopo planejado;
 - mudancas grandes demais para uma task.
 
+### T4 - Mudancas externas x plano ativo
+
+Rollback, sync, outra skill ou prompt direto podem mudar o app sem registrar uma etapa LDK. Diagnostique com
+cautela:
+
+- nao trate codigo preexistente de projeto ja iniciado como drift se estiver fora da feature/task LDK ativa;
+- se a mudanca externa esta dentro da task ativa, registre/normalize o plano ou task state;
+- se amplia escopo, direcao visual ou decisao da task ativa, proponha atualizar o plano antes de proof;
+- se cria nova feature, proponha registrar no ledger/roadmap;
+- se remove ou contradiz task `proof-pending`/`done`, proponha reabrir a task ou ajustar o ledger;
+- se toca motor do LDK, trate como drift critico.
+
 ## Saida do diagnostico
 
 ```md
@@ -107,3 +119,4 @@ Regras:
 - Mostrar diff.
 - Reexecutar check relevante.
 - Sem aprovacao explicita, nao alterar nada.
+- Nao reverta nem sobrescreva mudanca externa do usuario sem aprovacao explicita.

@@ -37,6 +37,11 @@ Se houver diff em arquivos de motor LDK, leia `contracts/engine-boundary.md` e r
 
 Escolha sempre o caminho mais leve que ainda preserve a regra "sem prova, nao e done".
 
+Rollback, sync, outra skill ou prompt direto podem alterar o app sem aparecer como etapa LDK. Em projeto ja
+iniciado, seja cauteloso: nao trate codigo preexistente ou arquivos fora da feature/task ativa como drift.
+Compare somente os arquivos/AC esperados da feature ativa. Se uma task `proof-pending` ou `done` parece ter sido
+removida ou contradita pelo codigo atual, chame isso de possivel drift externo e recomende `ldk-doctor`.
+
 Nao sugira executar duas ou mais tasks aprovadas juntas. Mesmo quando tasks tocam o mesmo arquivo, recomende apenas
 a proxima task `ready`/`in-progress`. Se a divisao do plano parecer ruim, a alternativa consciente deve ser revisar
 o plano antes do build, nao agrupar tasks no `ldk-build-task`.
@@ -55,6 +60,7 @@ uma nova do roadmap.
 |---|---|
 | Nao existe `ldk/project.md` ou `ldk/ledger.md` | `ldk-intake` |
 | Ledger/proof/app divergentes | `ldk-doctor` |
+| Task `proof-pending`/`done` contradita pelo codigo atual | `ldk-doctor` |
 | Feature em `proof-pending` | `ldk-proof` |
 | Feature em `building` com task `ready`/`in-progress` | `ldk-build-task` da proxima task |
 | Feature em `building` com todas as tasks `proof-pending` | `ldk-doctor` para alinhar o ledger antes de `ldk-proof` |

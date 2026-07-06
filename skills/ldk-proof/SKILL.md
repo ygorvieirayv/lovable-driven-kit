@@ -28,6 +28,16 @@ Execute somente proof. Nao rode `ldk-review`, `ldk-release` ou outra skill nesta
 - arquivos alterados ou GitHub diff, se disponível
 - Preview, console/logs e testes, quando acessíveis
 
+## Antes de provar
+
+Confira a tabela de tasks do `plan.md` quando ela existir.
+
+- Se ainda houver task essencial `ready`, `backlog` ou `in-progress`, nao marque a feature como `DONE`.
+- Se uma task `proof-pending` ou `done` parece ter sido removida ou contradita por rollback, sync, outra skill ou
+  prompt direto, nao reuse proof antigo; marque como `PARTIAL`/`BLOCKED` ou recomende `ldk-doctor`.
+- Em projeto ja iniciado, ignore codigo preexistente fora da feature/task LDK ativa; isso nao e drift.
+- Revalide preview/codigo atual. Evidencia antiga so vale se ainda refletir o app atual.
+
 ## Nível de prova
 
 - P1: exige screenshot ou observação precisa do preview.
@@ -49,6 +59,7 @@ Nao adicione burocracia para uma mudanca pequena, mas nunca pule evidencia.
 
 Use `DONE` apenas quando:
 
+- todas as tasks essenciais da feature estao `proof-pending` ou `done`;
 - todos os AC essenciais estao `covered`;
 - prova atingida >= prova exigida;
 - não há erro crítico conhecido;
