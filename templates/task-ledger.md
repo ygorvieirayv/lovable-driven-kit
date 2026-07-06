@@ -1,5 +1,8 @@
 # LDK Ledger
 
+Do not translate or rename this table. Keep the exact columns and value vocabularies.
+`ID` must contain only a stable ID like `F1`; put the feature name only in `Feature`.
+
 | ID | Feature | Risk | State | Proof required | Last evidence |
 |----|---------|------|-------|----------------|---------------|
 | F1 | <feature> | baixo | idea | P2 | |

@@ -41,3 +41,5 @@
   comuns sem criar um loop público de aprendizado.
 - Intake/roadmap agora proíbem assumir Shopify, gateways, frete real, Supabase ou pagamento real sem pedido
   explícito do usuário; loja vaga usa default seguro com checkout fake.
+- Ledger reforçado como artefato machine-readable: headers não devem ser traduzidos, ID não deve misturar nome da
+  feature e `Proof required` deve usar um único nível.

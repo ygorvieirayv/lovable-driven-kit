@@ -27,6 +27,8 @@ Criar ou atualizar:
 - Use cerimonia proporcional: trivial/baixo nao deve virar burocracia maior que a mudanca.
 - Antes de planejar, respeite `ldk/roadmap.md` quando existir.
 - Aplique `contracts/always-rules.md` e consulte `contracts/common-lessons.md`, se disponiveis.
+- Ao atualizar `ldk/ledger.md`, mantenha o formato machine-readable de `templates/task-ledger.md`: headers em ingles,
+  ID separado do nome e `Proof required` com um unico valor.
 
 ## Risco
 

@@ -24,6 +24,15 @@ Formato minimo:
 | F1 | Catalogo | baixo | done | P2 | ldk/features/catalogo/proof.md |
 ```
 
+Contrato machine-readable:
+
+- Nao traduza nem renomeie estes headers: `ID`, `Feature`, `Risk`, `State`, `Proof required`, `Last evidence`.
+- A coluna `ID` contem apenas o identificador (`F1`, `F2`, `F3`). Nao misture ID e nome da feature.
+- O nome da feature fica apenas na coluna `Feature`.
+- `Proof required` contem um unico valor: `P1`, `P2`, `P3` ou `P4`. Nao use `P1/P2`.
+- Use valores canonicos em ingles/ASCII para `State`: `idea`, `planned`, `approved`, `building`, `proof-pending`,
+  `done`, `partial`, `blocked`, `reopened`.
+
 Valores permitidos:
 
 - Risk: `trivial`, `baixo`, `medio`, `alto`

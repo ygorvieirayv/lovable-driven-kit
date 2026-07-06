@@ -23,6 +23,7 @@ Se nao existir, valide manualmente:
 
 - `ldk/ledger.md` existe;
 - `ldk/roadmap.md` existe quando o projeto tem varias features;
+- `ldk/ledger.md` usa headers exatos `ID | Feature | Risk | State | Proof required | Last evidence`;
 - estados validos;
 - `done` tem proof;
 - proof `DONE` tem prova suficiente.
@@ -35,6 +36,9 @@ Procure:
 - proof diz `DONE`, mas `Proof level achieved` e insuficiente;
 - feature com plan/brief mas sem ledger;
 - ledger aponta evidence quebrada;
+- ledger com headers traduzidos ou colunas fora do contrato;
+- ledger com ID misturado ao nome da feature;
+- ledger com prova em intervalo como `P1/P2`;
 - roadmap aponta proxima feature ja concluida ou bloqueada;
 - roadmap e ledger discordam sobre estado/ordem;
 - `[VERIFY]` critico aberto em feature `done`;

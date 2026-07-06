@@ -38,7 +38,24 @@ Se `ldk/project.md` ou `ldk/ledger.md` nao existir, recomende `ldk-intake`.
 - Auth, pagamento real, PII, Supabase RLS, delecao e migracao nunca sao triviais.
 - Se uma feature depende de decisao do usuario, marque `[VERIFY]`.
 - Se uma feature nova entrar no roadmap, registre ou recomende registrar no ledger.
+- Ao registrar no ledger, preserve exatamente o formato de `templates/task-ledger.md`.
 - Nao altere motor do LDK.
+
+## Ledger contract
+
+Se precisar adicionar linhas em `ldk/ledger.md`, nao traduza nem reestruture a tabela:
+
+```md
+| ID | Feature | Risk | State | Proof required | Last evidence |
+|----|---------|------|-------|----------------|---------------|
+| F1 | <feature> | baixo | idea | P2 | |
+```
+
+- `ID`: apenas `F1`, `F2`, etc.
+- `Feature`: nome da feature.
+- `Risk`: `trivial`, `baixo`, `medio` ou `alto`.
+- `State`: valor canonico como `idea`, `planned`, `blocked`.
+- `Proof required`: um unico valor `P1`/`P2`/`P3`/`P4`, nao intervalo.
 
 ## Heuristicas de dependencia
 

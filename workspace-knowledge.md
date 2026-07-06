@@ -85,6 +85,23 @@ Conversa aprova, arquivo registra.
 
 Se `ldk/` nao existir quando uma skill LDK for usada, crie a estrutura necessaria para aquela etapa.
 
+## Artefatos machine-readable
+
+Alguns artefatos sao contrato, nao prosa. Nao traduza headers, marcadores ou vocabularios.
+
+Para `ldk/ledger.md`, use exatamente:
+
+```md
+| ID | Feature | Risk | State | Proof required | Last evidence |
+|----|---------|------|-------|----------------|---------------|
+| F1 | <feature> | baixo | idea | P2 | |
+```
+
+- `ID` deve ser somente `F1`, `F2`, etc.
+- O nome fica em `Feature`, nao junto do ID.
+- `Proof required` deve ser um unico valor: `P1`, `P2`, `P3` ou `P4`.
+- Nao use headers traduzidos como `Estado`, `Risco`, `Prova minima`.
+
 ## Estados permitidos
 
 Use apenas:

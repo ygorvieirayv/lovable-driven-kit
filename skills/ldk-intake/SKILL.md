@@ -28,6 +28,8 @@ Criar ou atualizar:
 - Marque incertezas com `[VERIFY]`.
 - Confirme antes de gravar.
 - Aplique `contracts/always-rules.md`, se disponivel.
+- Ao criar `ldk/ledger.md`, use exatamente `templates/task-ledger.md`. Nao traduza headers, nao mude colunas e nao
+  misture ID com nome da feature.
 
 ## Roteiro
 
@@ -87,6 +89,17 @@ ldk/
 ```
 
 Use `templates/project.md`, `templates/task-ledger.md` e `templates/roadmap.md` como formato.
+
+Para `ldk/ledger.md`, mantenha exatamente:
+
+```md
+| ID | Feature | Risk | State | Proof required | Last evidence |
+|----|---------|------|-------|----------------|---------------|
+| F1 | <feature> | baixo | idea | P2 | |
+```
+
+Cada linha deve ter `ID` como `F1`, `F2`, etc.; o nome da feature fica em `Feature`. `Proof required` deve ser um
+unico nivel (`P1`, `P2`, `P3` ou `P4`), nunca `P1/P2`.
 
 ## Saida final na conversa
 
