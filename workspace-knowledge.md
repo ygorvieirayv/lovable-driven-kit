@@ -123,8 +123,44 @@ explicitamente:
 Se estiver `off` ou ausente, nao crie `ldk/audit/log.md` e nao mencione auditoria no fluxo normal.
 
 Quando estiver `on`, ao fim de comandos LDK que alteram estado ou arquivos, adicione uma entrada compacta em
-`ldk/audit/log.md`. Use `templates/audit-log-entry.md` se estiver disponivel. Registre fatos e alegacoes, nao o
-chat inteiro.
+`ldk/audit/log.md`. Registre fatos e alegacoes, nao o chat inteiro.
+
+Use este formato minimo, sem depender de template externo:
+
+```md
+## <data/hora> - <comando LDK> - <feature ou projeto>
+
+Command:
+- <ldk-command>
+
+User intent:
+- <resumo factual curto>
+
+State before:
+- <estado anterior no ledger/plano>
+
+Actions:
+- <o que foi decidido, criado ou alterado>
+
+Files changed:
+- <paths ou none>
+
+Evidence claimed:
+- Preview opened: yes/no/not applicable
+- Manual flow tested: yes/no/not applicable
+- Automated test result: pass/fail/not run/not applicable
+- Console/log checked: yes/no/not available
+- GitHub diff checked: yes/no/not available
+
+Decision:
+- DONE | PARTIAL | BLOCKED | planned | approved | roadmap-updated | diagnosis-only | other
+
+Known limitations:
+- <limitacoes, prova ausente ou none>
+
+Next:
+- <proximo passo seguro>
+```
 
 Regras do audit log:
 
