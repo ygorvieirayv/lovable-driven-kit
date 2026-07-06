@@ -34,6 +34,7 @@ Se `ldk/project.md` ou `ldk/ledger.md` nao existir, recomende `ldk-intake`.
 - Ordene por dependencia antes de desejo.
 - Marque bloqueios como `blocked`, nao force plano.
 - Mantenha o MVP pequeno.
+- Nao escolha plataforma, provedor ou integracao sem pedido explicito do usuario.
 - Auth, pagamento real, PII, Supabase RLS, delecao e migracao nunca sao triviais.
 - Se uma feature depende de decisao do usuario, marque `[VERIFY]`.
 - Se uma feature nova entrar no roadmap, registre ou recomende registrar no ledger.
@@ -43,10 +44,12 @@ Se `ldk/project.md` ou `ldk/ledger.md` nao existir, recomende `ldk-intake`.
 
 Loja:
 
+- se plataforma/provedor nao foi escolhido, manter loja generica no Lovable e marcar provedor como `[VERIFY]`;
 - catalogo, produto e preco antes de carrinho;
 - carrinho antes de checkout;
+- checkout fake antes de checkout real;
 - frete/taxas antes de checkout real;
-- checkout fake antes de pagamento real;
+- pagamento real, gateway, Shopify ou frete real ficam `later` ou `verify` ate pedido/decisao explicita;
 - pedidos antes de admin de pedidos;
 - auth/permissoes antes de area admin real.
 

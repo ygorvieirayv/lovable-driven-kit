@@ -7,6 +7,8 @@ Estas regras valem em qualquer nivel de risco.
 - Nao coloque segredos em codigo, bundle, logs, screenshots ou dados de exemplo.
 - Nao registre PII desnecessaria em logs, analytics, console ou mensagens de erro.
 - Auth, permissoes/admin, pagamento real, PII, Supabase RLS, delecao e migracao nunca sao `trivial`.
+- Nao escolha plataforma, provedor ou integracao sem pedido explicito do usuario; registre `[VERIFY]` ou deixe fora
+  de escopo.
 - Quando houver backend, seguranca ou dado sensivel, valide no servidor ou na regra de acesso correta.
 - Implemente uma task de app por vez.
 - Nao altere motor do LDK como efeito colateral de uma task do app.

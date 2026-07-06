@@ -39,3 +39,5 @@
   dependência antes de planejar.
 - Adicionados contratos internos `always-rules.md` e `common-lessons.md` para piso de segurança e lições
   comuns sem criar um loop público de aprendizado.
+- Intake/roadmap agora proíbem assumir Shopify, gateways, frete real, Supabase ou pagamento real sem pedido
+  explícito do usuário; loja vaga usa default seguro com checkout fake.

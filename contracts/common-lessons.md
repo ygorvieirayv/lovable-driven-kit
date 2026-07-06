@@ -7,6 +7,8 @@ Nao e um loop de aprendizado do projeto e nao exige manutencao do usuario.
 
 - Loja: catalogo/produto/preco vem antes de carrinho; carrinho vem antes de checkout; checkout fake vem antes
   de pagamento real; pedidos vem antes de admin de pedidos.
+- Nao assumir Shopify, Stripe, Mercado Pago, Supabase, frete real ou gateway quando o usuario so pediu "loja".
+  Tratar como `[VERIFY]` ou `later`.
 - Frete, taxa, moeda e confirmacao precisam ser decididos antes de checkout real.
 - SaaS: modelo de dados e fluxo principal vem antes de dashboard avancado.
 - Admin real depende de auth, papeis e permissao clara.

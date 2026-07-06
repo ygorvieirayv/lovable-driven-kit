@@ -22,6 +22,9 @@ Criar ou atualizar:
 - Explique o por que antes de perguntar.
 - Se o usuario disser "nao sei", sugira um default seguro.
 - Nao invente regra de negocio, compliance, pagamento ou permissao.
+- Nao escolha plataforma, provedor ou integracao sem o usuario pedir. Exemplos: Shopify, Stripe, Mercado Pago,
+  Supabase, ERP, frete ou gateway devem ficar como `[VERIFY]` ou fora de escopo.
+- Se o usuario pular uma escolha, nao assuma uma opcao do menu; registre `[VERIFY]` e siga com o caminho generico.
 - Marque incertezas com `[VERIFY]`.
 - Confirme antes de gravar.
 - Aplique `contracts/always-rules.md`, se disponivel.
@@ -48,6 +51,18 @@ Criar ou atualizar:
    - depois do MVP;
    - primeira feature ou tarefa a executar.
 5. Crie o ledger inicial.
+
+## Defaults seguros
+
+Para loja/e-commerce sem detalhes tecnicos:
+
+- MVP default: landing/vitrine, catalogo com produtos ficticios, cards, carrinho local, checkout fake e confirmacao
+  simulada.
+- Fora de escopo default: pagamento real, checkout real, frete real, Shopify, gateway, auth real, Supabase e
+  integracoes externas.
+- Riscos podem citar pagamento, PII, frete, compliance ou ANVISA como `[VERIFY]`, mas nao transforme esses riscos em
+  arquitetura escolhida.
+- Proximo passo seguro normalmente e `ldk-roadmap` ou `ldk-plan` da vitrine/catalogo, nao setup de provedor externo.
 
 ## Proximo passo proporcional
 

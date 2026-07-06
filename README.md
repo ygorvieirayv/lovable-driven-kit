@@ -294,7 +294,11 @@ Regras que sempre valem:
 - sem `DONE` sem evidência;
 - sem segredo em código, bundle ou logs;
 - sem PII desnecessária em logs, analytics, console ou mensagens de erro;
-- auth, permissão, pagamento real, RLS, deleção e migração nunca são triviais.
+- auth, permissão, pagamento real, RLS, deleção e migração nunca são triviais;
+- sem assumir Shopify, gateway, frete real, Supabase ou integração externa sem você pedir.
+
+Se você disser apenas "quero uma loja virtual", o default seguro é vitrine, catálogo, carrinho local e checkout
+fake. Pagamento real e provedor externo entram depois, quando forem escolhidos conscientemente.
 
 ## Avaliar o LDK
 

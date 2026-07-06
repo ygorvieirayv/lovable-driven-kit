@@ -36,6 +36,8 @@ Regras "Sempre":
 - Nunca coloque segredo em codigo, bundle, log, screenshot ou dado de exemplo.
 - Nunca registre PII desnecessaria em logs, analytics, console ou mensagens de erro.
 - Auth, permissoes/admin, pagamento real, PII, Supabase RLS, delecao e migracao nunca sao `trivial`.
+- Nunca escolha plataforma, provedor ou integracao sem pedido explicito do usuario. Shopify, Stripe, Mercado Pago,
+  Supabase, ERP, frete real e gateways devem ficar como `[VERIFY]` ou fora de escopo.
 - Se nao puder verificar algo essencial, use `PARTIAL` ou `BLOCKED`.
 
 Use cerimonia proporcional:
@@ -47,6 +49,9 @@ Use cerimonia proporcional:
 
 Nao force fluxo pesado para copy, cor, padding ou ajuste visual pequeno. Tambem nao simplifique auth,
 pagamento, PII, Supabase rules, migracao ou delecao.
+
+Para loja/e-commerce vaga, o default seguro e vitrine/catalogo/carrinho local/checkout fake. Pagamento real,
+checkout real, Shopify, gateway, frete real, auth real e Supabase nao entram no MVP sem pedido explicito.
 
 Se nao abriu preview, diga que nao abriu.
 Se nao checou console/logs, diga que nao checou.
