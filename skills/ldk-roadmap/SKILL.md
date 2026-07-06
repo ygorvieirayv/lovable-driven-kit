@@ -40,6 +40,7 @@ Se `ldk/project.md` ou `ldk/ledger.md` nao existir, recomende `ldk-intake`.
 - Se uma feature nova entrar no roadmap, registre ou recomende registrar no ledger.
 - Ao registrar no ledger, preserve exatamente o formato de `templates/task-ledger.md`.
 - Nao altere motor do LDK.
+- Execute somente roadmap. Nao rode `ldk-plan` nem `ldk-build-task` nesta skill.
 
 ## Ledger contract
 
@@ -117,8 +118,8 @@ Later:
 Ledger updates:
 - ...
 
-Next safe step:
+Etapa concluida:
+- Roadmap pronto e aguardando proximo comando.
 ```
 
-Se houver feature `ready`, o proximo passo normalmente e `ldk-plan`.
-Se a proxima mudanca for trivial, bem definida e sem dependencia, o proximo passo pode ser `ldk-build-task`.
+Nao execute a proxima etapa nesta skill. Se o usuario nao souber como continuar, ele deve usar `ldk-next`.

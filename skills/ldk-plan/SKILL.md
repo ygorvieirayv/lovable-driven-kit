@@ -29,6 +29,8 @@ Criar ou atualizar:
 - Aplique `contracts/always-rules.md` e consulte `contracts/common-lessons.md`, se disponiveis.
 - Ao atualizar `ldk/ledger.md`, mantenha o formato machine-readable de `templates/task-ledger.md`: headers em ingles,
   ID separado do nome e `Proof required` com um unico valor.
+- Execute somente planejamento. Aprovacao do plano autoriza salvar/aprovar o plano, nao autoriza build.
+- Mesmo se o usuario disser "pode continuar", nao rode `ldk-build-task` nesta skill.
 
 ## Risco
 
@@ -56,7 +58,7 @@ Mapeamento recomendado:
 ## Cerimonia proporcional
 
 - trivial: se o pedido ja esta claro, nao crie plano formal longo. Registre objetivo, AC de uma linha, risco `trivial`,
-  prova `P1` e recomende `ldk-build-task`.
+  prova `P1` e pare.
 - baixo: use plano curto com objetivo, ACs, fora de escopo, uma ou poucas tasks e prova P1/P2.
 - medio: use o plano completo com tasks pequenas, verificacao por task e estrategia de prova.
 - alto: use plano completo, liste riscos, dependencias, seguranca, rollback e prova P4.
@@ -100,7 +102,8 @@ Status no ledger:
 Cerimonia usada: trivial curta | baixo curta | medio completa | alto completa
 Roadmap/dependencias:
 
-Proximo passo seguro:
+Etapa concluida:
+- Plano pronto/aprovado e aguardando proximo comando.
 ```
 
 Nao implemente nada nesta skill.

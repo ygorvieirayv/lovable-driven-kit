@@ -7,6 +7,8 @@ description: Use before publishing or handing off a Lovable app to run an LDK go
 
 Use esta skill antes de publicar ou entregar uma versao.
 
+Execute somente o checklist de release. Nao publique, nao corrija e nao implemente nesta skill.
+
 ## Objetivo
 
 Gerar `ldk/releases/<date>.md` com decisao `GO` ou `NO-GO`.
@@ -64,7 +66,7 @@ Scope:
 Evidence:
 Blockers:
 Known limitations:
-Next safe step:
+Etapa concluida:
 ```
 
 Use `NO-GO` se houver risco critico sem prova.

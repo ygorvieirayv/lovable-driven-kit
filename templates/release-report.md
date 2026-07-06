@@ -28,4 +28,4 @@ Status: GO | NO-GO
 
 ## Decision
 - GO/NO-GO:
-- Next safe step:
+- Etapa concluida:

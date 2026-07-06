@@ -15,6 +15,8 @@ Gerar `ldk/features/<feature>/proof.md` e atualizar `ldk/ledger.md` sem aceitar 
 
 Sem prova, não é done.
 
+Execute somente proof. Nao rode `ldk-review`, `ldk-release` ou outra skill nesta etapa.
+
 ## O que ler
 
 - `ldk/ledger.md`
@@ -165,6 +167,6 @@ Proof level achieved:
 ### Known limitations
 - ...
 
-### Next safe step
-- ...
+### Etapa concluida
+- Proof registrado e aguardando proximo comando.
 ```

@@ -58,6 +58,9 @@ Use `/ldk-intake` no começo do projeto.
 
 Use `/ldk-next` sempre que não souber o próximo passo. Ele deve ler o estado salvo e dizer o que fazer.
 
+Cada comando executa só uma etapa. Quando uma etapa termina, o Lovable deve parar e aguardar o próximo comando;
+se você não souber qual é, use `/ldk-next`.
+
 Os outros comandos aparecem quando o próprio LDK pedir:
 
 ```txt
@@ -287,6 +290,9 @@ Na dúvida, suba o risco.
 
 O fluxo deve ser proporcional: tarefa trivial não precisa virar plano longo; feature média ou alta não deve ir
 direto para construção sem escopo, risco e prova clara.
+
+O fluxo também deve ser etapa por etapa: aprovar um plano não autoriza build automático, e terminar build não
+autoriza proof automático. Use `/ldk-next` quando quiser continuar.
 
 Regras que sempre valem:
 

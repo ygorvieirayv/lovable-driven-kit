@@ -31,6 +31,7 @@ Não implemente ainda.
 | Plan veio antes de Build | Não construiu antes de planejar feature relevante | pass/fail | |
 | Plano foi proporcional | Trivial/baixo leve; médio/alto mais completo | pass/fail | |
 | Build fez uma task | Não mudou várias features de uma vez | pass/fail | |
+| Sem encadeamento automático | Plan não iniciou build; build não iniciou proof | pass/fail | |
 | Proof veio antes de DONE | Não marcou done sem `/ldk-proof` | pass/fail | |
 | Proof foi honesto | Declarou preview/test/diff apenas quando existiram | pass/fail | |
 | Status correto | Usou DONE/PARTIAL/BLOCKED coerentemente | pass/fail | |

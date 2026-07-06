@@ -47,6 +47,7 @@
 - Sem PII desnecessaria em log/analytics/console.
 - Auth, pagamento real, RLS, delecao e migracao nunca sao triviais.
 - Nao assumir Shopify, gateway, frete real, Supabase ou integracao externa sem pedido explicito.
+- Cada comando LDK executa uma etapa e para. Para continuar, use `/ldk-next`.
 
 ## Pendencias [VERIFY]
 - 

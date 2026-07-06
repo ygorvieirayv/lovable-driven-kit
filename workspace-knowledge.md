@@ -24,10 +24,25 @@ para que o usuario acompanhe e aprove com evidencia.
 1. Antes de construir mudancas relevantes, use Plan mode.
 2. Defina escopo, risco, criterios de aceite e prova minima.
 3. Implemente uma task por vez.
-4. Ao terminar uma task, execute `ldk-proof`.
+4. Ao terminar uma task, deixe `proof-pending`; nao execute `ldk-proof` no mesmo comando.
 5. Use `DONE` apenas quando houver evidencia suficiente.
 6. Se a prova minima nao foi atingida, use `PARTIAL` ou `BLOCKED`.
 7. Nunca invente verificacao.
+
+## Fronteira de comando
+
+Execute apenas a skill/comando invocado pelo usuario.
+
+- `ldk-intake` faz intake e para.
+- `ldk-roadmap` faz roadmap e para.
+- `ldk-plan` faz plano/aprovacao do plano e para.
+- `ldk-build-task` implementa uma task e para em `proof-pending`.
+- `ldk-proof` prova/bloqueia e para.
+- `ldk-review` revisa e para.
+
+Nao encadeie para a proxima skill na mesma resposta, mesmo que o usuario diga "pode continuar". Essa aprovacao
+vale apenas para concluir a etapa atual. Ao final, diga que a etapa esta pronta e aguardando o proximo comando.
+Se o usuario nao souber o que fazer, ele deve usar `/ldk-next`.
 
 Regras "Sempre":
 
@@ -170,4 +185,4 @@ Toda resposta final apos uma task deve conter:
 3. AC cobertos
 4. Prova executada
 5. Status: DONE/PARTIAL/BLOCKED
-6. Proximo passo seguro
+6. Etapa concluida e aguardando proximo comando

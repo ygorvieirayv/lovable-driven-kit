@@ -21,7 +21,7 @@ Implementar uma task do plano e deixar a entrega pronta para prova.
 - Nao edite motor do LDK.
 - Aplique `contracts/always-rules.md`, se disponivel.
 - Nao marque task ou feature como `done` diretamente.
-- Ao terminar a implementacao, deixe estado como `proof-pending` e rode `ldk-proof`.
+- Ao terminar a implementacao, deixe estado como `proof-pending` e pare. Nao rode `ldk-proof` nesta skill.
 
 ## Antes de construir
 
@@ -61,14 +61,14 @@ Confirme:
 - Valide input no servidor quando houver backend.
 - Nao coloque segredos no codigo, bundle ou logs.
 - Nao registre PII desnecessaria em logs, console, analytics ou mensagens de erro.
-- Se falhar 2-3 vezes no mesmo ponto, pare e marque `BLOCKED` ou peca input.
+- Se falhar 2-3 vezes no mesmo ponto, registre o bloqueio, pare e peca input. Nao force build nem rode proof.
 
 ## Ao terminar
 
 1. Liste arquivos alterados.
 2. Atualize a task para `proof-pending` se o plano mantiver task states.
 3. Atualize o ledger para `proof-pending`.
-4. Execute `ldk-proof`.
+4. Pare e aguarde o proximo comando.
 
 ## Saida
 
@@ -82,7 +82,7 @@ Arquivos alterados:
 AC alvo:
 Verificacao ainda pendente:
 Status: proof-pending
-Proximo passo seguro: ldk-proof
+Etapa concluida: build-task pronta e aguardando proximo comando
 ```
 
-Se algo impedir a conclusao, nao force. Use `BLOCKED` no proof.
+Se algo impedir a conclusao, nao force. Registre o bloqueio e aguarde o proximo comando.

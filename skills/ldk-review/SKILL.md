@@ -7,6 +7,8 @@ description: Use when reviewing an implemented LDK feature against its plan, pro
 
 Use esta skill para revisar uma feature depois do proof, com foco em bugs, riscos, drift e testes.
 
+Execute somente review. Nao corrija, nao rode build e nao rode release nesta skill.
+
 ## Objetivo
 
 Revisar o diff contra:
@@ -66,7 +68,8 @@ AC -> evidence:
 Roadmap/dependencies:
 - ...
 
-Next safe step:
+Etapa concluida:
+- Review registrado e aguardando proximo comando.
 ```
 
 Nao corrija em silencio durante review. Reporte primeiro.

@@ -11,5 +11,6 @@ Estas regras valem em qualquer nivel de risco.
   de escopo.
 - Quando houver backend, seguranca ou dado sensivel, valide no servidor ou na regra de acesso correta.
 - Implemente uma task de app por vez.
+- Execute apenas o comando LDK invocado; nao encadeie automaticamente para a proxima skill.
 - Nao altere motor do LDK como efeito colateral de uma task do app.
 - Se nao puder verificar algo essencial, use `PARTIAL` ou `BLOCKED`.

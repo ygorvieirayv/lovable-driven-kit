@@ -42,5 +42,5 @@ Proof level achieved: P1 | P2 | P3 | P4 | none
 ## Known limitations
 - 
 
-## Next safe step
-- 
+## Etapa concluida
+- Proof registrado e aguardando proximo comando.

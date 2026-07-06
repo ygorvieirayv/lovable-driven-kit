@@ -7,7 +7,7 @@ Source:
 
 - Feature:
 - Why:
-- Next safe step:
+- Etapa concluida:
 
 ## Feature order
 
@@ -24,6 +24,10 @@ Source:
 ## Later / out of MVP
 
 - 
+
+## Etapa concluida
+
+- Roadmap pronto e aguardando proximo comando.
 
 ## Readiness vocabulary
 

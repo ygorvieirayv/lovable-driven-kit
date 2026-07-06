@@ -30,6 +30,7 @@ Criar ou atualizar:
 - Aplique `contracts/always-rules.md`, se disponivel.
 - Ao criar `ldk/ledger.md`, use exatamente `templates/task-ledger.md`. Nao traduza headers, nao mude colunas e nao
   misture ID com nome da feature.
+- Execute somente intake. Nao rode `ldk-roadmap`, `ldk-plan` ou qualquer build nesta skill.
 
 ## Roteiro
 
@@ -64,14 +65,16 @@ Para loja/e-commerce sem detalhes tecnicos:
   integracoes externas.
 - Riscos podem citar pagamento, PII, frete, compliance ou ANVISA como `[VERIFY]`, mas nao transforme esses riscos em
   arquitetura escolhida.
-- Proximo passo seguro normalmente e `ldk-roadmap` ou `ldk-plan` da vitrine/catalogo, nao setup de provedor externo.
+- Nao avance para setup de provedor externo. Registre o estado e pare.
 
-## Proximo passo proporcional
+## Classificacao da etapa seguinte
 
-- Se o MVP tiver varias features ou ordem importante, recomende `ldk-roadmap`.
-- Se a primeira demanda for vaga, baixa/media/alta ou envolver risco sem dependencias relevantes, recomende `ldk-plan`.
-- Se a primeira demanda for trivial e bem definida, registre um AC curto, risco `trivial`, prova `P1` e recomende
-  `ldk-build-task` sem plano longo.
+- Se o MVP tiver varias features ou ordem importante, registre que provavelmente precisa de roadmap.
+- Se a primeira demanda for vaga, baixa/media/alta ou envolver risco sem dependencias relevantes, registre que
+  provavelmente precisa de plano.
+- Se a primeira demanda for trivial e bem definida, registre AC curto, risco `trivial` e prova `P1`.
+
+Nao execute a etapa seguinte nesta skill. Ao final, diga que o intake esta pronto e aguardando o proximo comando.
 
 ## Saida em arquivo
 
@@ -110,6 +113,6 @@ Responda com:
 3. MVP proposto.
 4. Arquivos criados/alterados.
 5. Pendencias `[VERIFY]`.
-6. Proximo passo seguro: `ldk-roadmap`, `ldk-plan` ou `ldk-build-task`, conforme dependencia, risco e clareza.
+6. Etapa concluida: intake pronto e aguardando proximo comando.
 
 Nao implemente nada nesta skill.

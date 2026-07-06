@@ -43,3 +43,5 @@
   explícito do usuário; loja vaga usa default seguro com checkout fake.
 - Ledger reforçado como artefato machine-readable: headers não devem ser traduzidos, ID não deve misturar nome da
   feature e `Proof required` deve usar um único nível.
+- Reforçada a fronteira de comando: cada skill executa uma etapa e para; `ldk-plan` não inicia build e
+  `ldk-build-task` não inicia proof automaticamente.
