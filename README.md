@@ -193,6 +193,21 @@ Você não precisa preencher tudo. O LDK deve perguntar o que faltar e marcar d�
 
 Depois de instalar as skills e o Knowledge, crie um projeto novo no Lovable e comece com `/ldk-intake`.
 
+Se quiser uma base o mais limpa possível antes de iniciar o LDK, crie o projeto no Lovable com este prompt simples:
+
+```txt
+Crie um projeto base o mais limpo possível.
+
+Apenas uma tela inicial simples com o texto "Iniciar" centralizado.
+
+Não crie loja, autenticação, banco de dados, backend, rotas extras, componentes extras, dados fake ou integrações.
+Não crie a pasta ldk/ ainda.
+
+Quero só uma base limpa para instalar e testar o LDK depois.
+```
+
+Depois que o projeto base existir, instale as skills/Knowledge e rode `/ldk-intake`.
+
 Você não precisa chegar com tudo definido. O LDK existe justamente para ajudar o Lovable a transformar uma
 ideia vaga em escopo, riscos, decisões, MVP, plano e próximos passos.
 
