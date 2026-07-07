@@ -372,12 +372,20 @@ no repo do app. Ele roda `ldk-check` e, quando existir `package.json`, tenta rod
 
 Por padrão, o LDK não salva log de execução. Isso mantém o fluxo simples.
 
-Se quiser avaliar o projeto depois com outra IA, habilite o audit log no **Project Knowledge**:
+O `project-knowledge-template.md` já vem assim:
 
 ```md
 ## Auditoria LDK
-- Audit log: on
+- Audit log: off
 - Audit log file: `ldk/audit/log.md`
+```
+
+Deixe `off` se você quer o fluxo normal, sem logs extras.
+
+Se quiser avaliar o projeto depois com outra IA, troque apenas esta linha no **Project Knowledge**:
+
+```md
+- Audit log: on
 ```
 
 Com isso ligado, comandos LDK que alteram estado ou arquivos devem adicionar entradas compactas em
