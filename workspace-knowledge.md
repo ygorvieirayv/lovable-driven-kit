@@ -96,7 +96,13 @@ Nao reverta nem sobrescreva mudanca externa sem aprovacao explicita. Nao use pro
 
 ## Audit log opcional
 
-O audit log vem desligado. So crie/atualize `ldk/audit/log.md` quando o Project Knowledge tiver:
+O audit log vem desligado. O Project Knowledge padrao deve ficar:
+
+```md
+- Audit log: off
+```
+
+So crie/atualize `ldk/audit/log.md` se o usuario trocar explicitamente para:
 
 ```md
 - Audit log: on
