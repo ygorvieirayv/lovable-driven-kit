@@ -163,17 +163,17 @@ Uso:
 
 | Skill | O que faz | Uso |
 |---|---|---|
-| `ldk-intake` | Começa o projeto: organiza ideia, MVP, riscos, decisões abertas e cria a memória inicial em `ldk/`. | manual |
-| `ldk-next` | Lê o estado salvo e diz o próximo passo seguro. Não implementa nada. | manual |
-| `ldk-roadmap` | Ordena as features por dependência e decide o que deve vir primeiro. | auto + manual |
-| `ldk-plan` | Planeja uma feature: escopo, critérios de aceite, risco, prova esperada e tasks. | auto + manual |
-| `ldk-build` | Executa uma feature aprovada com menos microcerimônia: pensa antes, implementa, prova e retorna `DONE`, `PARTIAL` ou `BLOCKED`. | manual para iniciar; auto dentro da feature |
-| `ldk-build-task` | Executa uma task específica quando você quer controle manual, checkpoint ou trabalho de risco maior. | manual |
-| `ldk-proof` | Registra a prova e decide se a entrega pode ser `DONE`, `PARTIAL` ou `BLOCKED`. | auto + manual |
-| `ldk-review` | Revisa uma feature implementada contra plano, prova, diff, riscos e evidências. | manual |
-| `ldk-doctor` | Diagnostica e corrige drift quando ledger, plano, proof, app ou GitHub parecem incoerentes. | auto + manual |
-| `ldk-release` | Faz checklist antes de publicar ou entregar o app. | manual |
-| `ldk-evaluate` | Audita o projeto com outra IA usando logs, ledger, planos, proofs e diff. | externa |
+| `ldk-intake` | Começa o projeto: organiza ideia, MVP, riscos, decisões abertas e cria a memória inicial em `ldk/`.<br><br>**Dica:** use quando você acabou de criar o app e quer dizer algo simples como "quero uma loja de cosméticos". | manual |
+| `ldk-next` | Lê o estado salvo e diz o próximo passo seguro. Não implementa nada.<br><br>**Dica:** use quando você voltou ao projeto depois de uma pausa ou não sabe qual comando vem agora. | manual |
+| `ldk-roadmap` | Ordena as features por dependência e decide o que deve vir primeiro.<br><br>**Dica:** use quando já existem várias ideias, como landing, catálogo, carrinho e checkout, e você quer saber a ordem certa. | auto + manual |
+| `ldk-plan` | Planeja uma feature: escopo, critérios de aceite, risco, prova esperada e tasks.<br><br>**Dica:** use antes de construir uma feature nova, por exemplo "planeje o catálogo de produtos". | auto + manual |
+| `ldk-build` | Executa uma feature aprovada com menos microcerimônia: pensa antes, implementa, prova e retorna `DONE`, `PARTIAL` ou `BLOCKED`.<br><br>**Dica:** use quando o plano já está aprovado e você quer que o Lovable execute a feature até a prova final. | manual para iniciar; auto dentro da feature |
+| `ldk-build-task` | Executa uma task específica quando você quer controle manual, checkpoint ou trabalho de risco maior.<br><br>**Dica:** use quando quiser fazer só uma parte, como "implemente apenas os cards de produto". | manual |
+| `ldk-proof` | Registra a prova e decide se a entrega pode ser `DONE`, `PARTIAL` ou `BLOCKED`.<br><br>**Dica:** use quando algo já foi implementado e você quer fechar a etapa com evidência real. | auto + manual |
+| `ldk-review` | Revisa uma feature implementada contra plano, prova, diff, riscos e evidências.<br><br>**Dica:** use quando você quer uma checagem crítica antes de seguir para a próxima feature. | manual |
+| `ldk-doctor` | Diagnostica e corrige drift quando ledger, plano, proof, app ou GitHub parecem incoerentes.<br><br>**Dica:** use quando o Lovable fez algo fora do plano, houve rollback, ou os arquivos `ldk/` parecem desalinhados. | auto + manual |
+| `ldk-release` | Faz checklist antes de publicar ou entregar o app.<br><br>**Dica:** use antes de colocar o projeto no ar ou mandar para cliente/testadores. | manual |
+| `ldk-evaluate` | Audita o projeto com outra IA usando logs, ledger, planos, proofs e diff.<br><br>**Dica:** use fora do Lovable, depois de avançar o projeto, para avaliar se o processo LDK foi seguido. | externa |
 
 Não importe `ldk-evaluate` no Lovable. Ela é uma skill externa de auditoria, explicada mais abaixo.
 
