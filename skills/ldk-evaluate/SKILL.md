@@ -41,6 +41,8 @@ Leia, quando disponivel:
 - GitHub diff, commits, CI ou screenshots, se o usuario fornecer
 
 Se o audit log nao existir, avalie pelos artefatos disponiveis e marque a rastreabilidade como limitada.
+Se o audit log tiver entradas marcadas como `BACKFILL` ou "reconstruido", trate-as como resumo inferido, nao como
+log original do momento da execucao.
 
 ## Metodo
 

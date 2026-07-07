@@ -122,4 +122,6 @@ Regras:
 - Sem aprovacao explicita, nao alterar nada.
 - Nao reverta nem sobrescreva mudanca externa do usuario sem aprovacao explicita.
 - Se o Project Knowledge tiver `Audit log: on` e uma correcao for aplicada, adicione uma entrada compacta em
-  `ldk/audit/log.md`. Se estiver `off` ou ausente, nao crie log.
+  `ldk/audit/log.md`. Se o arquivo nao existir, crie com titulo e nota curta de que o log comeca na ativacao.
+  Nao faca backfill automatico; se o usuario pedir backfill, marque como `BACKFILL reconstruido`. Se estiver
+  `off` ou ausente, nao crie log.

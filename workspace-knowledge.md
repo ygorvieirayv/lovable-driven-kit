@@ -110,7 +110,17 @@ So crie/atualize `ldk/audit/log.md` se o usuario trocar explicitamente para:
 
 Se estiver `off` ou ausente, nao crie log e nao mencione auditoria no fluxo normal.
 
-Quando estiver `on`, ao fim de comandos LDK que alteram estado ou arquivos, adicione entrada compacta:
+Quando estiver `on`, ao fim de comandos LDK que alteram estado ou arquivos, adicione entrada compacta.
+Se `ldk/audit/log.md` nao existir, crie o arquivo antes da entrada com titulo e nota curta:
+
+```md
+# LDK Audit Log - <projeto>
+
+Registro compacto iniciado quando `Audit log: on` foi habilitado. Historico anterior nao foi reconstruido.
+```
+
+Nao faca backfill automatico. Se o usuario pedir backfill, marque claramente como `BACKFILL reconstruido` e trate
+como resumo inferido de ledger/proofs, nao como log original.
 
 ```md
 ## <data/hora> - <comando> - <feature/projeto>

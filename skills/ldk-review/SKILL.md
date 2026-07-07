@@ -8,6 +8,7 @@ description: Use when reviewing an implemented LDK feature against its plan, pro
 Use esta skill para revisar uma feature depois do proof, com foco em bugs, riscos, drift e testes.
 
 Execute somente review. Nao corrija, nao rode build e nao rode release nesta skill.
+Mesmo com `Audit log: on`, nao crie nem atualize `ldk/audit/log.md` nesta skill read-only, salvo pedido explicito.
 
 ## Objetivo
 

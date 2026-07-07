@@ -45,6 +45,8 @@ Se `ldk/project.md` ou `ldk/ledger.md` nao existir, recomende `ldk-intake`.
 ## Audit log opcional
 
 Se o Project Knowledge tiver `Audit log: on`, adicione uma entrada compacta em `ldk/audit/log.md` ao final.
+Se `ldk/audit/log.md` nao existir, crie o arquivo com titulo e nota curta de que o log comeca na ativacao.
+Nao faca backfill automatico; se o usuario pedir backfill, marque como `BACKFILL reconstruido`.
 Se estiver `off` ou ausente, nao crie log.
 
 ## Ledger contract

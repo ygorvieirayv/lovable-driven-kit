@@ -406,6 +406,11 @@ Se quiser avaliar o projeto depois com outra IA, troque apenas esta linha no **P
 Com isso ligado, comandos LDK que alteram estado ou arquivos devem adicionar entradas compactas em
 `ldk/audit/log.md`. O log não deve copiar o chat inteiro nem guardar segredos ou dados pessoais.
 
+Se você ligar o audit log no meio de um projeto, o próximo comando LDK que alterar estado ou arquivos deve criar
+`ldk/audit/log.md` automaticamente. O histórico anterior não é reconstruído sozinho. Se quiser recuperar um resumo
+do que aconteceu antes, peça um backfill explicitamente e trate essas entradas como `BACKFILL reconstruído`, não
+como log original.
+
 Para desligar, volte para:
 
 ```md

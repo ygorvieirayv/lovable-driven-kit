@@ -42,6 +42,10 @@ iniciado, seja cauteloso: nao trate codigo preexistente ou arquivos fora da feat
 Compare somente os arquivos/AC esperados da feature ativa. Se uma task `proof-pending` ou `done` parece ter sido
 removida ou contradita pelo codigo atual, chame isso de possivel drift externo e recomende `ldk-doctor`.
 
+Se o Project Knowledge tiver `Audit log: on` e `ldk/audit/log.md` nao existir, nao crie o arquivo nesta skill
+read-only. Apenas mencione que o proximo comando LDK que alterar estado ou arquivos deve criar o audit log. Nao
+trate isso como drift bloqueante.
+
 Prefira `ldk-build` para feature aprovada e segura. Ele pode executar as tasks planejadas em sequencia e provar a
 feature. Use `ldk-build-task` apenas para task especifica, checkpoint manual, risco alto ou quando o usuario pedir
 granularidade.

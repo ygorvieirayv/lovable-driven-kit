@@ -40,6 +40,7 @@
 - Audit log file: `ldk/audit/log.md`
 - Para habilitar, troque para `Audit log: on`.
 - Para desabilitar, volte para `Audit log: off`.
+- Se habilitar no meio do projeto, o log começa dali em diante; backfill só com pedido explícito.
 
 ## Cerimonia proporcional
 - trivial: AC curto, uma mudanca pequena e prova P1.
