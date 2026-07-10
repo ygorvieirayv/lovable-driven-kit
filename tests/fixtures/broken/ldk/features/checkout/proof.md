@@ -4,8 +4,10 @@ Task: T1
 Feature: Checkout
 Status: DONE
 Risk: medio
+Discovery revision: 1
 Proof level required: P3
 Proof level achieved: P1
+Evidence log: inline
 
 ## Changed files
 - src/App.tsx

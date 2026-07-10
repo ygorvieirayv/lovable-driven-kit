@@ -1,99 +1,89 @@
 ---
 name: ldk-plan
-description: 'Use when planning a single Lovable app feature before implementation: define scope, acceptance criteria, risk, proof level, and small tasks. Not for building the feature.'
+description: Use when planning one feature after approved LDK discovery and a current roadmap when dependencies exist. Defines scope, AC, applicable concerns, risk, one proof level, tasks, optional tasks, and execution mode. Not for implementation.
 ---
 
 # ldk-plan
 
-Use esta skill em Plan mode para planejar uma feature antes de construir.
+LDK Version: 0.2.0
+LDK Schema: 2
+
+Use esta skill para planejar uma feature antes de construir.
+
+Discovery aprovado e obrigatorio antes de roadmap, plan e build.
+
+## Gate
+
+Leia `ldk/discovery.md`, project, ledger e roadmap quando existir.
+
+- Discovery ausente/nao aprovado: pare e recomende `ldk-intake`.
+- Roadmap `stale` ou revision divergente: pare e recomende `ldk-roadmap`.
+- Feature `blocked`/`verify`: nao planeje sem decisao consciente.
+- Version/schema divergente: recomende `ldk-doctor`.
 
 ## Objetivo
 
-Criar ou atualizar:
+Criar/atualizar:
 
-- `ldk/features/<feature>/brief.md`
-- `ldk/features/<feature>/plan.md`
-- linha correspondente em `ldk/ledger.md`
+- `ldk/features/<feature>/brief.md`;
+- `ldk/features/<feature>/plan.md`;
+- linha da feature no ledger.
+
+Planeje uma feature por vez e grave a revision aprovada em brief/plan.
 
 ## Regras
 
-- Use Plan mode.
-- Planeje uma feature por vez.
-- Criterios de aceite precisam ser binarios e verificaveis.
-- Cada task precisa apontar AC, arquivos esperados, verificacao e estado.
-- Use a tabela machine-readable de tasks de `templates/feature-plan.md`; nao use apenas bullets.
-- A tabela de tasks deve usar exatamente estes headers, sem abreviar, traduzir, renomear ou trocar ordem:
-  `ID | Descricao | AC | Arquivos esperados | Verificacao | State`.
-- `Arquivos` nao e header valido; use sempre `Arquivos esperados`.
-- Defina risco e prova minima antes de construir.
-- Nao liste arquivos de motor LDK como alvo de task de produto.
-- Confirme o plano antes de mudar estado para `approved`.
-- Use cerimonia proporcional: trivial/baixo nao deve virar burocracia maior que a mudanca.
-- Antes de planejar, respeite `ldk/roadmap.md` quando existir.
-- Aplique `contracts/always-rules.md` e consulte `contracts/common-lessons.md`, se disponiveis.
-- Ao atualizar `ldk/ledger.md`, mantenha o formato machine-readable de `templates/task-ledger.md`: headers em ingles,
-  ID separado do nome e `Proof required` com um unico valor.
-- Durante planning/aprovacao, deixe `Last evidence` vazio. Nao use `plan.md` como evidencia no ledger.
-- Execute somente planejamento. Aprovacao do plano autoriza salvar/aprovar o plano, nao inicia build nesta skill.
-- Mesmo se o usuario disser "pode continuar", nao rode `ldk-build` nem `ldk-build-task` nesta skill.
+- ACs binarios e observaveis.
+- Escopo deriva do discovery/roadmap; exemplo nao vira requisito.
+- Faca concern scan dirigido para a feature e registre somente o aplicavel.
+- Nao escolha plataforma, provedor ou integracao sem decisao explicita do usuario.
+- Decisao aberta que muda escopo, dado, acesso, dependencia ou prova fica `[VERIFY]` e bloqueia aprovacao.
+- Defina risco e um unico proof requerido antes de construir.
+- Cada task aponta AC, arquivos esperados, verificacao e State.
+- Todas as tasks sao essenciais, salvo IDs em `Optional tasks:`.
+- Nao liste motor LDK como alvo de task de produto.
+- Confirme o plano antes de `Status: approved`.
+- Aprovacao salva/aprova o plano; nunca inicia build nesta skill.
+- Aplique contracts/always-rules e common-lessons, se disponiveis.
 
-## Audit log opcional
+Tabela obrigatoria:
 
-Se o Project Knowledge tiver `Audit log: on`, adicione uma entrada compacta em `ldk/audit/log.md` ao final.
-Se `ldk/audit/log.md` nao existir, crie o arquivo com titulo e nota curta de que o log comeca na ativacao.
-Nao faca backfill automatico; se o usuario pedir backfill, marque como `BACKFILL reconstruido`.
-Se estiver `off` ou ausente, nao crie log.
+```md
+| ID | Descricao | AC | Arquivos esperados | Verificacao | State |
+|----|-----------|----|--------------------|-------------|-------|
+| T1 | <task> | AC1 | `src/...` | <check> | ready |
+```
 
-## Risco
+## Risco e prova
 
-- trivial: copy, cor, padding, ajuste visual pequeno.
-- baixo: secao simples, componente estatico, comportamento isolado.
-- medio: CRUD, formulario, filtro, dashboard, admin simples.
-- alto: auth, permissao, dados pessoais, pagamento, Supabase RLS, migracao, delecao.
+- `trivial`: mudanca pequena/reversivel, sem comportamento sensivel -> P1.
+- `baixo`: comportamento isolado, baixo impacto -> escolha P1 ou P2.
+- `medio`: jornada/regra/integracao com impacto moderado -> escolha P2 ou P3.
+- `alto`: acesso, dado sensivel, transacao real, operacao irreversivel ou dependencia critica -> P4.
 
-Na duvida, suba um nivel.
-
-## Prova minima
-
-- P1: visual.
-- P2: fluxo manual.
-- P3: teste automatizado.
-- P4: CI/release.
-
-Mapeamento recomendado:
-
-- trivial -> P1
-- baixo -> P1/P2
-- medio -> P2/P3
-- alto -> P4
+Nao grave intervalo. Escolha um nivel conforme o AC mais forte e explique.
 
 ## Cerimonia proporcional
 
-- trivial: se o pedido ja esta claro, nao crie plano formal longo. Registre objetivo, AC de uma linha, risco `trivial`,
-  prova `P1` e pare.
-- baixo: use plano curto com objetivo, ACs, fora de escopo, uma ou poucas tasks e prova P1/P2.
-- medio: use o plano completo com tasks pequenas, verificacao por task e estrategia de prova.
-- alto: use plano completo, liste riscos, dependencias, seguranca, rollback e prova P4.
+- trivial: brief/plano minimo, um AC e uma task; ainda exige aprovacao antes do build.
+- baixo: plano curto, poucas tasks e prova objetiva.
+- medio: plano completo, tasks pequenas, concern scan, rollback e estrategia de prova.
+- alto: plano completo, execucao guiada, seguranca/rollback e P4.
 
-Se o usuario pedir apenas copy, cor, padding ou ajuste visual pequeno, diga explicitamente que o plano sera leve.
+## Autonomia
 
-## Roteiro
+Registre modo recomendado sem executar:
 
-1. Leia `ldk/project.md`, `ldk/ledger.md` e `ldk/roadmap.md`, se existir.
-2. Confirme o nome/slug da feature.
-3. Se a feature estiver `blocked` no roadmap, nao planeje sem decisao consciente do usuario.
-4. Se o roadmap estiver ausente/desatualizado em projeto com dependencias, recomende `ldk-roadmap`.
-5. Escreva objetivo, usuario, escopo e fora de escopo.
-6. Escreva ACs no formato observavel.
-7. Defina risco e prova minima.
-8. Quebre em tasks pequenas.
-9. Defina como cada task sera verificada.
-10. Defina modo de execucao recomendado:
-   - `ldk-build` para trivial/baixo e medio sem bloqueio critico;
-   - `ldk-build-task` para alto risco, checkpoint manual ou decisao aberta.
-11. Atualize o ledger:
-   - nova feature: `planned`;
-   - feature aprovada pelo usuario: `approved`.
+- `guided`/`ldk-build-task`: risco alto, checkpoint pedido ou decisao sensivel.
+- `balanced`/`ldk-build`: default para feature aprovada e segura.
+- `autopilot`/`ldk-build`: pode fechar a feature aprovada, nunca iniciar outra.
+
+O Project Knowledge define o modo do projeto; risco pode reduzir autonomia, nunca ampliar.
+
+## Audit log opcional
+
+Se `Audit log: on`, registre revision, escopo, AC, concerns, risco/prova, tasks, aprovacao e proximo passo. Evidencia
+continua vazia no ledger. Se `off`/ausente, nao crie log.
 
 ## Saida
 
@@ -101,8 +91,11 @@ Se o usuario pedir apenas copy, cor, padding ou ajuste visual pequeno, diga expl
 ## LDK Plan
 
 Feature:
+Discovery revision:
 Risk:
 Proof required:
+Applicable concerns:
+- ...
 
 Acceptance criteria:
 - AC1:
@@ -110,18 +103,13 @@ Acceptance criteria:
 Tasks:
 | ID | Descricao | AC | Arquivos esperados | Verificacao | State |
 |----|-----------|----|--------------------|-------------|-------|
-| T1 |  | AC1 | `src/...` | preview | ready |
+| T1 | | AC1 | `src/...` | <check> | ready |
 
-Arquivos criados/alterados:
-- ...
-
+Optional tasks: none | T...
+Autonomy/execution mode:
+Roadmap/dependencies:
 Status no ledger:
-Cerimonia usada: trivial curta | baixo curta | medio completa | alto completa
-Modo de execucao recomendado: ldk-build | ldk-build-task
-Roadmap/dependencias:
-
-Etapa concluida:
-- Plano pronto/aprovado e aguardando proximo comando.
+Etapa concluida: plano pronto/aprovado e aguardando proximo comando.
 ```
 
-Nao implemente nada nesta skill.
+Nao implemente nada nesta skill, mesmo se o usuario disser "pode continuar".

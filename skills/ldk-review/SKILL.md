@@ -5,6 +5,9 @@ description: Use when reviewing an implemented LDK feature against its plan, pro
 
 # ldk-review
 
+LDK Version: 0.2.0
+LDK Schema: 2
+
 Use esta skill para revisar uma feature depois do proof, com foco em bugs, riscos, drift e testes.
 
 Execute somente review. Nao corrija, nao rode build e nao rode release nesta skill.
@@ -16,12 +19,17 @@ Revisar o diff contra:
 
 - `ldk/features/<feature>/brief.md`
 - `ldk/features/<feature>/plan.md`
+- `ldk/features/<feature>/evidence.md`, se existir
 - `ldk/features/<feature>/proof.md`
+- `ldk/discovery.md`
 - `ldk/ledger.md`
 - `ldk/roadmap.md`, se existir
 - `contracts/always-rules.md`, se disponivel
 - `contracts/common-lessons.md`, se disponivel
 - regras de risco/prova do LDK
+
+Se discovery nao estiver approved ou discovery/roadmap/plan/proof divergirem em revision, o review nao pode ser
+`approved`; reporte drift e recomende `ldk-doctor`/reconciliacao antes de seguir.
 
 ## O que checar
 
@@ -30,16 +38,18 @@ Revisar o diff contra:
 3. O nivel de prova atingido e suficiente?
 4. O diff mudou arquivos fora do escopo da task?
 5. O diff tocou motor do LDK?
-6. Existem riscos de auth, permissao, PII, pagamento, Supabase rules ou delecao?
-7. Testes existem onde o risco exige P3/P4?
-8. A UI foi verificada no preview quando a prova e visual/manual?
-9. A feature respeitou a ordem/dependencias do roadmap?
-10. Alguma licao comum do LDK foi violada?
+6. Discovery, roadmap, plan e proof usam a mesma revision?
+7. As preocupacoes aplicaveis do discovery/plan foram tratadas e provadas?
+8. Evidencias citam fonte, resultado atual, output/referencia e limite?
+9. Testes existem onde o risco exige P3/P4?
+10. A UI foi verificada no preview quando a prova e visual/manual?
+11. A feature respeitou a ordem/dependencias do roadmap?
+12. Alguma licao comum do LDK foi violada?
 
 ## Severidade
 
-- Critical: seguranca, perda de dados, PII/segredo exposto, proof falso, auth/pagamento/RLS sem prova forte,
-  diff de app alterando motor LDK.
+- Critical: seguranca, perda de dados, PII/segredo exposto, proof falso, acesso/transacao/dado sensivel sem prova
+  forte, operacao irreversivel insegura ou diff de app alterando motor LDK.
 - High: AC essencial nao coberto, teste ausente para risco medio/alto, desvio relevante do plano.
 - Medium: cobertura fraca, limitacao nao documentada, risco operacional.
 - Low: estilo, clareza, melhoria opcional.
@@ -67,6 +77,9 @@ AC -> evidence:
 - AC1 -> ...
 
 Roadmap/dependencies:
+- ...
+
+Discovery/concerns:
 - ...
 
 Etapa concluida:

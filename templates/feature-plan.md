@@ -3,6 +3,8 @@
 Status: planned
 Risk: baixo
 Proof required: P2
+Discovery revision: 1
+Optional tasks: none
 
 ## Brief
 `ldk/features/<feature>/brief.md`
@@ -27,6 +29,11 @@ Allowed task states: `backlog`, `ready`, `in-progress`, `proof-pending`, `done`,
 - P2:
 - P3:
 - P4:
+
+## Evidencia durante execucao
+
+- Para varias tasks ou prova P3/P4, acumular fatos em `ldk/features/<feature>/evidence.md`.
+- Para entrega curta P1/P2, a evidencia pode ser consolidada diretamente no proof.
 
 ## Riscos e rollback
 - Risco:

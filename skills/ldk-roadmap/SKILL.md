@@ -1,57 +1,64 @@
 ---
 name: ldk-roadmap
-description: Use when ordering Lovable app features by dependencies and deciding what should be planned next in an LDK project. Creates or updates ldk/roadmap.md from project context, ledger, risks, blockers, and common LDK lessons. Not for implementation.
+description: Use when ordering project capabilities and features by dependencies after LDK discovery approval. Creates or refreshes ldk/roadmap.md and reconciles candidate ledger rows. Not for discovery, planning a feature, or implementation.
 ---
 
 # ldk-roadmap
 
-Use esta skill em Plan mode para ordenar features por dependencia e escolher o proximo passo seguro.
+LDK Version: 0.2.0
+LDK Schema: 2
+
+Use esta skill para transformar o discovery aprovado em ordem de entrega.
+
+Discovery aprovado e obrigatorio antes de roadmap, plan e build.
+
+## Pre-flight
+
+Leia:
+
+- `ldk/discovery.md`;
+- `ldk/project.md`;
+- `ldk/ledger.md`;
+- `ldk/roadmap.md`, se existir;
+- briefs/plans existentes;
+- `contracts/always-rules.md` e `contracts/common-lessons.md`, se disponiveis.
+
+Pare e recomende `ldk-intake` se discovery nao existir ou nao estiver `approved`. Se project/ledger/version/schema
+divergirem, recomende `ldk-doctor`.
 
 ## Objetivo
 
-Criar ou atualizar:
+- criar/atualizar `ldk/roadmap.md` com `Status: current` e a revision aprovada;
+- ordenar por dependencia e resultado, nao por desejo ou tipo de app;
+- adicionar ao ledger somente features realmente derivadas do discovery aprovado;
+- marcar decisoes/bloqueios sem escolher provedor ou inflar escopo.
 
-- `ldk/roadmap.md`
-- linhas de `ldk/ledger.md`, apenas quando faltar uma feature descoberta no roadmap
+Nao escolha plataforma, provedor ou integracao sem decisao explicita do usuario.
 
-Nao implemente app nesta skill.
+## Heuristicas genericas
 
-## O que ler
+- Finalidade e jornada aprovada orientam o recorte.
+- Pre-requisitos vem antes de capacidades que dependem deles.
+- Fonte de dados/regras essenciais vem antes das experiencias que as consomem.
+- Identidade/autorizacao so entra quando atores, dados ou superficies acionarem essa preocupacao.
+- Dependencia externa critica exige decisao, falha/fallback e prova antes de sustentar a jornada.
+- Execucao recorrente/demorada so entra quando o comportamento exigir.
+- Descoberta, mensuracao e desempenho ganham prioridade quando o objetivo/situacao atual os tornar relevantes.
+- Preocupacao `later` nao vira feature do MVP.
+- Preocupacao `verify` que muda a ordem torna feature `verify`/`blocked`, nao e resolvida por suposicao.
+- Mantenha o menor caminho que entrega o resultado aprovado.
 
-Leia somente o necessario:
+## Readiness
 
-- `ldk/project.md`
-- `ldk/ledger.md`
-- `ldk/roadmap.md`, se existir
-- plans/briefs em `ldk/features/`, se existirem
-- `contracts/always-rules.md`, se disponivel
-- `contracts/common-lessons.md`, se disponivel
+- `ready`: pode planejar agora.
+- `blocked`: depende de feature, decisao, acesso ou risco nao resolvido.
+- `later`: fora do recorte atual.
+- `done`: concluida com proof coerente.
+- `verify`: falta confirmar algo antes de ordenar/planejar.
 
-Se `ldk/project.md` ou `ldk/ledger.md` nao existir, recomende `ldk-intake`.
+## Ledger
 
-## Regras
-
-- Ordene por dependencia antes de desejo.
-- Marque bloqueios como `blocked`, nao force plano.
-- Mantenha o MVP pequeno.
-- Nao escolha plataforma, provedor ou integracao sem pedido explicito do usuario.
-- Auth, pagamento real, PII, Supabase RLS, delecao e migracao nunca sao triviais.
-- Se uma feature depende de decisao do usuario, marque `[VERIFY]`.
-- Se uma feature nova entrar no roadmap, registre ou recomende registrar no ledger.
-- Ao registrar no ledger, preserve exatamente o formato de `templates/task-ledger.md`.
-- Nao altere motor do LDK.
-- Execute somente roadmap. Nao rode `ldk-plan`, `ldk-build` nem `ldk-build-task` nesta skill.
-
-## Audit log opcional
-
-Se o Project Knowledge tiver `Audit log: on`, adicione uma entrada compacta em `ldk/audit/log.md` ao final.
-Se `ldk/audit/log.md` nao existir, crie o arquivo com titulo e nota curta de que o log comeca na ativacao.
-Nao faca backfill automatico; se o usuario pedir backfill, marque como `BACKFILL reconstruido`.
-Se estiver `off` ou ausente, nao crie log.
-
-## Ledger contract
-
-Se precisar adicionar linhas em `ldk/ledger.md`, nao traduza nem reestruture a tabela:
+Ao adicionar feature, preserve exatamente:
 
 ```md
 | ID | Feature | Risk | State | Proof required | Last evidence |
@@ -59,59 +66,21 @@ Se precisar adicionar linhas em `ldk/ledger.md`, nao traduza nem reestruture a t
 | F1 | <feature> | baixo | idea | P2 | |
 ```
 
-- `ID`: apenas `F1`, `F2`, etc.
-- `Feature`: nome da feature.
-- `Risk`: `trivial`, `baixo`, `medio` ou `alto`.
-- `State`: valor canonico como `idea`, `planned`, `blocked`.
-- `Proof required`: um unico valor `P1`/`P2`/`P3`/`P4`, nao intervalo.
-- `Last evidence`: vazio para `idea`, `planned`, `approved`, `building` e `proof-pending`.
+Use ID separado, risco canonico, um unico proof e evidencia vazia antes de estado final.
 
-## Heuristicas de dependencia
+## Audit log opcional
 
-Loja:
+Se `Audit log: on`, registre revision usada, ordem, bloqueios, linhas adicionadas e proximo passo. Se `off`/ausente,
+nao crie log.
 
-- se plataforma/provedor nao foi escolhido, manter loja generica no Lovable e marcar provedor como `[VERIFY]`;
-- catalogo, produto e preco antes de carrinho;
-- carrinho antes de checkout;
-- checkout fake antes de checkout real;
-- frete/taxas antes de checkout real;
-- pagamento real, gateway, Shopify ou frete real ficam `later` ou `verify` ate pedido/decisao explicita;
-- pedidos antes de admin de pedidos;
-- auth/permissoes antes de area admin real.
+## Saida
 
-SaaS/app interno:
-
-- modelo de dados antes de CRUD;
-- auth antes de dados pessoais por usuario;
-- permissoes antes de admin;
-- fluxo principal antes de dashboard avancado;
-- auditoria/logs antes de operacoes sensiveis.
-
-Integracoes:
-
-- variaveis/segredos antes de API externa;
-- idempotencia antes de webhook em producao;
-- fallback/erro antes de fluxo critico.
-
-## Readiness
-
-Use apenas:
-
-- `ready`: pode planejar agora.
-- `blocked`: depende de feature, decisao, acesso ou risco nao resolvido.
-- `later`: fora do MVP ou baixa prioridade.
-- `done`: ja concluida no ledger/proof.
-- `verify`: precisa confirmar algo antes de decidir.
-
-## Saida em arquivo
-
-Grave `ldk/roadmap.md` usando `templates/roadmap.md`, se disponivel.
-
-## Saida final
+Grave `ldk/roadmap.md` por `templates/roadmap.md`, com `Status: current` e `Discovery revision` iguais ao discovery.
 
 ```md
 ## LDK Roadmap
 
+Discovery revision:
 Next recommended feature:
 Why:
 Blocked:
@@ -126,8 +95,7 @@ Later:
 Ledger updates:
 - ...
 
-Etapa concluida:
-- Roadmap pronto e aguardando proximo comando.
+Etapa concluida: roadmap pronto e aguardando proximo comando.
 ```
 
-Nao execute a proxima etapa nesta skill. Se o usuario nao souber como continuar, ele deve usar `ldk-next`.
+Execute somente roadmap. Nao rode plan/build.

@@ -1,5 +1,10 @@
 # LDK Project
 
+LDK Version: 0.2.0
+LDK Schema: 2
+Discovery revision: 1
+Autonomy mode: balanced
+
 ## Produto
 - Nome: Mini Loja Fixture
 - Objetivo: Validar o contrato LDK.

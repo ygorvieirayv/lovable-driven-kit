@@ -1,5 +1,35 @@
 # Changelog
 
+## [0.2.0] - 2026-07-10
+
+### Added
+
+- Discovery obrigatorio e versionado em `ldk/discovery.md`, com confirmacao antes de roadmap/plan/build.
+- Concern Scan adaptativo, mapa dinamico de preocupacoes e resumo curto do raciocinio.
+- Pacote portatil para revisao externa e reconciliacao `accept/defer/reject/verify`.
+- Invalidacao por `Discovery revision` e roadmap `current/stale`.
+- Modos de autonomia `guided`, `balanced` e `autopilot`, sem atravessar gates ou features.
+- Acumulo de evidencia observavel durante build em `evidence.md` ou proof inline.
+- `SCHEMA_VERSION`, version markers e `ldk-instructions-check.mjs` para tratar instrucoes como codigo.
+- Contrato deterministico de frases criticas, limites de Knowledge/skill e genericidade do runtime.
+
+### Changed
+
+- `ldk-intake` virou curadoria obrigatoria e nao cria roadmap.
+- `ldk-next` reconhece intencoes naturais de retomada e nunca recomenda build sem plano aprovado.
+- Roadmap e lessons passaram de heuristicas de nicho para sinais/dependencias genericos.
+- Plans escolhem um unico proof level e declaram `Optional tasks`; as demais tasks sao essenciais.
+- `ldk-build` executa loop seguro por task conforme autonomia, acumula evidencia e aciona disjuntor em falha repetida.
+- Proof exige referencia atual/observavel alem da alegacao da IA.
+- Workflow de proof nao mascara mais falha de `npm test`; ausencia de script e reportada como indisponivel.
+- Validators Bash/PowerShell passaram a checar discovery, revision, autonomy, version/schema, IDs numericos e
+  coerencia entre roadmap, plans e proofs.
+
+### Migration
+
+- Projetos 0.1.0 precisam rodar `/ldk-intake` para criar/aprovar `ldk/discovery.md` antes de retomar roadmap/plan.
+- Atualize os dois Knowledges e todas as skills em conjunto para evitar versoes misturadas.
+
 ## [0.1.0] - 2026-07-05
 
 ### Added

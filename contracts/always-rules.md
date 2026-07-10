@@ -2,13 +2,16 @@
 
 Estas regras valem em qualquer nivel de risco.
 
+- Discovery aprovado e obrigatorio antes de roadmap, plan e build.
 - Sem prova falsa: se preview, teste, console, diff ou CI nao foram verificados, declare isso.
 - Sem `DONE` sem evidencia suficiente.
 - Nao coloque segredos em codigo, bundle, logs, screenshots ou dados de exemplo.
 - Nao registre PII desnecessaria em logs, analytics, console ou mensagens de erro.
-- Auth, permissoes/admin, pagamento real, PII, Supabase RLS, delecao e migracao nunca sao `trivial`.
-- Nao escolha plataforma, provedor ou integracao sem pedido explicito do usuario; registre `[VERIFY]` ou deixe fora
-  de escopo.
+- Identidade, autorizacao, transacao real, dado pessoal, controle de acesso a dados, delecao e migracao nunca sao
+  `trivial`.
+- Nao escolha plataforma, provedor ou integracao sem decisao explicita do usuario.
+- Quando o pedido estiver ambiguo, prefira uma representacao reversivel e marque capacidade externa ou de alto
+  impacto como `[VERIFY]` ou fora de escopo.
 - Quando houver backend, seguranca ou dado sensivel, valide no servidor ou na regra de acesso correta.
 - `ldk-build` pode executar tasks planejadas da mesma feature em sequencia e provar a feature.
 - Fora de `ldk-build`, implemente uma task de app por vez.
@@ -21,5 +24,6 @@ Estas regras valem em qualquer nivel de risco.
 - Mudancas externas ao fluxo LDK (rollback, sync, outra skill ou prompt solto) nao sao erro por si so.
 - Em projeto ja iniciado, nao trate codigo preexistente fora da feature/task LDK ativa como drift.
 - Se codigo atual contradiz uma task LDK ja `proof-pending`/`done`, rode `ldk-doctor` antes de proof.
+- Considere todas as tasks essenciais, salvo lista explicita `Optional tasks:` no plano.
 - Nao rode `ldk-proof` final enquanto houver task essencial `ready`, `backlog` ou `in-progress`.
 - Se nao puder verificar algo essencial, use `PARTIAL` ou `BLOCKED`.

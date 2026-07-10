@@ -4,8 +4,10 @@ Tasks:
 Feature:
 Status: DONE | PARTIAL | BLOCKED
 Risk: trivial | baixo | medio | alto
+Discovery revision:
 Proof level required: P1 | P2 | P3 | P4
 Proof level achieved: P1 | P2 | P3 | P4 | none
+Evidence log: ldk/features/<feature>/evidence.md | inline
 
 ## Pre-flight before execution
 - Optimistic:
@@ -32,6 +34,7 @@ Proof level achieved: P1 | P2 | P3 | P4 | none
 - Required proof identified: yes/no
 - All essential AC covered: yes/no
 - Evidence exists for every covered AC: yes/no
+- Evidence references are current and observable: yes/no
 - Proof level achieved >= required: yes/no
 - Critical errors known: yes/no
 - LDK engine drift detected: yes/no
@@ -45,8 +48,10 @@ Proof level achieved: P1 | P2 | P3 | P4 | none
 - Preview URL:
 - Screenshot or visual observation:
 - Manual steps:
-- Test output:
-- Commit/diff:
+- Test command and exit code:
+- Test output or artifact:
+- Commit/diff reference:
+- CI reference:
 
 ## Known limitations
 - 

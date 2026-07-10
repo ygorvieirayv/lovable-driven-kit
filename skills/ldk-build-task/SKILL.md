@@ -1,90 +1,63 @@
 ---
 name: ldk-build-task
-description: Use when implementing exactly one approved LDK task in manual/granular mode, or when high-risk/checkpointed work should not use feature autopilot. Keeps scope small and leaves the task proof-pending. Not for planning or final proof.
+description: Use when implementing exactly one approved LDK task in guided/manual mode, for high-risk work, or when a checkpoint is requested. Requires approved discovery and a revision-aligned approved plan, accumulates evidence, and stops at proof-pending. Not for planning or final proof.
 ---
 
 # ldk-build-task
 
-Use esta skill em Build mode para implementar exatamente uma task aprovada. Para feature aprovada e segura, prefira
-`ldk-build`.
+LDK Version: 0.2.0
+LDK Schema: 2
 
-## Objetivo
+Use esta skill para implementar exatamente uma task aprovada.
 
-Implementar uma task do plano e deixar a entrega pronta para prova.
+## Gate
+
+Leia discovery, project, ledger, roadmap, brief, plan, evidence/proof existentes e contracts disponiveis.
+
+Pare se discovery nao estiver aprovado, roadmap/plan estiver stale ou com revision divergente, plan nao estiver
+approved, version/schema divergir ou tabela de tasks nao usar exatamente:
+
+```md
+| ID | Descricao | AC | Arquivos esperados | Verificacao | State |
+```
+
+Toda task, inclusive trivial, precisa de registro minimo aprovado no plan: objetivo, AC, fora de escopo, risco,
+proof, revision e uma linha de task.
 
 ## Regras
 
-- Use Build mode depois de existir plano aprovado.
-- Excecao: para tarefa `trivial` claramente definida, pode construir sem plano formal longo se houver registro minimo
-  com AC explicito, prova P1 e linha no ledger.
-- Implemente uma task por vez.
-- A task deve existir na tabela de tasks do `plan.md`. Se o plano tiver apenas bullets, pare e rode `ldk-doctor` ou
-  `ldk-plan` para normalizar o plano antes de construir.
-- A tabela deve usar exatamente os headers `ID | Descricao | AC | Arquivos esperados | Verificacao | State`.
-  Se o header estiver abreviado como `Arquivos`, pare e rode `ldk-doctor` antes de construir.
-- Se o usuario pedir duas ou mais tasks aprovadas no mesmo comando, escolha a proxima task `ready` e explique que
-  as demais ficam para os proximos comandos. Para fundir tasks, revise o plano antes.
-- Nao aumente escopo sem aprovar novo plano.
-- Nao edite motor do LDK.
-- Aplique `contracts/always-rules.md`, se disponivel.
-- Nao marque task ou feature como `done` diretamente.
-- Ao terminar a implementacao, deixe a task executada como `proof-pending` e pare. Nao rode `ldk-proof` nesta skill.
+- Implemente somente a task indicada ou a proxima `ready`.
+- Se o usuario pedir varias, execute uma e deixe as demais; para lote seguro use `ldk-build`.
+- Nao aumente escopo, altere motor LDK nem escolha capacidade externa nao decidida.
+- Confirme AC, arquivos esperados, verificacao e proof antes de editar.
+- Marque `in-progress`, implemente, verifique e deixe `proof-pending`.
+- Nao marque task/feature `done` e nao rode proof final.
+- Todas as tasks sao essenciais, salvo `Optional tasks:`.
+- Risco alto inclui acesso/autoridade, dado sensivel, transacao real, operacao irreversivel ou dependencia critica.
+- Valide entrada/autoridade na camada correta; nunca exponha segredo/PII.
+- Falha 2-3 vezes sem novo sinal: registre evidencia, bloqueie e pare.
 
-## Antes de construir
+## Evidencia
 
-Leia:
+Acumule em `ldk/features/<feature>/evidence.md` ou proof draft:
 
-- `ldk/project.md`
-- `ldk/ledger.md`
-- `ldk/roadmap.md`, se existir
-- `ldk/features/<feature>/brief.md`
-- `ldk/features/<feature>/plan.md`
-- `contracts/engine-boundary.md`, se disponivel
-- `contracts/always-rules.md`, se disponivel
+- task e AC;
+- acao/comando/fonte;
+- resultado/observacao;
+- exit code quando houver;
+- output/artefato/referencia;
+- limitacao.
 
-Para tarefa trivial sem plano formal longo, leia `ldk/project.md`, `ldk/ledger.md` e confirme que existe registro
-minimo antes de construir:
-
-- feature/task;
-- AC de uma linha;
-- fora de escopo;
-- risco `trivial`;
-- prova minima `P1`.
-
-Confirme:
-
-- task ativa;
-- estado da task (`ready` ou `in-progress`);
-- AC coberto;
-- arquivos esperados;
-- verificacao esperada;
-- prova minima.
-
-## Durante a implementacao
-
-- Mantenha mudancas cirurgicas.
-- Preserve padroes do app.
-- Para trivial/baixo, nao transforme a task em refatoracao ou mudanca de produto maior.
-- Para auth, pagamento, PII, Supabase rules, delecao ou migracao, trate como alto risco.
-- Valide input no servidor quando houver backend.
-- Nao coloque segredos no codigo, bundle ou logs.
-- Nao registre PII desnecessaria em logs, console, analytics ou mensagens de erro.
-- Se falhar 2-3 vezes no mesmo ponto, registre o bloqueio, pare e peca input. Nao force build nem rode proof.
+Alegacao da IA sem observacao/fonte nao e evidencia.
 
 ## Ao terminar
 
-1. Liste arquivos alterados.
-2. Atualize a task executada no `plan.md` para `proof-pending`.
-3. Se ainda houver tasks `ready`, `in-progress` ou `backlog`, mantenha o ledger da feature como `building`.
-4. Se todas as tasks essenciais estiverem `proof-pending` ou `done`, atualize o ledger da feature para `proof-pending`.
-5. Pare e aguarde o proximo comando.
-
-## Audit log opcional
-
-Se o Project Knowledge tiver `Audit log: on`, adicione uma entrada compacta em `ldk/audit/log.md` ao final.
-Se `ldk/audit/log.md` nao existir, crie o arquivo com titulo e nota curta de que o log comeca na ativacao.
-Nao faca backfill automatico; se o usuario pedir backfill, marque como `BACKFILL reconstruido`.
-Se estiver `off` ou ausente, nao crie log.
+1. liste arquivos;
+2. atualize task para `proof-pending`;
+3. mantenha feature `building` se houver essencial aberta;
+4. use feature `proof-pending` se todas essenciais estiverem `proof-pending`/`done`;
+5. registre audit log se `on`;
+6. pare.
 
 ## Saida
 
@@ -93,13 +66,14 @@ Se estiver `off` ou ausente, nao crie log.
 
 Task:
 Feature:
+Discovery revision:
+Autonomy: guided
 O que mudou:
 Arquivos alterados:
 AC alvo:
-Verificacao ainda pendente:
-Task status: proof-pending
-Feature status: building | proof-pending
-Etapa concluida: build-task pronta e aguardando proximo comando
+Evidence reference:
+Verificacao executada/pendente:
+Task status: proof-pending | blocked
+Feature status: building | proof-pending | blocked
+Etapa concluida e aguardando proximo comando.
 ```
-
-Se algo impedir a conclusao, nao force. Registre o bloqueio e aguarde o proximo comando.

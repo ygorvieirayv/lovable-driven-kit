@@ -35,5 +35,40 @@ jobs:
             exit 0
           fi
           if [ -f package-lock.json ]; then npm ci; else npm install; fi
-          npm test -- --runInBand || npm test || echo "No test script or tests failed; inspect package scripts."
-          npm run build --if-present
+
+          if node -e "const p=require('./package.json'); process.exit(p.scripts?.test ? 0 : 1)"; then
+            echo "Running declared test script. A failing test fails this job."
+            npm test
+          else
+            echo "No test script declared; tests are not available, not passing."
+          fi
+
+          if node -e "const p=require('./package.json'); process.exit(p.scripts?.build ? 0 : 1)"; then
+            npm run build
+          else
+            echo "No build script declared; build is not available."
+          fi
+
+          if node -e "const p=require('./package.json'); process.exit(p.scripts?.lint ? 0 : 1)"; then
+            npm run lint
+          else
+            echo "No lint script declared; lint is not available."
+          fi
+
+      - name: Playwright smoke when configured
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ ! -f package.json ] || [ ! -f github/playwright-smoke.spec.ts ]; then
+            echo "No app package or LDK smoke spec; browser smoke is not available."
+            exit 0
+          fi
+          if ! node -e "require.resolve('@playwright/test')" >/dev/null 2>&1; then
+            echo "Playwright is not installed; browser smoke is not available."
+            exit 0
+          fi
+          if ! compgen -G 'playwright.config.*' >/dev/null; then
+            echo "No Playwright config/webServer; browser smoke is not available."
+            exit 0
+          fi
+          npx playwright test github/playwright-smoke.spec.ts

@@ -1,21 +1,27 @@
 # Project Knowledge - Lovable Driven Kit
 
+LDK Version: 0.2.0
+LDK Schema: 2
+
 ## Produto
 - Nome:
 - Objetivo:
 - Usuario principal:
-- Resultado de negocio:
+- Resultado esperado:
+- Como o sucesso sera observado:
 
 ## Plataforma
 - Lovable project:
 - GitHub repo:
+- Stack percebida:
 - Backend:
-- Banco:
-- Auth:
-- Pagamentos:
+- Dados/estado:
+- Identidade e acesso:
+- Integracoes externas:
 
 ## Fonte da verdade
-- Contexto do produto: `ldk/project.md`
+- Discovery aprovado: `ldk/discovery.md`
+- Contexto duravel: `ldk/project.md`
 - Ledger: `ldk/ledger.md`
 - Roadmap: `ldk/roadmap.md`
 - Features: `ldk/features/`
@@ -24,53 +30,61 @@
 - Issues: `ldk/issues/`
 - Releases: `ldk/releases/`
 
-## Riscos
-- Dados pessoais:
-- Pagamentos:
-- Permissoes/admin:
-- Integracoes externas:
-- Supabase/RLS:
-- Compliance:
+## Preocupacoes aplicaveis
+
+Registre somente preocupacoes acionadas por sinais deste projeto.
+
+| Concern | Why it matters | Decision | Proof/validation |
+|---------|----------------|----------|------------------|
+| | | | |
+
+## Autonomia LDK
+- Autonomy mode: balanced
+
+Valores:
+- `guided`: checkpoints manuais e execucao granular.
+- `balanced`: plano aprovado autoriza build seguro da feature e proof sem microaprovacoes.
+- `autopilot`: conclui feature aprovada ate DONE/PARTIAL/BLOCKED, sem puxar outra feature.
+
+Risco alto, decisao aberta, credencial, dado sensivel, operacao irreversivel, drift ou prova impossivel sempre param.
 
 ## Regras do projeto
-- 
+-
 
 ## Auditoria LDK
 - Audit log: off
 - Audit log file: `ldk/audit/log.md`
 - Para habilitar, troque para `Audit log: on`.
 - Para desabilitar, volte para `Audit log: off`.
-- Se habilitar no meio do projeto, o log começa dali em diante; backfill só com pedido explícito.
+- Se habilitar no meio do projeto, o log comeca dali; backfill so com pedido explicito.
 
 ## Cerimonia proporcional
-- trivial: AC curto, uma mudanca pequena e prova P1.
-- baixo: plano curto e prova P1/P2.
-- medio: plano completo e prova P2/P3.
-- alto: plano completo, risco explicito, prova P4 e revisao antes de release.
+- trivial: AC curto, mudanca pequena e P1.
+- baixo: plano curto e uma prova P1 ou P2.
+- medio: plano completo e uma prova P2 ou P3.
+- alto: plano completo, execucao guiada, P4 e review antes de release.
 
 ## Regras sempre
-- Sem prova falsa.
-- Sem segredo no bundle/log.
-- Sem PII desnecessaria em log/analytics/console.
-- Auth, pagamento real, RLS, delecao e migracao nunca sao triviais.
-- Nao assumir Shopify, gateway, frete real, Supabase ou integracao externa sem pedido explicito.
-- `ldk-build` pode executar e provar uma feature aprovada. Fora dele, cada comando LDK executa uma etapa e para.
-  Para continuar, use `/ldk-next`.
+- Discovery aprovado e obrigatorio antes de roadmap, plan e build.
+- Sem prova falsa e sem `DONE` sem evidencia suficiente.
+- Sem segredo em bundle/log e sem PII desnecessaria em log/analytics/console.
+- Nao escolha plataforma, provedor ou integracao sem decisao explicita do usuario.
+- Capacidade externa, irreversivel ou de alto impacto nao e inferida de exemplo; use `[VERIFY]`.
+- `ldk-build` pode executar/provar feature aprovada. Fora dele, cada comando executa uma etapa e para.
+- Para continuar ou retomar, use `/ldk-next`.
 
 ## Pendencias [VERIFY]
-- 
+-
 
 ## Comandos LDK
 
-Use:
-
-- `ldk-intake` para organizar ideia e contexto.
-- `ldk-next` para descobrir o proximo passo seguro.
-- `ldk-roadmap` para ordenar features por dependencia.
-- `ldk-plan` para planejar uma feature.
-- `ldk-build` para executar e provar uma feature aprovada.
-- `ldk-build-task` para implementar uma task especifica.
-- `ldk-proof` para provar ou bloquear a conclusao.
-- `ldk-review` para revisar diff, risco e testes.
-- `ldk-doctor` para diagnosticar drift.
-- `ldk-release` antes de publicar.
+- `ldk-intake`: discovery, confirmacao e contexto inicial.
+- `ldk-next`: proximo passo seguro.
+- `ldk-roadmap`: ordem por dependencia apos discovery aprovado.
+- `ldk-plan`: plano de uma feature.
+- `ldk-build`: execucao e proof da feature aprovada.
+- `ldk-build-task`: uma task especifica.
+- `ldk-proof`: prova isolada quando tasks essenciais terminaram.
+- `ldk-review`: revisao de diff, risco e evidencia.
+- `ldk-doctor`: diagnostico/reconciliacao de drift.
+- `ldk-release`: gate antes de publicar.

@@ -13,6 +13,22 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Instruction contracts are consistent
+        run: node scripts/ldk-instructions-check.mjs
+
+      - name: Broken instruction contract fails
+        shell: bash
+        run: |
+          set -euo pipefail
+          broken="$(mktemp -d)"
+          cp -R . "$broken/repo"
+          rm -rf "$broken/repo/.git"
+          sed -i 's/Sem prova, nao e done\./Prova e opcional./' "$broken/repo/workspace-knowledge.md"
+          if node "$broken/repo/scripts/ldk-instructions-check.mjs"; then
+            echo "Broken instruction contract unexpectedly passed"
+            exit 1
+          fi
+
       - name: PowerShell valid fixture passes
         shell: pwsh
         run: ./scripts/ldk-check.ps1 -Root tests/fixtures/valid
@@ -37,3 +53,7 @@ jobs:
             echo "Broken fixture unexpectedly passed"
             exit 1
           fi
+
+      - name: Shell syntax
+        shell: bash
+        run: bash -n scripts/ldk-check.sh

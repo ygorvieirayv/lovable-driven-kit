@@ -1,146 +1,129 @@
 ---
 name: ldk-build
-description: 'Use when executing an approved LDK feature end-to-end after planning: run planned safe tasks in sequence, do a pre-flight optimistic/pessimistic verdict before editing, verify evidence, write proof, and return DONE/PARTIAL/BLOCKED. Default build path for trivial, baixo, and safe medio features; not for intake, planning, review, or release.'
+description: Use when executing one approved LDK feature after approved discovery and a revision-aligned plan. Runs safe planned tasks in sequence according to autonomy, accumulates observable evidence, proves the feature, and returns DONE/PARTIAL/BLOCKED. Not for discovery, planning, review, or release.
 ---
 
 # ldk-build
 
-Use esta skill em Build mode para executar uma feature aprovada com pouca microcerimonia.
+LDK Version: 0.2.0
+LDK Schema: 2
+
+Sem prova, nao e done.
+
+Discovery aprovado e obrigatorio antes de roadmap, plan e build.
 
 ## Objetivo
 
-Executar a feature planejada ate onde for seguro:
+Executar uma feature aprovada ate onde for seguro:
 
-1. pensar antes de editar;
-2. implementar as tasks planejadas em sequencia;
-3. atualizar estados no `plan.md` e `ledger.md`;
-4. verificar a prova minima;
-5. escrever `proof.md`;
-6. decidir `DONE`, `PARTIAL` ou `BLOCKED`.
+1. validar gates e autonomia;
+2. mostrar resumo curto do pre-flight;
+3. executar tasks essenciais em sequencia;
+4. acumular evidencia observavel durante a execucao;
+5. atualizar plan/ledger;
+6. consolidar proof;
+7. decidir `DONE`, `PARTIAL` ou `BLOCKED` e parar.
 
-Isto nao e encadear skills. O escopo desta skill inclui build e proof da feature aprovada.
+Build e proof fazem parte desta skill. Nao puxe outra feature.
 
-## Quando usar
+## Gate antes de editar
 
-Use `ldk-build` como caminho padrao quando:
+Leia discovery, project, ledger, roadmap, brief, plan, proof/evidence existentes e arquivos citados no plano.
 
-- a feature esta `approved`, `building` ou com tasks `ready`/`in-progress`;
-- existe `plan.md` com tabela de tasks;
-- a tabela de tasks usa exatamente os headers `ID | Descricao | AC | Arquivos esperados | Verificacao | State`;
-- o risco e `trivial`, `baixo` ou `medio` sem decisao aberta critica;
-- o usuario quer resultado, nao operar T1/T2/T3 manualmente.
+Pare antes de editar se:
 
-Use `ldk-build-task` em vez disso quando:
+- discovery nao estiver `approved`;
+- roadmap estiver `stale` ou revision divergir;
+- plan nao estiver `approved` ou usar outra discovery revision;
+- tabela nao tiver headers exatos;
+- houver `[VERIFY]` que muda escopo, acesso, dado, dependencia, provedor, risco ou prova;
+- version/schema estiver misturado;
+- task exigir arquivo fora do escopo;
+- houver drift que contradiga task encerrada.
 
-- o usuario pediu explicitamente uma task especifica;
-- a feature e `alto` risco;
-- ha auth, pagamento real, PII, RLS, migracao, delecao, credencial ou integracao externa sensivel;
-- ha `[VERIFY]` que muda escopo, provedor, dado ou seguranca;
-- houve falha repetida ou drift que exige passo menor.
+Nao dependa de contracts como bundled files. Se disponiveis, use; senao siga Workspace Knowledge e esta skill.
 
-## Antes de editar
+## Pre-flight visivel e curto
 
-Leia:
+Nao exponha raciocinio extenso. Mostre:
 
-- `ldk/project.md`
-- `ldk/ledger.md`
-- `ldk/roadmap.md`, se existir
-- `ldk/features/<feature>/brief.md`
-- `ldk/features/<feature>/plan.md`
-- `ldk/features/<feature>/proof.md`, se existir
-- arquivos do app citados no plano
+- entendimento da feature;
+- otimista: por que e executavel;
+- pessimista: principal forma de falso `DONE`, dano ou pausa;
+- decisao: `proceed`, `pause` ou `blocked`.
 
-Nao dependa de `contracts/` como bundled file. Se algum contrato estiver disponivel, use; se nao estiver, siga o
-Workspace Knowledge e esta skill.
+Ajuste pequeno dentro do escopo entra na execucao. Decisao aberta, escopo novo, risco alto nao planejado,
+credencial, dado sensivel, operacao irreversivel ou prova impossivel para antes de editar.
 
-## Pre-flight obrigatorio
+## Autonomia
 
-Antes de editar app ou `src/`, faca o pre-flight:
+Leia `Autonomy mode`:
 
-- Veredito otimista: por que o plano parece executavel agora.
-- Veredito pessimista: o que pode dar errado, ficar falso ou exigir pausa.
-- Decisao antes de executar: `proceed`, `pause` ou `blocked`.
+- `guided`: execute uma task por vez e pare quando o usuario escolheu checkpoints manuais.
+- `balanced`: execute todas as tasks seguras da feature aprovada e consolide proof.
+- `autopilot`: execute a feature aprovada ate status final, mas nunca atravesse para outra feature.
 
-Use o veredito pessimista como ferramenta de qualidade:
+Risco alto sempre reduz para execucao guiada. Nenhum modo autoriza novo escopo ou decisao externa.
 
-- se apontar um ajuste pequeno dentro do escopo, incorpore na execucao;
-- se apontar decisao aberta, risco alto, credencial, provedor, dado sensivel ou prova impossivel, pare antes de
-  editar e explique o bloqueio;
-- se apontar escopo novo, recomende `ldk-plan` ou `ldk-doctor`.
+## Loop de execucao
 
-## Execucao
+Todas as tasks sao essenciais, salvo IDs em `Optional tasks:`.
 
-- Implemente somente a feature ativa.
-- Nao puxe nova feature do roadmap.
-- Execute tasks planejadas em sequencia, uma por vez internamente.
-- Antes de editar uma task, marque-a como `in-progress` se isso ajudar a registrar o estado.
-- Ao concluir uma task, marque-a como `proof-pending`.
-- Se uma task ja estiver `proof-pending`/`done`, nao refaca sem drift claro.
-- Se todas as tasks essenciais ficarem `proof-pending` ou `done`, marque a feature no ledger como
-  `proof-pending` antes da prova final.
-- Nao edite motor do LDK como efeito colateral da feature.
+Para cada task essencial em `ready`/`in-progress`:
 
-Pare imediatamente se encontrar:
+1. confirme AC, arquivos e verificacao;
+2. marque `in-progress`;
+3. edite somente o escopo aprovado;
+4. execute/observe a verificacao prevista;
+5. registre evidencia com fonte, resultado, output/referencia, exit code quando houver, AC e limitacao;
+6. marque `proof-pending` somente apos implementacao observada;
+7. continue conforme autonomia e seguranca.
 
-- tabela de tasks sem headers exatos; recomende `ldk-doctor` para normalizar antes de construir;
-- `[VERIFY]` que afeta a feature atual;
-- arquivo fora do escopo que seria necessario alterar;
-- segredo, PII, auth, pagamento real, RLS, migracao ou delecao nao planejados;
-- rollback/drift que contradiz task `proof-pending` ou `done`;
-- falha repetida no mesmo ponto.
+Use `ldk/features/<feature>/evidence.md` por `templates/evidence-log.md` para varias tasks ou P3/P4. Em entrega curta
+P1/P2, pode acumular diretamente num proof draft. Nunca invente preview, teste, console, diff, CI ou verificacao.
 
-## Prova dentro do build
+Se a mesma falha ocorrer 2-3 vezes sem novo sinal:
 
-Depois das tasks essenciais, verifique conforme `Proof required`:
+- pare;
+- registre tentativas/evidencia;
+- marque task/feature `blocked` quando aplicavel;
+- nao repita no escuro;
+- peca decisao ou contexto.
 
-- P1: screenshot ou observacao precisa do preview.
-- P2: fluxo manual com passos e resultado observado.
-- P3: teste automatizado ou script reproduzivel.
-- P4: CI/release, diff GitHub e checklist de seguranca.
+## Proof dentro do build
 
-Nunca invente prova. Se nao abriu preview, nao rodou teste ou nao viu diff, declare isso.
+Depois das tasks essenciais:
 
-Escreva `ldk/features/<feature>/proof.md` com:
+- P1: observacao visual real;
+- P2: fluxo manual com passos/resultado;
+- P3: teste/script reproduzivel com resultado pass;
+- P4: CI pass, diff e checklist de seguranca/release.
 
-- pre-flight otimista/pessimista;
-- arquivos alterados;
-- AC cobertos;
-- verificacao executada;
-- veredito otimista da prova;
-- veredito pessimista da prova;
-- `LDK self-check`;
-- status final.
+Consolide `proof.md` com pre-flight, discovery revision, evidence log/inline, arquivos, AC, verificacoes, comandos e
+exit codes disponiveis, referencias, limitacoes, self-check e veredito.
 
-Use `DONE` apenas quando:
+`DONE` exige:
 
-- todas as tasks essenciais estao `proof-pending` ou `done`;
-- todos os AC essenciais estao cobertos;
-- a prova atingida e maior ou igual a exigida;
-- nao existe erro critico conhecido;
-- a limitacao restante nao bloqueia o objetivo.
+- tasks essenciais `proof-pending`/`done`;
+- AC essenciais cobertos por evidencia atual e observavel;
+- prova atingida >= exigida;
+- nenhum erro critico ou drift;
+- limitacoes sem bloquear o objetivo.
 
-Use `PARTIAL` quando algo foi implementado, mas a prova ou algum AC essencial ficou incompleto.
-Use `BLOCKED` quando falta decisao, acesso, credencial, correcao previa ou prova essencial.
+Use `PARTIAL` se implementou mas falta AC/prova. Use `BLOCKED` se falta decisao, acesso, correcao ou verificacao
+essencial.
 
-Atualize o ledger:
+Atualize ledger/plan:
 
-- `done` se Status for `DONE`;
-- `partial` se Status for `PARTIAL`;
-- `blocked` se Status for `BLOCKED`;
-- `Last evidence` apontando para `ldk/features/<feature>/proof.md`.
-
-Atualize tambem o `plan.md`:
-
-- se Status for `DONE`, marque as tasks essenciais cobertas como `done`;
-- se Status for `PARTIAL`, deixe tasks sem prova suficiente como `proof-pending` ou `blocked`;
-- se Status for `BLOCKED`, marque a task afetada como `blocked` quando o bloqueio for especifico.
+- `done` + proof quando DONE; tasks cobertas -> `done`;
+- `partial` + proof quando PARTIAL; tasks sem prova -> `proof-pending`/`blocked`;
+- `blocked` + proof quando BLOCKED; task afetada -> `blocked`;
+- Last evidence sempre aponta para proof em estado final.
 
 ## Audit log opcional
 
-Se o Project Knowledge tiver `Audit log: on`, adicione uma entrada compacta em `ldk/audit/log.md` ao final.
-Se `ldk/audit/log.md` nao existir, crie o arquivo com titulo e nota curta de que o log comeca na ativacao.
-Nao faca backfill automatico; se o usuario pedir backfill, marque como `BACKFILL reconstruido`.
-Registre pre-flight, actions, evidence claimed, decision e next. Se estiver `off` ou ausente, nao crie log.
+Se `Audit log: on`, registre version/schema, revision, autonomy, pre-flight, tasks, arquivos, referencias de evidencia,
+decisao, limitacoes e next. Se `off`/ausente, nao crie log.
 
 ## Saida
 
@@ -148,29 +131,30 @@ Registre pre-flight, actions, evidence claimed, decision e next. Se estiver `off
 ## LDK Build
 
 Feature:
-Modo: feature autopilot | checkpoint | blocked-before-build
+Discovery revision:
+Autonomy/mode:
 Risk:
 Proof required:
 
-### Pre-flight antes da execucao
-Veredito otimista:
-- ...
-Veredito pessimista:
-- ...
-Decisao antes de executar: proceed | pause | blocked
+### Resumo do pre-flight
+- Entendimento:
+- Otimista:
+- Pessimista:
+- Decisao: proceed | pause | blocked
 
 ### Execucao
 - Tasks executadas:
 - Arquivos alterados:
+- Disjuntor acionado: yes/no
 
 ### Prova
+- Evidence log/inline:
 - Proof level achieved:
-- Preview/testes/diff:
-- Veredito otimista:
-- Veredito pessimista:
+- Preview/testes/diff/CI:
+- Limitacoes:
 
 Status: DONE | PARTIAL | BLOCKED
 Etapa concluida e aguardando proximo comando.
 ```
 
-Se o pre-flight decidir `pause` ou `blocked`, nao edite app. Explique o proximo passo seguro.
+Se pre-flight decidir pause/blocked, nao edite o app.

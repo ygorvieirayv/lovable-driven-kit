@@ -1,8 +1,11 @@
 # Lovable Driven Kit (LDK) - Workspace Knowledge
 
+LDK Version: 0.2.0
+LDK Schema: 2
+
 Voce trabalha com o Lovable Driven Kit.
 
-Regra central: sem prova, nao e done.
+Sem prova, nao e done.
 
 Comandos/skills:
 
@@ -19,151 +22,136 @@ Comandos/skills:
 
 ## Regras centrais
 
-O usuario nao precisa codar. O Lovable implementa; o LDK guia escopo, risco, tarefas e prova.
+O usuario nao precisa codar. O Lovable implementa; o LDK guia descoberta, escopo, risco, tarefas, execucao e prova.
 
-- Antes de mudancas relevantes, defina escopo, risco, criterios de aceite e prova minima.
-- Use `ldk-build` para feature aprovada e segura; ele pode executar tasks planejadas, provar e fechar status.
-- Use `ldk-build-task` apenas para task especifica, checkpoint manual, risco alto ou pedido explicito.
-- Use `DONE` somente com evidencia suficiente.
-- Se a prova minima nao foi atingida, use `PARTIAL` ou `BLOCKED`.
+Discovery aprovado e obrigatorio antes de roadmap, plan e build.
+
+- `ldk-intake` extrai a ideia, faz perguntas adaptativas, registra `ldk/discovery.md` e pede confirmacao.
+- Antes de mudanca relevante, defina escopo, risco, AC e prova minima.
+- Use `ldk-build` para feature aprovada e segura; ele executa tasks planejadas e pode provar a feature.
+- Use `ldk-build-task` para task especifica, checkpoint manual, risco alto ou pedido explicito.
+- Use `DONE` somente com evidencia suficiente; caso contrario use `PARTIAL` ou `BLOCKED`.
 - Nunca invente preview, teste, console, diff, CI ou verificacao.
+- Conversa aprova, arquivo registra.
 
 ## Fronteira de comando
 
 Execute apenas a skill/comando invocado pelo usuario.
 
-- `ldk-intake`: intake e para.
+- `ldk-intake`: descobre, reconcilia, aprova e para; nao cria roadmap nem app.
+- `ldk-next`: le estado e recomenda; read-only.
 - `ldk-roadmap`: ordena features e para.
-- `ldk-plan`: planeja/aprova plano e para.
-- `ldk-build`: executa a feature aprovada, registra tasks, prova e para.
+- `ldk-plan`: planeja/aprova uma feature e para.
+- `ldk-build`: executa a feature aprovada, acumula evidencia, prova e para.
 - `ldk-build-task`: implementa uma task e para em `proof-pending`.
 - `ldk-proof`: prova/bloqueia e para.
-- `ldk-review`: revisa e para.
-- `ldk-doctor`: diagnostica/corrige drift autorizado e para.
+- `ldk-review`: revisa e para; nao corrige em silencio.
+- `ldk-doctor`: diagnostica e so corrige item aprovado.
+- `ldk-release`: decide GO/NO-GO; nao publica.
 
-Nao encadeie a proxima skill na mesma resposta. A aprovacao do usuario vale para a etapa atual. Excecao:
-em `ldk-build`, build e proof fazem parte da mesma etapa. Ao final, diga que a etapa esta pronta e aguardando o
-proximo comando. Se o usuario nao souber o que fazer, recomende `/ldk-next`.
+Nao encadeie a proxima skill na mesma resposta. A aprovacao vale para a etapa atual. Excecao: build e proof fazem
+parte do proprio escopo de `ldk-build`. Ao final, recomende um proximo comando; nao o execute.
+
+## Discovery e concern scan
+
+Antes de perguntar, leia pedido, Project Knowledge e app existente. Nao pergunte o que ja puder inferir. Pergunte
+uma coisa por vez somente quando a resposta mudar finalidade, escopo, jornada, risco, arquitetura, prova ou
+prioridade; explique por que importa. Impacto pequeno usa default reversivel; impacto relevante fica `[VERIFY]`.
+
+Faca varredura ampla por finalidade, atores, jornada, dados, acesso, execucao, dependencias, exposicao, descoberta,
+mensuracao, desempenho, acessibilidade, operacao e release. Registre/apresente apenas preocupacoes acionadas por
+sinais deste projeto como `applicable`, `not-applicable`, `later` ou `verify`.
+
+Mostre resumo curto do raciocinio: entendimento, sinais, preocupacoes relevantes, descartes confiaveis e duvidas.
+O resumo nao substitui proof. Antes do roadmap, apresente entendimento autocontido e obtenha aprovacao explicita.
+
+Revisao externa e opcional. Ao receber sugestoes de outra IA, classifique `accept`, `defer`, `reject` ou `verify`,
+explique impacto e deixe a decisao final com o usuario. Mudanca estrutural incrementa a revisao do discovery, exige
+nova aprovacao e torna roadmap anterior `stale`.
+
+## Autonomia
+
+Leia `Autonomy mode` em `ldk/project.md`:
+
+- `guided`: checkpoints manuais e `ldk-build-task` quando o usuario quiser granularidade.
+- `balanced`: default; depois do plano aprovado, `ldk-build` executa tasks seguras e prova sem microaprovacoes.
+- `autopilot`: `ldk-build` pode concluir a feature aprovada, mas nunca atravessa para outra feature.
+
+Todo modo para em decisao aberta, escopo novo, risco alto, credencial, dado sensivel, operacao irreversivel,
+dependencia critica nao decidida, impossibilidade de prova, drift ou falha repetida. Nenhum modo pula discovery,
+plano aprovado ou release gate.
 
 ## Regras sempre aplicaveis
 
-- Sem `DONE` sem evidencia.
 - Sem segredo em codigo, bundle, log, screenshot ou dado de exemplo.
 - Sem PII desnecessaria em logs, analytics, console ou erro.
-- Auth, permissoes/admin, pagamento real, PII, Supabase RLS, delecao e migracao nunca sao `trivial`.
-- Nunca escolha plataforma, provedor ou integracao sem pedido explicito do usuario.
-- Shopify, Stripe, Mercado Pago, Supabase, ERP, frete real e gateways ficam como `[VERIFY]` ou fora de escopo.
-- Para e-commerce vago, o default seguro e vitrine, catalogo, carrinho local e checkout fake.
-- Pagamento real, checkout real, auth real, frete real e backend real entram depois de decisao explicita.
-- Se nao abriu preview, diga que nao abriu.
-- Se nao checou console/logs, diga que nao checou.
-- Se nao rodou teste, diga que nao rodou.
-- Se nao viu diff no GitHub, diga que nao viu.
+- Identidade, autorizacao, transacao real, dado pessoal, controle de acesso, delecao e migracao nunca sao triviais.
+- Nao escolha plataforma, provedor ou integracao sem decisao explicita do usuario.
+- Pedido ambiguo usa representacao reversivel; capacidade externa/alto impacto fica `[VERIFY]` ou fora de escopo.
+- Se nao abriu preview, checou console, rodou teste ou viu diff, declare isso.
+- Todas as tasks sao essenciais, salvo `Optional tasks:` explicito no plano.
+- Falha 2-3 vezes sem novo sinal aciona disjuntor: registre, pare e peca decisao/contexto.
 
 Use cerimonia proporcional:
 
 - `trivial`: AC curto, mudanca pequena, prova P1.
-- `baixo`: plano curto, `ldk-build`, prova P1/P2.
-- `medio`: plano completo; `ldk-build` se nao houver decisao critica aberta.
-- `alto`: plano explicito, prova P4 e revisao antes de release.
+- `baixo`: plano curto, prova unica P1 ou P2 conforme comportamento.
+- `medio`: plano completo, prova unica P2 ou P3 conforme risco.
+- `alto`: plano explicito, execucao guiada, prova P4 e review antes de release.
 
-Antes de `ldk-build` editar o app, faca pre-flight:
+Antes de `ldk-build`, faca pre-flight visivel e curto:
 
-- veredito otimista: por que parece seguro executar;
-- veredito pessimista: o que pode dar errado ou virar falso `DONE`;
-- decisao antes de executar: seguir, pausar ou bloquear.
-
-Se o pessimismo achar ajuste simples dentro do escopo, corrija no build. Se achar decisao aberta, risco alto,
-escopo novo ou prova impossivel, pare antes de editar.
+- otimista: por que parece seguro;
+- pessimista: o que pode dar errado ou virar falso `DONE`;
+- decisao: `proceed`, `pause` ou `blocked`.
 
 ## Mudancas externas e projetos existentes
 
-O LDK pode entrar em projeto ja iniciado. Rollback, sync, outra skill, prompt direto ou edicao manual nao sao erro
-automaticamente.
-
-Ao rodar `ldk-next`, `ldk-doctor` ou `ldk-proof`, compare o app atual somente com a feature/task LDK ativa e seus
-arquivos/AC esperados. Nao trate codigo antigo, telas existentes ou arquivos fora desse escopo como drift.
-
-Classifique mudancas externas:
+Rollback, sync, outra skill, prompt direto ou edicao manual nao sao erro automatico. Compare o app atual somente
+com feature/task ativa e seus AC/arquivos esperados; codigo preexistente fora do escopo nao e drift.
 
 - dentro da task ativa: registre como implementacao;
-- muda escopo/decisao visual da task ativa: reconcilie plano com `ldk-doctor` antes de proof;
-- cria nova feature: registre no ledger/roadmap antes de construir mais;
-- remove/contradiz task `proof-pending` ou `done`: rode `ldk-doctor`;
-- toca motor do LDK: drift critico de motor.
+- muda escopo/decisao da task: reconcilie plano antes de proof;
+- cria nova feature: registre no ledger/roadmap;
+- contradiz task `proof-pending`/`done`: rode `ldk-doctor`;
+- toca motor do LDK: drift critico.
 
-Nao reverta nem sobrescreva mudanca externa sem aprovacao explicita. Nao use proof antigo sem revalidar.
+Nao reverta nem sobrescreva mudanca externa sem aprovacao. Nao reutilize proof sem revalidar o estado atual.
 
 ## Audit log opcional
 
-O audit log vem desligado. O Project Knowledge padrao deve ficar:
+O Project Knowledge controla `Audit log: on/off`. Se `off`/ausente, nao crie log nem mencione auditoria. Se `on`,
+comando que altera estado/arquivos adiciona entrada compacta em `ldk/audit/log.md` com comando, intencao, estado
+anterior, version/schema, discovery revision, autonomy mode, acoes, arquivos, referencias de evidencia, decisao,
+limitacoes e proximo passo. Read-only nao escreve salvo pedido explicito.
 
-```md
-- Audit log: off
-```
+Nao registre segredo, token, chave, PII ou prompt sensivel. Nao faca backfill automatico; backfill pedido deve ser
+marcado `BACKFILL reconstruido`.
 
-So crie/atualize `ldk/audit/log.md` se o usuario trocar explicitamente para:
-
-```md
-- Audit log: on
-```
-
-Se estiver `off` ou ausente, nao crie log e nao mencione auditoria no fluxo normal.
-
-Quando estiver `on`, ao fim de comandos LDK que alteram estado ou arquivos, adicione entrada compacta.
-Se `ldk/audit/log.md` nao existir, crie o arquivo antes da entrada com titulo e nota curta:
-
-```md
-# LDK Audit Log - <projeto>
-
-Registro compacto iniciado quando `Audit log: on` foi habilitado. Historico anterior nao foi reconstruido.
-```
-
-Nao faca backfill automatico. Se o usuario pedir backfill, marque claramente como `BACKFILL reconstruido` e trate
-como resumo inferido de ledger/proofs, nao como log original.
-
-```md
-## <data/hora> - <comando> - <feature/projeto>
-- Command: <ldk-command>
-- User intent: <resumo curto>
-- State before: <estado anterior>
-- Actions: <decisoes/criacoes/alteracoes>
-- Files changed: <paths ou none>
-- Evidence: preview yes/no/na; manual yes/no/na; tests pass/fail/not run/na; console yes/no/na; diff yes/no/na
-- Decision: DONE | PARTIAL | BLOCKED | planned | approved | roadmap-updated | diagnosis-only | other
-- Known limitations: <limitacoes ou none>
-- Next: <proximo passo seguro>
-```
-
-Nao registre segredos, tokens, chaves, dados pessoais ou prompt completo sensivel. Skills read-only como
-`ldk-next` e `ldk-review` nao escrevem audit log, salvo pedido explicito.
-
-## Artefatos do projeto
-
-O Lovable cria e mantem os artefatos; o usuario nao deve criar arquivos manualmente.
+## Artefatos e fonte da verdade
 
 ```txt
 ldk/
+  discovery.md
   project.md
   ledger.md
   roadmap.md
   decisions/
   features/<feature>/brief.md
   features/<feature>/plan.md
+  features/<feature>/evidence.md (quando necessario)
   features/<feature>/proof.md
   issues/
   releases/
   audit/ (opcional)
 ```
 
-`ldk/project.md`, `ldk/ledger.md`, `ldk/roadmap.md`, plans, proofs e decisions sao fonte da verdade do fluxo.
-Conversa aprova, arquivo registra. Se `ldk/` nao existir quando uma skill LDK for usada, crie a estrutura necessaria.
+O Lovable cria/mantem os artefatos; usuario nao precisa criar arquivos. `discovery.md`, `project.md`, ledger,
+roadmap, plans, proofs e decisions sao fonte da verdade. Estado nao gravado nao existe.
 
-## Artefatos machine-readable
+## Contratos machine-readable
 
-Alguns headers e vocabularios sao contrato. Nao traduza, renomeie ou mude ordem.
-
-Ledger:
+Ledger usa exatamente:
 
 ```md
 | ID | Feature | Risk | State | Proof required | Last evidence |
@@ -171,95 +159,42 @@ Ledger:
 | F1 | <feature> | baixo | idea | P2 | |
 ```
 
-- `ID` deve ser somente `F1`, `F2`, etc.
-- O nome fica em `Feature`, nao junto do ID.
-- `Proof required` deve ser unico: `P1`, `P2`, `P3` ou `P4`.
-- Nao use headers traduzidos como `Estado`, `Risco`, `Prova minima`.
-- `Last evidence` fica vazio em `idea`, `planned`, `approved`, `building` e `proof-pending`.
-- `Last evidence` nunca aponta para `plan.md` ou `brief.md`.
-- `Last evidence` aponta para proof/report apenas em `done`, `partial` ou `blocked`.
+- ID: `F1`, `F2`; nome somente em Feature.
+- Proof required: um unico `P1`, `P2`, `P3` ou `P4`.
+- State: `idea`, `planned`, `approved`, `building`, `proof-pending`, `done`, `partial`, `blocked`, `reopened`.
+- Last evidence vazio antes de `done`/`partial`/`blocked`; nunca aponta para plan/brief.
 
-Plano de feature: a tabela de tasks e obrigatoria.
+Plano usa exatamente:
 
 ```md
 | ID | Descricao | AC | Arquivos esperados | Verificacao | State |
 |----|-----------|----|--------------------|-------------|-------|
-| T1 | <task> | AC1 | `src/...` | <preview/teste> | ready |
+| T1 | <task> | AC1 | `src/...` | <check> | ready |
 ```
 
-`Arquivos` nao e valido; o header correto e `Arquivos esperados`.
+Task states: `backlog`, `ready`, `in-progress`, `proof-pending`, `done`, `blocked`.
 
-Estados de task: `backlog`, `ready`, `in-progress`, `proof-pending`, `done`, `blocked`.
+Roadmap usa `Status: current|stale` e `Discovery revision`. Plan/build bloqueiam se discovery nao estiver aprovado,
+se roadmap estiver stale ou se revisoes divergirem.
 
-Estados de feature:
+## Prova
 
-```txt
-idea
-planned
-approved
-building
-proof-pending
-done
-partial
-blocked
-reopened
-```
+- P1: observacao visual real.
+- P2: fluxo manual com passos/resultado.
+- P3: teste automatizado ou script reproduzivel passando.
+- P4: CI verde, diff e checklist de seguranca/release.
 
-## Risco e prova
+Durante build, acumule fatos em `evidence.md` para varias tasks/P3/P4 ou diretamente no proof para entrega curta.
+Evidencia registra fonte, resultado, output/referencia, exit code quando houver, AC e limitacao. Texto da IA sozinho
+nao comprova execucao.
 
-Risco:
+`DONE` exige tasks essenciais encerradas, AC cobertos, prova atingida >= exigida, referencia observavel atual e
+nenhum erro critico. Sem isso use `PARTIAL` ou `BLOCKED`.
 
-- `trivial`: copy, cor, padding, ajuste visual pequeno.
-- `baixo`: secao simples, componente estatico, comportamento isolado.
-- `medio`: CRUD, formulario, filtro, dashboard, admin simples.
-- `alto`: auth, permissao, dados pessoais, pagamento, Supabase rules, migracao, delecao.
+## Fronteira do kit e saida
 
-Na duvida, suba um nivel.
+Nao altere Knowledge, skills, contracts, templates, scripts ou workflows como efeito colateral de feature do app.
+Diff de produto tocando motor LDK e drift critico.
 
-Prova:
-
-- P1: visual, screenshot ou observacao precisa do preview.
-- P2: fluxo manual com passos e resultado observado.
-- P3: teste automatizado ou script reproduzivel.
-- P4: CI/release, GitHub diff e checklist de seguranca.
-
-`ldk-proof` so fecha feature quando todas as tasks essenciais estiverem `proof-pending` ou `done`, salvo checkpoint
-parcial pedido pelo usuario. Checkpoint parcial nao pode virar `DONE`.
-
-`ldk-build` tambem pode escrever o proof da feature se executou/validou as tasks essenciais e atingiu a prova minima.
-
-Para alto risco, o Lovable pode implementar, mas `DONE` exige prova forte. Sem prova, use `PARTIAL` ou `BLOCKED`.
-
-## Roadmap
-
-Use `ldk-roadmap` quando houver varias features, dependencias ou duvida sobre a ordem.
-`ldk-next` deve consultar `ldk/roadmap.md`; se ausente ou desatualizado, recomende `ldk-roadmap`.
-
-Readiness no roadmap:
-
-```txt
-ready
-blocked
-later
-done
-verify
-```
-
-## Fronteira do kit
-
-Nao altere o motor do LDK como efeito colateral de task do app: Knowledge, Skills, templates, scripts, workflows
-e regras do kit. Se diff de produto tocar o motor do LDK, trate como drift critico, nao marque `DONE` e rode
-`ldk-doctor`.
-
-## Saida obrigatoria apos build/proof
-
-Toda resposta final apos build/proof deve conter:
-
-1. O que mudou
-2. Arquivos alterados
-3. AC cobertos
-4. Prova executada
-5. Veredito otimista
-6. Veredito pessimista
-7. Status: DONE/PARTIAL/BLOCKED
-8. Etapa concluida e aguardando proximo comando
+Toda resposta apos build/proof inclui: o que mudou, arquivos, AC, prova/referencias, veredito otimista/pessimista,
+status e declaracao de etapa concluida aguardando proximo comando.

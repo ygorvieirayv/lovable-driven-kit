@@ -1,5 +1,7 @@
 # LDK Roadmap
 
+Status: current
+Discovery revision: 1
 Updated:
 Source:
 
