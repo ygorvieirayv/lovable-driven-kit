@@ -1,6 +1,6 @@
 # Project Knowledge - Lovable Driven Kit
 
-LDK Version: 0.2.0
+LDK Version: 0.2.1
 LDK Schema: 2
 
 ## Produto

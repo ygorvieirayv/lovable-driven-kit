@@ -19,7 +19,7 @@ ldk/discovery.md
 Marcadores obrigatorios:
 
 ```md
-LDK Version: 0.2.0
+LDK Version: 0.2.1
 LDK Schema: 2
 Status: draft | external-review | awaiting-approval | approved
 Revision: <inteiro positivo>
@@ -37,7 +37,7 @@ Approved by: <usuario ou vazio>
 `ldk/project.md` registra:
 
 ```md
-LDK Version: 0.2.0
+LDK Version: 0.2.1
 LDK Schema: 2
 Discovery revision: <inteiro positivo>
 Autonomy mode: guided | balanced | autopilot
@@ -79,6 +79,7 @@ Valores permitidos:
 Regra:
 
 - `Last evidence` deve ficar vazio em `idea`, `planned`, `approved`, `building` e `proof-pending`.
+- Existir `evidence.md` nao autoriza preencher `Last evidence` em estado nao final.
 - `Last evidence` nao deve apontar para `plan.md` ou `brief.md`; plano nao e prova.
 - `partial` e `blocked` podem apontar para um proof/report que explique a limitacao.
 - `done` exige `Last evidence` apontando para um proof existente.
@@ -146,6 +147,9 @@ Readiness permitido:
 
 Regra:
 
+- `State` do ledger e `Readiness` do roadmap sao dimensoes independentes.
+- `planned + blocked`, `partial + verify` e `partial + blocked` podem ser coerentes quando a dependencia ou decisao
+  registrada justificar a readiness.
 - Uma feature `blocked` nao deve ir para `ldk-plan` sem decisao consciente do usuario.
 - Uma feature `ready` precisa ter dependencias essenciais resolvidas ou declaradas como `[VERIFY]`.
 - Se o ledger e o roadmap discordarem, rode `ldk-roadmap` ou `ldk-doctor`.
@@ -189,3 +193,6 @@ ldk/features/<feature>/evidence.md
 
 Cada entrada registra task, acao/comando, fonte, resultado, exit code quando houver, observacao/output, AC coberto,
 referencia e limitacao. Alegacao sem fonte observavel nao e evidencia.
+
+Evidencia de CI so vale para o commit e branch que ela verificou. Depois de novo commit, sync ou publicacao, trate a
+prova anterior como historica ate revalidar o estado atual.

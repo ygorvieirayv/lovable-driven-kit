@@ -5,7 +5,7 @@ description: 'Use when an external AI or reviewer needs to audit a completed Lov
 
 # ldk-evaluate
 
-LDK Version: 0.2.0
+LDK Version: 0.2.1
 LDK Schema: 2
 
 Use esta skill fora do Lovable para avaliar uma execucao LDK de ponta a ponta.
@@ -58,6 +58,10 @@ log original do momento da execucao.
 6. Julgue o processo, nao apenas o resultado visual.
 7. Verifique se discovery foi aprovado antes do roadmap e se revisoes permaneceram coerentes.
 8. Avalie se concern scan foi adaptativo, sem checklist irrelevante nem omissao acionada por sinais.
+9. Registre branch/HEAD e vincule cada CI/diff/proof ao estado exato que verificou; green antigo e historico.
+10. Nao confunda `State` do ledger com `Readiness` do roadmap nem evidence intermediaria com `Last evidence` final.
+11. Se houver mutacao externa durante a avaliacao, reinicie a leitura no novo HEAD e separe acao do executor de
+    sync automatico da plataforma.
 
 ## Escala
 

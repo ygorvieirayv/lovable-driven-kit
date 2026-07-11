@@ -5,7 +5,7 @@ description: Use when the user says continuar, prossiga, proximo, retomar, onde 
 
 # ldk-next
 
-LDK Version: 0.2.0
+LDK Version: 0.2.1
 LDK Schema: 2
 
 Use esta skill para retomar um projeto e recomendar um proximo passo seguro. Esta skill e read-only.

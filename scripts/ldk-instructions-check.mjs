@@ -94,6 +94,7 @@ const allManifestFiles = new Set([
   ...(manifest.knowledgeFiles ?? []),
   ...(manifest.skillFiles ?? []),
   ...(manifest.distributionFiles ?? []),
+  ...(manifest.evaluationFiles ?? []),
   ...(manifest.versionedFiles ?? []),
   ...(manifest.runtimeFilesForGenericity ?? []),
   ...((manifest.requiredRules ?? []).flatMap((rule) => rule.files ?? [])),
@@ -271,6 +272,16 @@ const trackedFiles = fs
 const declaredSkills = [...(manifest.skillFiles ?? [])].sort();
 if (JSON.stringify(trackedFiles) !== JSON.stringify(declaredSkills)) {
   error('instruction manifest skillFiles does not match skills/*/SKILL.md');
+}
+
+const trackedEvaluationFiles = fs
+  .readdirSync(path.join(root, 'evaluation'), { withFileTypes: true })
+  .filter((entry) => entry.isFile() && entry.name.endsWith('.md'))
+  .map((entry) => `evaluation/${entry.name}`)
+  .sort();
+const declaredEvaluationFiles = [...(manifest.evaluationFiles ?? [])].sort();
+if (JSON.stringify(trackedEvaluationFiles) !== JSON.stringify(declaredEvaluationFiles)) {
+  error('instruction manifest evaluationFiles does not match evaluation/*.md');
 }
 
 for (const message of warnings) {

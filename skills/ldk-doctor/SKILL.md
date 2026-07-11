@@ -5,7 +5,7 @@ description: 'Use when LDK project state may have drifted: ledger, proof, app co
 
 # ldk-doctor
 
-LDK Version: 0.2.0
+LDK Version: 0.2.1
 LDK Schema: 2
 
 Use esta skill para diagnosticar drift entre Knowledge, arquivos `ldk/`, app e GitHub.
@@ -15,6 +15,9 @@ Use esta skill para diagnosticar drift entre Knowledge, arquivos `ldk/`, app e G
 Encontrar inconsistencias e propor recuperacao segura.
 
 Esta skill comeca read-only. Nao corrija nada sem aprovacao explicita, um item por vez.
+
+Diagnostico nao e autorizacao para inferir regra nova. Diferencie violacao confirmada, evidencia historica e
+hipotese `[VERIFY]`. Achado confirmado cita arquivo/linha, regra e fato observavel.
 
 ## Camadas
 
@@ -33,8 +36,26 @@ Se nao existir, valide manualmente:
 - `done` tem proof;
 - proof `DONE` tem prova suficiente.
 
-Compare a versao desta skill com Workspace Knowledge, Project Knowledge e `ldk/project.md`. Se houver acesso ao
-repo oficial, consulte `VERSION` sem alterar nada e informe update disponivel; nao atualize automaticamente.
+Compare a versao desta skill com Workspace Knowledge, Project Knowledge e `ldk/project.md`. Workspace, Project
+Knowledge e skills instaladas devem usar a mesma versao. Artefatos duraveis `ldk/` da patch anterior podem permanecer
+na versao em que foram criados quando schema e major/minor forem iguais; reporte `compatible patch history`, nao
+drift nem migracao automatica. Schema ou major/minor divergente exige migracao consciente do conjunto.
+
+Se houver acesso ao repo oficial, consulte `VERSION` sem alterar nada e informe update disponivel; nao atualize
+automaticamente.
+
+Antes da leitura semantica, registre quando disponivel:
+
+- branch e HEAD atuais;
+- worktree limpo/sujo;
+- ultimo CI do mesmo HEAD, com status, URL e horario;
+- diff desde a ultima evidencia citada.
+
+Evidencia de CI so vale para o commit e branch que ela verificou. Green antigo e historico, nao prova o HEAD atual.
+Se nao houver acesso ao GitHub, escreva `current CI: not available`; nao substitua por alegacao antiga.
+
+O check deterministico tem precedencia para regras que ele cobre. Se passou, nao invente violacao oposta sem nova
+evidencia objetiva e regra citada; mantenha a hipotese em `[VERIFY]`.
 
 ### T1 - Ledger x arquivos
 
@@ -61,6 +82,16 @@ Procure:
 - `[VERIFY]` critico aberto em feature `done`;
 - task em `done` sem proof correspondente.
 
+Regras de interpretacao obrigatorias:
+
+- Existir `evidence.md` nao autoriza preencher `Last evidence` em estado nao final.
+- `Last evidence` fica vazio em `idea`, `planned`, `approved`, `building` e `proof-pending`, mesmo com evidencia
+  intermediaria. `done` exige referencia; `partial`/`blocked` podem registrar report/evidence da limitacao.
+- `State` do ledger e `Readiness` do roadmap sao dimensoes independentes. `planned + blocked`, `partial + verify` e
+  `partial + blocked` podem ser coerentes quando dependencias/decisoes justificam a readiness.
+- So reporte discordancia quando texto, dependencia, proximo passo ou readiness contradizer fato atual; nao exija
+  igualdade entre State e Readiness.
+
 ### T2 - Proof x realidade
 
 Procure:
@@ -70,6 +101,11 @@ Procure:
 - proof diz GitHub diff disponivel, mas nao ha link ou commit;
 - AC marcado `covered` sem evidencia.
 - evidence/proof sem fonte, output/referencia atual ou comando/exit code quando aplicavel;
+
+Para toda evidencia temporal, confira commit/HEAD, branch, ambiente, URL, run, horario e se houve mudanca depois.
+Classifique como `current`, `historical` ou `not available`. Nao diga que CI/test runner/fixture nao existe sem
+procurar workflow, scripts, package scripts e arquivos atuais. Diferencie `inexistente`, `nao executado`, `falhou`
+e `existe mas esta incompleto`.
 
 ### T3 - Diff x fronteira
 
@@ -95,6 +131,18 @@ cautela:
 - nao trate `sincronizado`, `aplicado` e `publicado` como equivalentes; compare tambem o ambiente/URL entregue quando
   o status depender de publicacao.
 
+Capture HEAD/worktree novamente ao final da fase read-only. Se HEAD mudar durante o diagnostico, reinicie a leitura no novo estado.
+Se arquivos mudarem sem acao desta skill, reporte `external mutation observed`; `Nothing changed by
+this skill` nao significa que a plataforma permaneceu imutavel.
+
+## Severidade e incerteza
+
+- Critical/High exigem violacao confirmada e impacto correspondente, nunca apenas inferencia sem fonte.
+- Regra machine-readable rejeitada pelo checker pode ser High/Critical conforme impacto.
+- Roadmap semanticamente antigo costuma ser Medium, salvo quando autoriza agora uma acao perigosa ou bloqueada.
+- Hipotese sem acesso/evidencia suficiente recebe `[VERIFY]` e nao autoriza diff corretivo.
+- Nome diferente sem ambiguidade e historico congelado normalmente sao Low/info.
+
 ## Saida do diagnostico
 
 ```md
@@ -105,6 +153,9 @@ Verdict: healthy | drift-found | serious-drift
 Installed version/schema:
 Latest version checked: yes/no/not available
 Discovery status/revision:
+Repository snapshot: branch / HEAD / worktree
+Current CI: current | historical | failed | not available
+External mutation observed: yes/no/not available
 
 Critical:
 - arquivo:linha - problema - regra violada
@@ -118,7 +169,8 @@ Medium:
 Low:
 - ...
 
-Nothing changed yet.
+Nothing changed by this skill.
+Repository unchanged during diagnosis: yes | no (external mutation) | not available
 ```
 
 ## Reconciliacao
@@ -138,6 +190,9 @@ https://github.com/ygorvieirayv/lovable-driven-kit
 Regras:
 
 - Uma correcao por vez.
+- Antes de propor diff, releia os arquivos afetados, HEAD e CI; se mudaram, reinicie o diagnostico.
+- Corrija primeiro drift de codigo/CI que invalida as premissas; depois reconcilie roadmap/proof dependente.
+- Diga explicitamente quais fontes foram preservadas sem alteracao.
 - Mostrar diff.
 - Reexecutar check relevante.
 - Sem aprovacao explicita, nao alterar nada.

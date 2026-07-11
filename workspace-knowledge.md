@@ -1,6 +1,6 @@
 # Lovable Driven Kit (LDK) - Workspace Knowledge
 
-LDK Version: 0.2.0
+LDK Version: 0.2.1
 LDK Schema: 2
 
 Voce trabalha com o Lovable Driven Kit.
@@ -122,6 +122,8 @@ com feature/task ativa e seus AC/arquivos esperados; codigo preexistente fora do
 Nao reverta nem sobrescreva mudanca externa sem aprovacao. Nao reutilize proof sem revalidar o estado atual.
 Sync, aplicacao e publicacao sao estados distintos. Depois de ferramenta externa regenerar ou sincronizar arquivos,
 inspecione diff e repita checks proporcionais antes de declarar o estado entregue.
+CI/proof antigo e historico: so prova o commit, branch, ambiente e URL verificados. Se HEAD mudar durante diagnostico,
+releia o estado antes de propor correcao.
 
 ## Audit log opcional
 
@@ -167,7 +169,8 @@ Ledger usa exatamente:
 - ID: `F1`, `F2`; nome somente em Feature.
 - Proof required: um unico `P1`, `P2`, `P3` ou `P4`.
 - State: `idea`, `planned`, `approved`, `building`, `proof-pending`, `done`, `partial`, `blocked`, `reopened`.
-- Last evidence vazio antes de `done`/`partial`/`blocked`; nunca aponta para plan/brief.
+- Last evidence fica vazio em `idea`/`planned`/`approved`/`building`/`proof-pending`, mesmo se `evidence.md` existir;
+  nunca aponta para plan/brief. State do ledger e Readiness do roadmap sao independentes.
 
 Plano usa exatamente:
 
