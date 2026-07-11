@@ -8,10 +8,13 @@ Estes arquivos sao processo, nao produto:
 
 - `workspace-knowledge.md`
 - `project-knowledge-template.md`
+- `VERSION`
+- `SCHEMA_VERSION`
 - `contracts/**`
 - `skills/**`
 - `templates/**`
 - `scripts/ldk-check.*`
+- `scripts/ldk-instructions-check.mjs`
 - `github/workflows/proof.yml`
 - `github/playwright-smoke.spec.ts`
 
@@ -22,6 +25,7 @@ Se estes arquivos forem copiados para um app Lovable, eles continuam sendo motor
 Estes arquivos pertencem ao app e podem mudar pelo fluxo normal:
 
 - `ldk/project.md`
+- `ldk/discovery.md`
 - `ldk/ledger.md`
 - `ldk/roadmap.md`
 - `ldk/decisions/**`

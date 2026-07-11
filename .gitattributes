@@ -1,9 +1,12 @@
 *.md text eol=lf
 *.yml text eol=lf
 *.yaml text eol=lf
+*.json text eol=lf
+*.mjs text eol=lf
 *.sh text eol=lf
 *.ts text eol=lf
 *.txt text eol=lf
 *.ps1 text eol=crlf
 LICENSE text eol=lf
 VERSION text eol=lf
+SCHEMA_VERSION text eol=lf

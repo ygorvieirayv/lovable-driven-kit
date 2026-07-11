@@ -8,13 +8,13 @@ Regra central:
 
 O LDK é um conjunto de skills e instruções para o Lovable seguir um fluxo simples:
 
-1. entender a ideia;
-2. organizar o MVP;
-3. identificar riscos;
+1. extrair e confirmar o entendimento do projeto;
+2. descobrir somente as preocupações relevantes;
+3. organizar o recorte inicial;
 4. ordenar as próximas features;
 5. planejar antes de construir;
-6. executar em partes pequenas;
-7. provar antes de marcar `DONE`.
+6. executar conforme o nível de autonomia;
+7. acumular evidência e provar antes de marcar `DONE`.
 
 Ele não transforma o usuário em programador. O Lovable continua implementando. O LDK só cria trilhos para a IA não
 sair construindo coisa errada, grande demais ou sem verificação.
@@ -27,7 +27,7 @@ https://github.com/ygorvieirayv/lovable-driven-kit
 
 ## Para quem é
 
-- Pessoas que usam Lovable para criar loja, landing page, SaaS simples, dashboard ou app interno.
+- Pessoas que usam Lovable para criar aplicações de diferentes nichos e finalidades.
 - Usuários não técnicos que querem ser guiados por perguntas, próximos passos e provas visuais/manuais.
 - Devs que usam Lovable como acelerador, mas querem plano, diff, evidência e menos falso "pronto".
 
@@ -46,9 +46,15 @@ Use `/ldk-next` quando voltar depois de uma pausa ou quando não souber o próxi
 
 Os outros comandos existem, mas o próprio LDK deve recomendar quando usar.
 
+O intake é um gate obrigatório: ele cria `ldk/discovery.md`, apresenta tudo que entendeu e pede sua confirmação.
+Roadmap, plano e build só começam depois dessa aprovação.
+
 ## Como instalar no Lovable
 
 O Lovable importa **uma skill por vez**. Não use a URL do repositório inteiro.
+
+Se voce ja usa uma versao anterior e quer apagar/reimportar tudo sem terminal, siga o
+[guia canonico de substituicao](LOVABLE_IMPORT.md). Ele fixa a ordem, as 10 URLs e os dois conteudos de Knowledge.
 
 ### 1. Abrir Skills
 
@@ -150,10 +156,10 @@ Você pode começar com um pedido simples:
 ```txt
 /ldk-intake
 
-Quero criar uma loja online bonita e moderna.
+Quero criar uma aplicação para <finalidade>.
 
 Use o Lovable Driven Kit.
-Me ajude a organizar a ideia, decidir o MVP, identificar riscos e definir o próximo passo seguro.
+Extraia o que entendeu, pergunte somente o que mudar o projeto e prepare a descoberta para minha confirmação.
 Não implemente ainda.
 ```
 
@@ -164,7 +170,7 @@ Crie um projeto base o mais limpo possível.
 
 Apenas uma tela inicial simples com o texto "Iniciar" centralizado.
 
-Não crie loja, autenticação, banco de dados, backend, rotas extras, componentes extras, dados fake ou integrações.
+Não antecipe funcionalidades, dados, backend, rotas, componentes ou integrações do produto.
 Não crie a pasta ldk/ ainda.
 
 Quero só uma base limpa para começar depois com o LDK.
@@ -195,7 +201,7 @@ Quero que você:
 - marque como done apenas o que conseguir verificar com evidência;
 - marque como partial quando algo parece existir mas ainda falta prova;
 - marque como idea/planned apenas para melhorias futuras;
-- identifique riscos como auth, pagamento, dados pessoais, integrações e permissões;
+- identifique somente preocupações acionadas pela finalidade, jornada, dados e comportamento observados;
 - sugira o próximo passo seguro.
 
 Não altere UI, lógica, rotas, banco, auth ou integrações.
@@ -208,10 +214,10 @@ Você não precisa decorar esta tabela. Use `/ldk-next` quando tiver dúvida.
 
 | Comando | Para que serve | Quando usar |
 |---|---|---|
-| `/ldk-intake` | Organiza ideia, MVP, riscos e contexto inicial. | No começo de projeto novo ou app já existente. |
+| `/ldk-intake` | Extrai, questiona, reconcilia e aprova o entendimento. | Antes de qualquer roadmap ou criação. |
 | `/ldk-next` | Lê o estado salvo e recomenda o próximo passo. | Sempre que você não souber o que fazer agora. |
-| `/ldk-roadmap` | Ordena features por dependência. | Quando há várias partes, como landing, catálogo, carrinho e checkout. |
-| `/ldk-plan` | Planeja uma feature antes de construir. | Antes de criar algo novo, como catálogo ou checkout. |
+| `/ldk-roadmap` | Ordena features por dependência. | Depois do discovery aprovado, quando há várias partes ou dependências. |
+| `/ldk-plan` | Planeja uma feature antes de construir. | Depois do discovery aprovado e roadmap atual, quando aplicável. |
 | `/ldk-build` | Executa uma feature aprovada e tenta fechar com prova. | Quando o plano já foi aprovado e o risco permite. |
 | `/ldk-build-task` | Executa uma task específica. | Quando você quer controle manual ou uma etapa pequena. |
 | `/ldk-proof` | Registra prova e decide `DONE`, `PARTIAL` ou `BLOCKED`. | Quando algo foi implementado e precisa ser validado. |
@@ -227,11 +233,12 @@ Estrutura esperada:
 
 ```txt
 ldk/
+  discovery.md
   project.md
   ledger.md
-  roadmap.md
+  roadmap.md        # criado por /ldk-roadmap depois do discovery
   decisions/
-  features/
+  features/         # pode conter evidence.md durante build
   issues/
   releases/
 ```
@@ -252,14 +259,35 @@ O LDK usa três resultados:
 
 `DONE` não é permitido quando o Lovable não verificou.
 
+## Discovery antes do roadmap
+
+O `/ldk-intake` não gera roadmap. Primeiro ele registra finalidade, usuários, jornada, resultado, escopo,
+pressupostos e um Concern Scan adaptativo em `ldk/discovery.md`. Em seguida mostra um resumo autocontido e pede
+confirmação.
+
+Se quiser confrontar a ideia com outra IA, o intake gera um pacote portátil. Ao colar a revisão de volta, o LDK
+classifica sugestões, explica impactos e pede sua decisão antes de aprovar uma nova revisão.
+
+Mudança estrutural incrementa `Discovery revision` e torna roadmap anterior `stale`.
+
+## Autonomia
+
+O Project Knowledge define `Autonomy mode`:
+
+- `guided`: execução granular e checkpoints manuais;
+- `balanced`: padrão; feature aprovada executa tasks seguras e proof sem microaprovações;
+- `autopilot`: conclui a feature aprovada até `DONE`, `PARTIAL` ou `BLOCKED`, sem iniciar outra.
+
+Risco alto, decisão aberta, credencial, operação irreversível, drift ou prova impossível sempre interrompem.
+
 ## Risco e prova
 
 | Risco | Exemplos | Prova esperada |
 |---|---|---|
 | trivial | texto, cor, padding | P1 visual |
-| baixo | seção simples, card estático | P1/P2 |
-| médio | CRUD, formulário, filtros, admin simples | P2/P3 |
-| alto | auth, permissão, dados pessoais, pagamento, Supabase rules, deleção/migração | P4 |
+| baixo | comportamento isolado e reversível | escolha única P1 ou P2 |
+| médio | jornada, regra ou dependência com impacto moderado | escolha única P2 ou P3 |
+| alto | acesso, dado sensível, transação real, operação irreversível ou dependência crítica | P4 |
 
 | Prova | Evidência mínima |
 |---|---|
@@ -276,11 +304,9 @@ Regras importantes:
 - sem `DONE` sem evidência;
 - sem segredo em código, bundle ou logs;
 - sem dados pessoais desnecessários em logs, analytics, console ou mensagens de erro;
-- auth, permissão, pagamento real, RLS, deleção e migração nunca são triviais;
-- sem assumir Shopify, gateway, frete real, Supabase ou integração externa sem você pedir.
-
-Se você disser apenas "quero uma loja virtual", o default seguro é vitrine, catálogo, carrinho local e checkout
-fake. Pagamento real e provedor externo entram depois, quando forem escolhidos conscientemente.
+- acesso, autorização, transação real, dado sensível, deleção e migração nunca são triviais;
+- sem escolher plataforma, provedor ou integração sem decisão explícita;
+- exemplos não viram requisitos; pedido ambíguo usa default reversível e `[VERIFY]` no que muda o projeto.
 
 ## GitHub
 
@@ -346,6 +372,12 @@ O objetivo é separar executor e avaliador: o Lovable executa; outra IA julga a 
 Esta seção é para quem vai alterar o kit, não para quem só quer usar no Lovable.
 
 Validação local:
+
+```powershell
+node scripts\ldk-instructions-check.mjs
+```
+
+Depois valide os fixtures:
 
 ```powershell
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts\ldk-check.ps1 -Root tests\fixtures\valid

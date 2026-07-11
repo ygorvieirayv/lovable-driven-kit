@@ -1,9 +1,12 @@
 ---
 name: ldk-evaluate
-description: 'External evaluator for Lovable Driven Kit runs. Use outside Lovable when another AI or reviewer needs to audit a completed LDK project from README/workspace rules, ldk/audit/log.md, ledger, roadmap, plans, proofs, and optional GitHub diff. Do not import this skill into Lovable.'
+description: 'Use when an external AI or reviewer needs to audit a completed Lovable Driven Kit run from discovery, audit log, ledger, roadmap, plans, proofs, and optional GitHub evidence. Run outside Lovable; do not import this skill into Lovable.'
 ---
 
 # ldk-evaluate
+
+LDK Version: 0.2.0
+LDK Schema: 2
 
 Use esta skill fora do Lovable para avaliar uma execucao LDK de ponta a ponta.
 
@@ -31,6 +34,7 @@ Leia, quando disponivel:
 - `project-knowledge-template.md`
 - skills principais: `ldk-intake`, `ldk-next`, `ldk-roadmap`, `ldk-plan`, `ldk-build`, `ldk-proof`, `ldk-doctor`
 - `ldk/audit/log.md`
+- `ldk/discovery.md`
 - `ldk/project.md`
 - `ldk/ledger.md`
 - `ldk/roadmap.md`
@@ -52,6 +56,8 @@ log original do momento da execucao.
 4. Procure falso `DONE`, prova inventada, escopo inflado, provedor assumido, drift e cerimonia excessiva.
 5. Verifique se o proof bate com ledger, plan e arquivos/diff quando disponiveis.
 6. Julgue o processo, nao apenas o resultado visual.
+7. Verifique se discovery foi aprovado antes do roadmap e se revisoes permaneceram coerentes.
+8. Avalie se concern scan foi adaptativo, sem checklist irrelevante nem omissao acionada por sinais.
 
 ## Escala
 

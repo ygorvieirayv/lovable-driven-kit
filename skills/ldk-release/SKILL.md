@@ -1,9 +1,12 @@
 ---
 name: ldk-release
-description: Use before publishing or handing off a Lovable app to run an LDK go/no-go release checklist across proofs, issues, preview, CI, auth, data, and release risks.
+description: Use when preparing to publish or hand off a Lovable app and an LDK go/no-go release checklist must review proofs, issues, preview, CI, applicable concerns, and residual risks.
 ---
 
 # ldk-release
+
+LDK Version: 0.2.0
+LDK Schema: 2
 
 Use esta skill antes de publicar ou entregar uma versao.
 
@@ -13,8 +16,12 @@ Execute somente o checklist de release. Nao publique, nao corrija e nao implemen
 
 Gerar `ldk/releases/<date>.md` com decisao `GO` ou `NO-GO`.
 
+Discovery precisa estar approved e discovery, roadmap, plans e proofs do escopo precisam usar revision coerente.
+Qualquer divergencia produz `NO-GO` ate reconciliacao.
+
 ## O que revisar
 
+- `ldk/discovery.md`
 - `ldk/ledger.md`
 - `ldk/roadmap.md`
 - proofs das features no escopo
@@ -22,13 +29,12 @@ Gerar `ldk/releases/<date>.md` com decisao `GO` ou `NO-GO`.
 - issues abertas
 - GitHub diff/CI
 - preview desktop/mobile
+- ambiente e URL realmente publicados, sem confundir sync/aplicacao com publicacao
 - console/logs
-- auth/admin
-- dados pessoais
-- pagamentos
-- Supabase/RLS
+- preocupacoes `applicable` no discovery/project
+- acesso, dados, transacoes e operacoes de alto impacto quando aplicaveis
 - env vars
-- SEO/analytics, quando aplicavel
+- descoberta, mensuracao e desempenho, quando marcados aplicaveis
 
 ## Checklist
 
@@ -36,13 +42,15 @@ Gerar `ldk/releases/<date>.md` com decisao `GO` ou `NO-GO`.
 - Alguma feature esta `partial` ou `blocked`?
 - Existe Critical/High aberto?
 - Build/test/CI estao verdes?
+- O estado publicado foi verificado no ambiente/URL de destino?
+- Sync/import/export regenerou ou duplicou arquivos que ainda precisam de reconciliacao?
 - Preview principal foi aberto?
 - Mobile foi checado?
 - Fluxo principal foi testado?
 - Console/logs foram checados?
 - Env vars necessarias existem?
-- Auth/admin foram testados com papel correto?
-- Dados/pagamentos foram revisados se existirem?
+- Todas as preocupacoes aplicaveis tem decisao e prova proporcional?
+- Acesso/dados/transacoes foram testados na camada correta, quando aplicaveis?
 - Roadmap nao deixou feature fundacional pendente no release?
 - Segredos/PII/logs foram checados?
 

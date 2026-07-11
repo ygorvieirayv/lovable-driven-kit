@@ -8,6 +8,43 @@ Regra de ouro:
 
 Estado que nao esta gravado em `ldk/` nao existe para retomada, prova ou auditoria.
 
+## Discovery
+
+Arquivo:
+
+```txt
+ldk/discovery.md
+```
+
+Marcadores obrigatorios:
+
+```md
+LDK Version: 0.2.0
+LDK Schema: 2
+Status: draft | external-review | awaiting-approval | approved
+Revision: <inteiro positivo>
+Approved at: <data/hora ou vazio>
+Approved by: <usuario ou vazio>
+```
+
+- `approved` exige `Approved at` e `Approved by` preenchidos.
+- Roadmap, plan, build e build-task exigem discovery aprovado.
+- Mudanca estrutural incrementa `Revision`, volta para `awaiting-approval` e torna o roadmap `stale`.
+- `ldk-next` e `ldk-doctor` podem rodar antes do gate porque sao read-only.
+
+## Project
+
+`ldk/project.md` registra:
+
+```md
+LDK Version: 0.2.0
+LDK Schema: 2
+Discovery revision: <inteiro positivo>
+Autonomy mode: guided | balanced | autopilot
+```
+
+`balanced` e o default. Nenhum modo pula discovery, aprovacao de plano, risco alto ou gate de release.
+
 ## Ledger
 
 Arquivo:
@@ -62,6 +99,8 @@ Marcadores recomendados:
 Status: planned | approved | building | proof-pending | done | partial | blocked | reopened
 Risk: trivial | baixo | medio | alto
 Proof required: P1 | P2 | P3 | P4
+Discovery revision: <inteiro positivo>
+Optional tasks: <IDs separados por virgula ou none>
 ```
 
 Tasks devem usar:
@@ -79,7 +118,8 @@ Contrato machine-readable para tasks:
 - Nao abrevie `Arquivos esperados` para `Arquivos`.
 - Cada task precisa de ID separado (`T1`, `T2`, `T3`) e `State` canonico.
 
-Task `done` so e permitida quando a verificacao da task passou ou quando o proof final cobre a task.
+Todas as tasks sao essenciais, salvo IDs listados em `Optional tasks`. Task `done` so e permitida quando a
+verificacao da task passou ou quando o proof final cobre a task.
 
 ## Roadmap
 
@@ -87,6 +127,13 @@ Arquivo:
 
 ```txt
 ldk/roadmap.md
+```
+
+Marcadores obrigatorios:
+
+```md
+Status: current | stale
+Discovery revision: <inteiro positivo>
 ```
 
 Readiness permitido:
@@ -102,6 +149,7 @@ Regra:
 - Uma feature `blocked` nao deve ir para `ldk-plan` sem decisao consciente do usuario.
 - Uma feature `ready` precisa ter dependencias essenciais resolvidas ou declaradas como `[VERIFY]`.
 - Se o ledger e o roadmap discordarem, rode `ldk-roadmap` ou `ldk-doctor`.
+- Roadmap `stale` ou com revisao diferente do discovery nao autoriza plan/build.
 
 ## Proof
 
@@ -130,3 +178,14 @@ Proof level achieved: P1 | P2 | P3 | P4 | none
 - as limitacoes restantes nao bloqueiam o objetivo.
 
 Se algo essencial nao foi verificado, use `PARTIAL` ou `BLOCKED`.
+
+## Execution evidence
+
+Arquivo opcional para features com varias tasks ou prova P3/P4:
+
+```txt
+ldk/features/<feature>/evidence.md
+```
+
+Cada entrada registra task, acao/comando, fonte, resultado, exit code quando houver, observacao/output, AC coberto,
+referencia e limitacao. Alegacao sem fonte observavel nao e evidencia.

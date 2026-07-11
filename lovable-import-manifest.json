@@ -1,0 +1,77 @@
+{
+  "version": "0.2.0",
+  "schema": 2,
+  "repository": "https://github.com/ygorvieirayv/lovable-driven-kit",
+  "ref": "main",
+  "strategy": "replace-all",
+  "knowledge": [
+    {
+      "slot": "workspace",
+      "file": "workspace-knowledge.md",
+      "source": "https://raw.githubusercontent.com/ygorvieirayv/lovable-driven-kit/main/workspace-knowledge.md"
+    },
+    {
+      "slot": "project",
+      "file": "project-knowledge-template.md",
+      "source": "https://raw.githubusercontent.com/ygorvieirayv/lovable-driven-kit/main/project-knowledge-template.md"
+    }
+  ],
+  "skills": [
+    {
+      "name": "ldk-intake",
+      "path": "skills/ldk-intake",
+      "source": "https://github.com/ygorvieirayv/lovable-driven-kit/tree/main/skills/ldk-intake"
+    },
+    {
+      "name": "ldk-next",
+      "path": "skills/ldk-next",
+      "source": "https://github.com/ygorvieirayv/lovable-driven-kit/tree/main/skills/ldk-next"
+    },
+    {
+      "name": "ldk-roadmap",
+      "path": "skills/ldk-roadmap",
+      "source": "https://github.com/ygorvieirayv/lovable-driven-kit/tree/main/skills/ldk-roadmap"
+    },
+    {
+      "name": "ldk-plan",
+      "path": "skills/ldk-plan",
+      "source": "https://github.com/ygorvieirayv/lovable-driven-kit/tree/main/skills/ldk-plan"
+    },
+    {
+      "name": "ldk-build",
+      "path": "skills/ldk-build",
+      "source": "https://github.com/ygorvieirayv/lovable-driven-kit/tree/main/skills/ldk-build"
+    },
+    {
+      "name": "ldk-build-task",
+      "path": "skills/ldk-build-task",
+      "source": "https://github.com/ygorvieirayv/lovable-driven-kit/tree/main/skills/ldk-build-task"
+    },
+    {
+      "name": "ldk-proof",
+      "path": "skills/ldk-proof",
+      "source": "https://github.com/ygorvieirayv/lovable-driven-kit/tree/main/skills/ldk-proof"
+    },
+    {
+      "name": "ldk-review",
+      "path": "skills/ldk-review",
+      "source": "https://github.com/ygorvieirayv/lovable-driven-kit/tree/main/skills/ldk-review"
+    },
+    {
+      "name": "ldk-doctor",
+      "path": "skills/ldk-doctor",
+      "source": "https://github.com/ygorvieirayv/lovable-driven-kit/tree/main/skills/ldk-doctor"
+    },
+    {
+      "name": "ldk-release",
+      "path": "skills/ldk-release",
+      "source": "https://github.com/ygorvieirayv/lovable-driven-kit/tree/main/skills/ldk-release"
+    }
+  ],
+  "excluded": [
+    {
+      "name": "ldk-evaluate",
+      "reason": "external-auditor-only"
+    }
+  ]
+}

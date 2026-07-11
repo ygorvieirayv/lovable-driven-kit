@@ -5,8 +5,16 @@
 Command:
 - <ldk-command>
 
+LDK context:
+- Version/schema:
+- Discovery revision:
+- Autonomy mode:
+
 User intent:
 - <short factual summary>
+
+Reasoning summary:
+- <understanding, relevant signals, main concern and decision; no long internal reasoning>
 
 State before:
 - <ledger/feature/task state before>
@@ -23,9 +31,11 @@ Evidence claimed:
 - Automated test result: pass/fail/not run/not applicable
 - Console/log checked: yes/no/not available
 - GitHub diff checked: yes/no/not available
+- Evidence references: <paths/URLs/commands or none>
 
 Decision:
-- DONE | PARTIAL | BLOCKED | planned | approved | roadmap-updated | diagnosis-only | other
+- DONE | PARTIAL | BLOCKED | discovery-draft | external-review | discovery-approved | discovery-reopened |
+  planned | approved | roadmap-updated | diagnosis-only | other
 
 Known limitations:
 - <limitations, missing evidence, or none>

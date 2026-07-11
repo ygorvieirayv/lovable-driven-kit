@@ -4,8 +4,10 @@ Task: T1
 Feature: Catalogo
 Status: DONE
 Risk: baixo
+Discovery revision: 1
 Proof level required: P2
 Proof level achieved: P2
+Evidence log: inline
 
 ## Changed files
 - src/App.tsx
@@ -27,6 +29,7 @@ Proof level achieved: P2
 - Required proof identified: yes
 - All essential AC covered: yes
 - Evidence exists for every covered AC: yes
+- Evidence references are current and observable: yes
 - Proof level achieved >= required: yes
 - Critical errors known: no
 - LDK engine drift detected: no

@@ -1,209 +1,141 @@
 ---
 name: ldk-proof
-description: 'Use when finishing an LDK feature or planned delivery after essential tasks are proof-pending/done, deciding DONE, PARTIAL, or BLOCKED from real evidence. Required before marking anything done.'
+description: Use when finishing an LDK feature after essential tasks are proof-pending/done, consolidating current observable evidence and deciding DONE, PARTIAL, or BLOCKED. Not for implementation, review, or release.
 ---
 
 # ldk-proof
 
-Use esta skill ao fim de uma feature/entrega planejada, depois que as tasks essenciais estiverem
-`proof-pending` ou `done`, para provar a entrega ou declarar `PARTIAL`/`BLOCKED`.
+LDK Version: 0.2.0
+LDK Schema: 2
 
-## Objetivo
+Sem prova, nao e done.
 
-Gerar `ldk/features/<feature>/proof.md` e atualizar `ldk/ledger.md` sem aceitar `DONE` sem evidência.
+Execute somente proof.
 
-## Regra central
+## Gate
 
-Sem prova, não é done.
+Leia discovery, project, ledger, roadmap, brief, plan, evidence/proof anterior, arquivos/diff, preview, console e
+testes acessiveis.
 
-Execute somente proof. Nao rode `ldk-review`, `ldk-release` ou outra skill nesta etapa.
+- Discovery precisa estar approved.
+- Discovery, roadmap e plan precisam usar a mesma revision.
+- Plan precisa estar approved/building/proof-pending.
+- Todas as tasks sao essenciais, salvo `Optional tasks:`.
+- Se essencial estiver backlog/ready/in-progress, nao use DONE; salvo checkpoint parcial pedido, pare e recomende
+  build.
+- Evidencia antiga so vale se ainda refletir app atual.
+- Contradicao por rollback/sync exige doctor ou reabertura; nao reutilize proof.
+- Codigo preexistente fora da feature ativa nao e drift.
 
-## O que ler
+## Niveis
 
-- `ldk/ledger.md`
-- `ldk/roadmap.md`, se existir
-- `ldk/features/<feature>/brief.md`
-- `ldk/features/<feature>/plan.md`
-- registro minimo de AC no ledger ou no plan curto, se for tarefa trivial
-- `contracts/always-rules.md`, se disponivel
-- arquivos alterados ou GitHub diff, se disponível
-- Preview, console/logs e testes, quando acessíveis
+- P1: screenshot ou observacao precisa do preview.
+- P2: fluxo manual executado com passos e resultado.
+- P3: teste/script reproduzivel com `pass` e referencia de output.
+- P4: CI `pass`, diff e checklist de seguranca/release.
 
-## Antes de provar
+Proof atingido precisa ser >= requerido. GitHub/CI pode ser indisponivel para P1/P2 se a evidencia exigida existir;
+para P3/P4, ausencia essencial impede DONE.
 
-Confira a tabela de tasks do `plan.md` quando ela existir.
+## Evidencia observavel
 
-- Se ainda houver task essencial `ready`, `backlog` ou `in-progress`, nao marque a feature como `DONE`.
-- Se ainda houver task essencial `ready`, `backlog` ou `in-progress` e o usuario nao pediu checkpoint parcial,
-  pare e recomende `ldk-next`/`ldk-build` para continuar a feature.
-- Se o usuario pedir conscientemente um checkpoint parcial antes do fim das tasks, registre limitacao e nao marque
-  a feature como `DONE`.
-- Se uma task `proof-pending` ou `done` parece ter sido removida ou contradita por rollback, sync, outra skill ou
-  prompt direto, nao reuse proof antigo; marque como `PARTIAL`/`BLOCKED` ou recomende `ldk-doctor`.
-- Em projeto ja iniciado, ignore codigo preexistente fora da feature/task LDK ativa; isso nao e drift.
-- Revalide preview/codigo atual. Evidencia antiga so vale se ainda refletir o app atual.
+Nunca invente preview, teste, console, diff, CI ou verificacao.
 
-## Nível de prova
+Consolide `evidence.md` ou evidencia inline. Para cada AC coberto, identifique:
 
-- P1: exige screenshot ou observação precisa do preview.
-- P2: exige fluxo manual executado, passos e resultado observado.
-- P3: exige teste automatizado ou script reproduzível com resultado `pass`.
-- P4: exige CI verde, diff GitHub e checklist de segurança/release.
+- fonte/tool;
+- acao/comando;
+- resultado observado;
+- exit code quando aplicavel;
+- output, URL, artefato ou diff;
+- data/estado atual;
+- limitacao.
 
-`Proof level achieved` precisa ser maior ou igual ao `Proof level required`.
+Texto da IA sozinho nao prova execucao. Se algo nao foi aberto/rodado/visto, registre `no`, `not run` ou
+`not available`.
 
-## Cerimonia proporcional
+## Status
 
-- P1/trivial: proof curto e honesto e suficiente. Deve cobrir AC, observacao visual e self-check.
-- P2/baixo: proof curto e honesto com passos manuais executados e resultado observado.
-- P3/P4 ou risco medio/alto: use o formato completo, com testes, diff, CI/release e limitacoes quando aplicavel.
+`DONE` somente quando:
 
-Nao adicione burocracia para uma mudanca pequena, mas nunca pule evidencia.
+- todas as tasks essenciais estao proof-pending/done;
+- todos os AC essenciais tem evidencia atual;
+- prova atingida >= exigida;
+- nenhum erro critico/drift conhecido;
+- limitacao restante nao bloqueia objetivo.
 
-## Regras para status
+`PARTIAL`: implementacao existe, mas falta AC, preview, teste, diff ou outra validacao essencial.
 
-Use `DONE` apenas quando:
+`BLOCKED`: falta acesso, decisao, dado externo, correcao previa, verificacao possivel ou ha risco/drift critico.
 
-- todas as tasks essenciais da feature estao `proof-pending` ou `done`;
-- todos os AC essenciais estao `covered`;
-- prova atingida >= prova exigida;
-- não há erro crítico conhecido;
-- limitações restantes não bloqueiam o objetivo.
+## Self-check obrigatorio
 
-Use `PARTIAL` quando:
-
-- algo foi implementado, mas falta AC, teste, preview, diff ou validacao essencial.
-
-Use `BLOCKED` quando:
-
-- falta acesso, credencial, decisão, dado externo ou correção prévia;
-- a verificação não pode ser executada;
-- apareceu drift de motor LDK.
-
-## Auto-check antes do status
-
-Antes de escolher `DONE`, `PARTIAL` ou `BLOCKED`, preencha mentalmente e depois registre no proof a seção
-`LDK self-check`.
-
-Gates obrigatórios:
+Registre no proof:
 
 - Required proof identified: yes/no
 - All essential AC covered: yes/no
 - Evidence exists for every covered AC: yes/no
+- Evidence references are current and observable: yes/no
 - Proof level achieved >= required: yes/no
 - Critical errors known: yes/no
 - LDK engine drift detected: yes/no
 - If GitHub/CI is unavailable, limitation documented: yes/no/not applicable
 
-Regra:
+Qualquer gate essencial `no` impede DONE. Critical/drift `yes` exige BLOCKED. Evidencia falsa, segredo/PII exposto,
+controle de acesso/transacao/dado sensivel sem prova forte ou operacao irreversivel insegura exige BLOCKED.
 
-- Se qualquer gate essencial for `no`, status não pode ser `DONE`.
-- Se `Critical errors known: yes`, status deve ser `BLOCKED`.
-- Se `LDK engine drift detected: yes`, status deve ser `BLOCKED` e o próximo passo é `/ldk-doctor`.
-- Se houver segredo exposto, PII em log, auth/pagamento/RLS sem prova forte, delecao/migracao insegura ou proof falso,
-  status deve ser `BLOCKED`.
-- Se a limitação é falta de GitHub/CI em prova P3/P4, status deve ser `PARTIAL` ou `BLOCKED`, não `DONE`.
-- Para P1/P2, GitHub/CI pode ser `not available`, desde que a evidência visual/manual exigida exista.
+## Escrita de estado
 
-## Nunca inventar
+Use `templates/proof-report.md` e grave discovery revision/evidence reference.
 
-Se não abriu preview, registre:
+- DONE -> ledger `done`, Last evidence=proof, tasks essenciais cobertas=`done`.
+- PARTIAL -> ledger `partial`, tasks sem prova=`proof-pending`/`blocked`.
+- BLOCKED -> ledger `blocked`, task afetada=`blocked` quando especifica.
 
-```txt
-Preview opened: no
-```
+Last evidence nunca aponta plan/brief/evidence log; aponta o proof final.
 
-Se não rodou teste:
+Se `Audit log: on`, registre version/schema, revision, fontes de evidencia, decisao, limitacoes e next. Se off, nao
+crie log.
 
-```txt
-Automated test result: not run
-```
-
-Se console/log não está disponível:
-
-```txt
-Console/log errors checked: not available
-```
-
-## Saída em arquivo
-
-Grave `ldk/features/<feature>/proof.md` usando `templates/proof-report.md`.
-
-Atualize o ledger:
-
-- `done` se Status for `DONE`;
-- `partial` se Status for `PARTIAL`;
-- `blocked` se Status for `BLOCKED`;
-- `Last evidence` deve apontar para o proof.
-
-Nao use `plan.md` ou `brief.md` como `Last evidence`. Plano nao e prova.
-
-Atualize o `plan.md` quando houver tabela de tasks:
-
-- se Status for `DONE`, marque tasks essenciais cobertas como `done`;
-- se Status for `PARTIAL`, deixe tasks sem prova suficiente como `proof-pending` ou `blocked`;
-- se Status for `BLOCKED`, marque a task afetada como `blocked` quando o bloqueio for especifico.
-
-## Audit log opcional
-
-Se o Project Knowledge tiver `Audit log: on`, adicione uma entrada compacta em `ldk/audit/log.md` ao final.
-Se `ldk/audit/log.md` nao existir, crie o arquivo com titulo e nota curta de que o log comeca na ativacao.
-Nao faca backfill automatico; se o usuario pedir backfill, marque como `BACKFILL reconstruido`.
-Registre evidence claimed, decision, limitations e next. Se estiver `off` ou ausente, nao crie log.
-
-## Saída final
+## Saida
 
 ```md
 ## Proof of Done
 
-Tasks:
 Feature:
+Tasks:
+Discovery revision:
 Status: DONE | PARTIAL | BLOCKED
 Risk:
 Proof level required:
 Proof level achieved:
+Evidence log/inline:
 
-### Changed files
+Changed files:
 - ...
 
-### Acceptance criteria
-- AC1: covered | not covered | not applicable
+Acceptance criteria:
+- AC1: covered | not covered | not applicable -> evidence reference
 
-### Verification performed
+Verification performed:
 - Preview opened: yes/no
 - Main user flow tested: yes/no
 - Responsive/mobile checked: yes/no
 - Console/log errors checked: yes/no/not available
 - GitHub diff available: yes/no
-- Automated test available: yes/no
 - Automated test result: pass/fail/not run/not available
-- CI result: pass/fail/not run/not available
+- Test command/exit code/reference:
+- CI result/reference: pass/fail/not run/not available
 
-### LDK self-check
-- Required proof identified: yes/no
-- All essential AC covered: yes/no
-- Evidence exists for every covered AC: yes/no
-- Proof level achieved >= required: yes/no
-- Critical errors known: yes/no
-- LDK engine drift detected: yes/no
-- If GitHub/CI is unavailable, limitation documented: yes/no/not applicable
-
-### Proof verdict
-Optimistic:
-- ...
-Pessimistic:
+LDK self-check:
 - ...
 
-### Evidence
-- Preview URL:
-- Screenshot or visual observation:
-- Manual steps:
-- Test output:
-- Commit/diff:
+Proof verdict:
+- Optimistic:
+- Pessimistic:
 
-### Known limitations
+Known limitations:
 - ...
 
-### Etapa concluida
-- Proof registrado e aguardando proximo comando.
+Etapa concluida e aguardando proximo comando.
 ```

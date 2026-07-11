@@ -3,6 +3,7 @@
 Status: planned
 Risk: baixo
 Proof required: P2
+Discovery revision: 1
 
 ## Objetivo
 <O que sera construido e por que importa.>
@@ -21,6 +22,9 @@ Proof required: P2
 
 ## Dependencias
 - 
+
+## Preocupacoes aplicaveis
+- <somente as acionadas por esta feature>
 
 ## Pendencias [VERIFY]
 - [ ] 

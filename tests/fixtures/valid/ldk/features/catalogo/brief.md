@@ -3,6 +3,7 @@
 Status: approved
 Risk: baixo
 Proof required: P2
+Discovery revision: 1
 
 ## Objetivo
 Mostrar produtos no catalogo.

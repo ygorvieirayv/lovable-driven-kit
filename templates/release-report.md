@@ -14,14 +14,15 @@ Status: GO | NO-GO
 - Console/logs checked: yes/no/not available
 - Build/test/CI green: yes/no/not available
 - Env vars checked: yes/no/not available
-- Auth/admin checked: yes/no/not applicable
-- Data/payment risks checked: yes/no/not applicable
+- Applicable discovery concerns checked: yes/no/not applicable
+- High-impact access/data/transaction risks checked: yes/no/not applicable
 
 ## Evidence
 - Preview:
 - GitHub diff:
 - CI:
 - Screenshots:
+- Concern-specific evidence:
 
 ## Known limitations
 - 

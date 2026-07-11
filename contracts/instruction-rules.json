@@ -1,0 +1,126 @@
+{
+  "version": "0.2.0",
+  "schema": 2,
+  "knowledgeFiles": [
+    "workspace-knowledge.md",
+    "project-knowledge-template.md"
+  ],
+  "skillFiles": [
+    "skills/ldk-intake/SKILL.md",
+    "skills/ldk-next/SKILL.md",
+    "skills/ldk-roadmap/SKILL.md",
+    "skills/ldk-plan/SKILL.md",
+    "skills/ldk-build/SKILL.md",
+    "skills/ldk-build-task/SKILL.md",
+    "skills/ldk-proof/SKILL.md",
+    "skills/ldk-review/SKILL.md",
+    "skills/ldk-doctor/SKILL.md",
+    "skills/ldk-release/SKILL.md",
+    "skills/ldk-evaluate/SKILL.md"
+  ],
+  "distributionFiles": [
+    "LOVABLE_IMPORT.md",
+    "lovable-import-manifest.json"
+  ],
+  "versionedFiles": [
+    "workspace-knowledge.md",
+    "project-knowledge-template.md",
+    "templates/project.md",
+    "templates/discovery.md",
+    "skills/ldk-intake/SKILL.md",
+    "skills/ldk-next/SKILL.md",
+    "skills/ldk-roadmap/SKILL.md",
+    "skills/ldk-plan/SKILL.md",
+    "skills/ldk-build/SKILL.md",
+    "skills/ldk-build-task/SKILL.md",
+    "skills/ldk-proof/SKILL.md",
+    "skills/ldk-review/SKILL.md",
+    "skills/ldk-doctor/SKILL.md",
+    "skills/ldk-release/SKILL.md",
+    "skills/ldk-evaluate/SKILL.md"
+  ],
+  "requiredRules": [
+    {
+      "id": "LDK-R001",
+      "text": "Sem prova, nao e done.",
+      "files": [
+        "workspace-knowledge.md",
+        "skills/ldk-build/SKILL.md",
+        "skills/ldk-proof/SKILL.md"
+      ]
+    },
+    {
+      "id": "LDK-R002",
+      "text": "Discovery aprovado e obrigatorio antes de roadmap, plan e build.",
+      "files": [
+        "workspace-knowledge.md",
+        "skills/ldk-intake/SKILL.md",
+        "skills/ldk-roadmap/SKILL.md",
+        "skills/ldk-plan/SKILL.md",
+        "skills/ldk-build/SKILL.md"
+      ]
+    },
+    {
+      "id": "LDK-R003",
+      "text": "Nao escolha plataforma, provedor ou integracao sem decisao explicita do usuario.",
+      "files": [
+        "workspace-knowledge.md",
+        "project-knowledge-template.md",
+        "contracts/always-rules.md",
+        "skills/ldk-intake/SKILL.md",
+        "skills/ldk-roadmap/SKILL.md",
+        "skills/ldk-plan/SKILL.md"
+      ]
+    },
+    {
+      "id": "LDK-R004",
+      "text": "Conversa aprova, arquivo registra.",
+      "files": [
+        "workspace-knowledge.md",
+        "contracts/state-markers.md",
+        "skills/ldk-intake/SKILL.md"
+      ]
+    },
+    {
+      "id": "LDK-R005",
+      "text": "Nunca invente preview, teste, console, diff, CI ou verificacao.",
+      "files": [
+        "workspace-knowledge.md",
+        "skills/ldk-build/SKILL.md",
+        "skills/ldk-proof/SKILL.md"
+      ]
+    }
+  ],
+  "runtimeFilesForGenericity": [
+    "workspace-knowledge.md",
+    "project-knowledge-template.md",
+    "contracts/always-rules.md",
+    "contracts/common-lessons.md",
+    "contracts/discovery-gate.md",
+    "skills/ldk-intake/SKILL.md",
+    "skills/ldk-next/SKILL.md",
+    "skills/ldk-roadmap/SKILL.md",
+    "skills/ldk-plan/SKILL.md",
+    "skills/ldk-build/SKILL.md",
+    "skills/ldk-build-task/SKILL.md",
+    "skills/ldk-proof/SKILL.md",
+    "skills/ldk-review/SKILL.md",
+    "skills/ldk-doctor/SKILL.md",
+    "skills/ldk-release/SKILL.md"
+  ],
+  "forbiddenRuntimeTerms": [
+    "Shopify",
+    "Stripe",
+    "Mercado Pago",
+    "Supabase",
+    "ANVISA",
+    "mini loja",
+    "e-commerce",
+    "loja",
+    "landing page",
+    "SaaS",
+    "dashboard",
+    "catalogo",
+    "checkout"
+  ]
+}

@@ -1,106 +1,156 @@
 ---
 name: ldk-intake
-description: Use when starting a Lovable project with the Lovable Driven Kit, turning a vague idea into project context, risks, MVP scope, and the initial LDK ledger. Not for implementing app features.
+description: Use when starting, continuing, externally reviewing, or reconciling the mandatory LDK project discovery before roadmap or implementation. Extracts purpose, users, journey, success, relevant concerns, scope, and an approved portable understanding. Not for roadmap or app implementation.
 ---
 
 # ldk-intake
 
-Use esta skill para transformar uma ideia vaga em contexto inicial do Lovable Driven Kit.
+LDK Version: 0.2.0
+LDK Schema: 2
+
+Use esta skill como porta obrigatoria de curadoria inicial do Lovable Driven Kit.
+
+Discovery aprovado e obrigatorio antes de roadmap, plan e build.
 
 ## Objetivo
 
-Criar ou atualizar:
+Criar, continuar, revisar ou aprovar:
 
-- `ldk/project.md`
-- `ldk/ledger.md`
-- `ldk/roadmap.md` inicial, quando houver mais de uma feature ou dependencias claras
-- primeiras pendencias `[VERIFY]`
+- `ldk/discovery.md`;
+- `ldk/project.md`, depois da aprovacao;
+- `ldk/ledger.md` inicial, depois da aprovacao;
+- pendencias `[VERIFY]`;
+- pacote portatil para revisao externa, quando pedido.
+
+Execute somente intake. Nao gere `ldk/roadmap.md`, nao planeje feature e nao edite o app.
 
 ## Regras de conversa
 
-- Uma pergunta por vez.
-- Explique o por que antes de perguntar.
-- Se o usuario disser "nao sei", sugira um default seguro.
-- Nao invente regra de negocio, compliance, pagamento ou permissao.
-- Nao escolha plataforma, provedor ou integracao sem o usuario pedir. Exemplos: Shopify, Stripe, Mercado Pago,
-  Supabase, ERP, frete ou gateway devem ficar como `[VERIFY]` ou fora de escopo.
-- Se o usuario pular uma escolha, nao assuma uma opcao do menu; registre `[VERIFY]` e siga com o caminho generico.
-- Marque incertezas com `[VERIFY]`.
-- Confirme antes de gravar.
-- Aplique `contracts/always-rules.md`, se disponivel.
-- Ao criar `ldk/ledger.md`, use exatamente `templates/task-ledger.md`. Nao traduza headers, nao mude colunas e nao
-  misture ID com nome da feature.
-- Execute somente intake. Nao rode `ldk-roadmap`, `ldk-plan` ou qualquer build nesta skill.
+- Uma pergunta por vez; no maximo duas quando forem inseparaveis.
+- Explique em uma frase por que a resposta muda o projeto.
+- Leia primeiro o pedido, Project Knowledge e app atual, quando houver; nao repita pergunta ja respondida.
+- Se o usuario disser "nao sei", proponha default reversivel e explique a consequencia.
+- Pergunte somente se a resposta mudar finalidade, escopo, jornada, risco, arquitetura, prova ou prioridade.
+- Nao transforme exemplo do usuario em requisito sem confirmacao.
+- Nao invente regra de negocio, obrigacao, capacidade, compliance ou permissao.
+- Nao escolha plataforma, provedor ou integracao sem decisao explicita do usuario.
+- Impacto pequeno pode usar pressuposto reversivel; impacto relevante fica `[VERIFY]`.
+- Confirme antes de aprovar/gravar entendimento estrutural.
+- Aplique `contracts/discovery-gate.md` e `contracts/always-rules.md`, se disponiveis.
+- Conversa aprova, arquivo registra.
 
-## Roteiro
+## Fase 1 - Extracao
 
-1. Entenda o produto:
-   - nome;
-   - publico;
-   - objetivo;
-   - resultado esperado.
-2. Entenda a plataforma:
-   - GitHub repo;
-   - backend/banco/auth/pagamentos, se existirem;
-   - se usa Supabase, quais tabelas/policies importam.
-3. Classifique riscos:
-   - dados pessoais;
-   - pagamento;
-   - admin/permissoes;
-   - integracoes;
-   - migracao/delecao.
-4. Defina MVP:
-   - essencial;
-   - depois do MVP;
-   - primeira feature ou tarefa a executar.
-5. Crie o ledger inicial.
+Extraia do material existente sem desenhar solucao antecipada:
 
-## Defaults seguros
+- finalidade e motivacao;
+- problema, oportunidade ou situacao atual;
+- usuarios e outros atores;
+- resultado esperado e como sera observado;
+- jornada principal;
+- capacidades mencionadas;
+- restricoes e decisoes ja tomadas;
+- essencial, depois e fora de escopo;
+- pressupostos e duvidas.
 
-Para loja/e-commerce sem detalhes tecnicos:
+Para projeto existente, leia o app sem alterar UI, logica, rotas, dados ou integracoes. Diferencie comportamento
+observado, alegacao do usuario e melhoria desejada.
 
-- MVP default: landing/vitrine, catalogo com produtos ficticios, cards, carrinho local, checkout fake e confirmacao
-  simulada.
-- Fora de escopo default: pagamento real, checkout real, frete real, Shopify, gateway, auth real, Supabase e
-  integracoes externas.
-- Riscos podem citar pagamento, PII, frete, compliance ou ANVISA como `[VERIFY]`, mas nao transforme esses riscos em
-  arquitetura escolhida.
-- Nao avance para setup de provedor externo. Registre o estado e pare.
+## Fase 2 - Concern Scan
 
-## Classificacao da etapa seguinte
+Faca uma varredura interna ampla por finalidade, atores, jornada, dados, acesso, execucao, dependencias, exposicao,
+descoberta, mensuracao, desempenho, acessibilidade, operacao e release.
 
-- Se o MVP tiver varias features ou ordem importante, registre que provavelmente precisa de roadmap.
-- Se a primeira demanda for vaga, baixa/media/alta ou envolver risco sem dependencias relevantes, registre que
-  provavelmente precisa de plano.
-- Se a primeira demanda for trivial e bem definida, registre AC curto, risco `trivial` e prova `P1`.
+Registre somente preocupacoes acionadas por sinais deste projeto:
 
-Nao execute a etapa seguinte nesta skill. Ao final, diga que o intake esta pronto e aguardando o proximo comando.
+- `applicable`: influencia roadmap, plan ou proof;
+- `not-applicable`: descartada por sinal concreto;
+- `later`: valida, mas fora do recorte;
+- `verify`: falta resposta que muda decisao.
 
-## Audit log opcional
+Nao mostre uma checklist inteira. Na conversa, resuma:
 
-Se o Project Knowledge tiver `Audit log: on`, adicione uma entrada compacta em `ldk/audit/log.md` ao final.
-Se `ldk/audit/log.md` nao existir, crie o arquivo com titulo e nota curta de que o log comeca na ativacao.
-Nao faca backfill automatico; se o usuario pedir backfill, marque como `BACKFILL reconstruido`.
-Se estiver `off` ou ausente, nao crie log.
+- entendimento;
+- sinais relevantes;
+- preocupacoes priorizadas;
+- descartes confiaveis;
+- duvida que precisa ser respondida agora.
 
-## Saida em arquivo
+## Fase 3 - Discovery draft
 
-Se `ldk/` nao existir, crie:
+Crie/atualize `ldk/discovery.md` usando `templates/discovery.md`.
+
+Enquanto houver descoberta ou reconciliacao:
+
+```md
+Status: draft | external-review | awaiting-approval
+```
+
+O `Resumo do entendimento` deve ser autocontido: outra pessoa ou IA consegue revisar sem historico do chat.
+
+## Fase 4 - Revisao externa opcional
+
+Se o usuario quiser confrontar a ideia com outra IA:
+
+1. preencha `External review packet` com o resumo atual;
+2. grave `Status: external-review`;
+3. entregue o bloco copiavel;
+4. pare sem aprovar e sem gerar roadmap.
+
+Quando o usuario colar sugestoes externas:
+
+- classifique `accept`, `defer`, `reject` ou `verify`;
+- avalie alinhamento, impacto e novo escopo;
+- recomende, mas a decisao final e do usuario;
+- preencha a tabela de reconciliacao;
+- incremente `Revision` se o entendimento mudar;
+- use `Status: awaiting-approval`;
+- apresente novamente o resumo completo.
+
+## Fase 5 - Aprovacao
+
+Pergunte explicitamente se o entendimento representa o projeto desejado. Aprovacao exige que finalidade, usuario,
+resultado, jornada, recorte e preocupacoes estruturais estejam claros. `[VERIFY]` nao bloqueante pode permanecer;
+duvida que muda o MVP bloqueia.
+
+Depois do "sim" do usuario:
+
+1. grave `Status: approved`, `Approved at` e `Approved by`;
+2. atualize `ldk/project.md` com a mesma versao, schema, revisao e `Autonomy mode`;
+3. crie/atualize ledger inicial com features candidatas em `idea`;
+4. nao crie roadmap;
+5. recomende `ldk-roadmap` quando houver varias features/dependencias, ou `ldk-plan` quando houver uma unica feature
+   independente;
+6. pare.
+
+## Reabertura e invalidacao
+
+Se finalidade, usuario, jornada, resultado, recorte ou preocupacao estrutural mudar depois:
+
+- incremente `Revision`;
+- grave `Status: awaiting-approval`;
+- se roadmap existir, grave `Status: stale`;
+- nao altere silenciosamente planos existentes;
+- exija nova confirmacao antes de retomar roadmap/plan/build.
+
+Mudanca apenas editorial nao invalida.
+
+## Arquivos
+
+Se `ldk/` nao existir, crie apenas o necessario:
 
 ```txt
 ldk/
-  project.md
-  ledger.md
-  roadmap.md
+  discovery.md
+  project.md          # depois da aprovacao
+  ledger.md           # depois da aprovacao
   decisions/
   features/
   issues/
   releases/
 ```
 
-Use `templates/project.md`, `templates/task-ledger.md` e `templates/roadmap.md` como formato.
-
-Para `ldk/ledger.md`, mantenha exatamente:
+Use `templates/discovery.md`, `templates/project.md` e `templates/task-ledger.md`. Ledger mantem exatamente:
 
 ```md
 | ID | Feature | Risk | State | Proof required | Last evidence |
@@ -108,18 +158,36 @@ Para `ldk/ledger.md`, mantenha exatamente:
 | F1 | <feature> | baixo | idea | P2 | |
 ```
 
-Cada linha deve ter `ID` como `F1`, `F2`, etc.; o nome da feature fica em `Feature`. `Proof required` deve ser um
-unico nivel (`P1`, `P2`, `P3` ou `P4`), nunca `P1/P2`.
+ID e `F1`, `F2`; prova e um unico P1/P2/P3/P4; evidencia fica vazia em `idea`.
 
-## Saida final na conversa
+## Audit log opcional
 
-Responda com:
+Se `Audit log: on`, registre intake/reconciliacao/aprovacao com revision, decisoes, arquivos e proximo passo. Crie o
+log quando necessario, sem backfill automatico. Se estiver `off`/ausente, nao crie nem mencione.
 
-1. Produto entendido.
-2. Riscos identificados.
-3. MVP proposto.
-4. Arquivos criados/alterados.
-5. Pendencias `[VERIFY]`.
-6. Etapa concluida: intake pronto e aguardando proximo comando.
+## Saida final
 
-Nao implemente nada nesta skill.
+Durante descoberta:
+
+```md
+## LDK Intake
+
+Resumo do raciocinio:
+- ...
+
+Entendimento atual:
+- ...
+
+Pergunta que muda o projeto:
+- ...
+
+Status: draft | external-review | awaiting-approval
+```
+
+Depois da aprovacao, inclua produto entendido, preocupacoes relevantes, recorte, arquivos, `[VERIFY]`, revision e:
+
+```txt
+Etapa concluida: discovery aprovado e aguardando proximo comando.
+```
+
+Nao implemente nem gere roadmap nesta skill.
