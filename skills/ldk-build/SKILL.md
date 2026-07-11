@@ -79,6 +79,10 @@ Para cada task essencial em `ready`/`in-progress`:
 6. marque `proof-pending` somente apos implementacao observada;
 7. continue conforme autonomia e seguranca.
 
+Antes de cada efeito externo ou irreversivel em fluxo concorrente/assincrono, revalide ownership e estado atuais.
+Cota/contador compartilhado exige reserva atomica antes do efeito e compensacao segura quando ele falhar; nao use
+check-then-act separado. Entrada privilegiada nao pode confiar em chave publica/publicavel como autenticacao.
+
 Use `ldk/features/<feature>/evidence.md` por `templates/evidence-log.md` para varias tasks ou P3/P4. Em entrega curta
 P1/P2, pode acumular diretamente num proof draft. Nunca invente preview, teste, console, diff, CI ou verificacao.
 
@@ -109,6 +113,9 @@ exit codes disponiveis, referencias, limitacoes, self-check e veredito.
 - prova atingida >= exigida;
 - nenhum erro critico ou drift;
 - limitacoes sem bloquear o objetivo.
+
+Sync, aplicacao e publicacao sao estados distintos. Quando ferramenta externa sincronizar ou regenerar arquivos,
+inspecione o diff, repita checks proporcionais e prove o ambiente/URL realmente entregue antes de `DONE`.
 
 Use `PARTIAL` se implementou mas falta AC/prova. Use `BLOCKED` se falta decisao, acesso, correcao ou verificacao
 essencial.

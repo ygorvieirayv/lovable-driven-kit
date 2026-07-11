@@ -18,6 +18,10 @@
     "skills/ldk-release/SKILL.md",
     "skills/ldk-evaluate/SKILL.md"
   ],
+  "distributionFiles": [
+    "LOVABLE_IMPORT.md",
+    "lovable-import-manifest.json"
+  ],
   "versionedFiles": [
     "workspace-knowledge.md",
     "project-knowledge-template.md",

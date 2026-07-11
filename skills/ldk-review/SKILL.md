@@ -45,6 +45,9 @@ Se discovery nao estiver approved ou discovery/roadmap/plan/proof divergirem em 
 10. A UI foi verificada no preview quando a prova e visual/manual?
 11. A feature respeitou a ordem/dependencias do roadmap?
 12. Alguma licao comum do LDK foi violada?
+13. Fluxo concorrente/assincrono revalida ownership antes de cada efeito e usa operacoes atomicas onde necessario?
+14. Entrada privilegiada usa autenticacao de servidor em vez de identificador publico/publicavel?
+15. O estado publicado foi provado sem confundir sync ou aplicacao com entrega no ambiente/URL final?
 
 ## Severidade
 

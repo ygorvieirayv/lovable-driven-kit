@@ -29,6 +29,19 @@ jobs:
             exit 1
           fi
 
+      - name: Broken Lovable distribution fails
+        shell: bash
+        run: |
+          set -euo pipefail
+          broken="$(mktemp -d)"
+          cp -R . "$broken/repo"
+          rm -rf "$broken/repo/.git"
+          sed -i 's/tree\/main\/skills\/ldk-intake/tree\/main\/skills\/wrong-intake/' "$broken/repo/LOVABLE_IMPORT.md"
+          if node "$broken/repo/scripts/ldk-instructions-check.mjs"; then
+            echo "Broken Lovable distribution unexpectedly passed"
+            exit 1
+          fi
+
       - name: PowerShell valid fixture passes
         shell: pwsh
         run: ./scripts/ldk-check.ps1 -Root tests/fixtures/valid

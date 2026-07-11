@@ -86,6 +86,9 @@ plano aprovado ou release gate.
 - Sem segredo em codigo, bundle, log, screenshot ou dado de exemplo.
 - Sem PII desnecessaria em logs, analytics, console ou erro.
 - Identidade, autorizacao, transacao real, dado pessoal, controle de acesso, delecao e migracao nunca sao triviais.
+- Trabalho concorrente/assincrono revalida ownership e estado antes de cada efeito externo ou irreversivel.
+- Cota/contador compartilhado usa reserva atomica e compensacao; nunca check-then-act separado.
+- Chave publica/publicavel nao autentica worker, agendamento ou entrada privilegiada.
 - Nao escolha plataforma, provedor ou integracao sem decisao explicita do usuario.
 - Pedido ambiguo usa representacao reversivel; capacidade externa/alto impacto fica `[VERIFY]` ou fora de escopo.
 - Se nao abriu preview, checou console, rodou teste ou viu diff, declare isso.
@@ -117,6 +120,8 @@ com feature/task ativa e seus AC/arquivos esperados; codigo preexistente fora do
 - toca motor do LDK: drift critico.
 
 Nao reverta nem sobrescreva mudanca externa sem aprovacao. Nao reutilize proof sem revalidar o estado atual.
+Sync, aplicacao e publicacao sao estados distintos. Depois de ferramenta externa regenerar ou sincronizar arquivos,
+inspecione diff e repita checks proporcionais antes de declarar o estado entregue.
 
 ## Audit log opcional
 

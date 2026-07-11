@@ -90,6 +90,10 @@ cautela:
 - se cria nova feature, proponha registrar no ledger/roadmap;
 - se remove ou contradiz task `proof-pending`/`done`, proponha reabrir a task ou ajustar o ledger;
 - se toca motor do LDK, trate como drift critico.
+- depois de sync/import/export, procure arquivo regenerado, formatacao alterada, artefato duplicado e evidencia que
+  ainda descreve o estado anterior;
+- nao trate `sincronizado`, `aplicado` e `publicado` como equivalentes; compare tambem o ambiente/URL entregue quando
+  o status depender de publicacao.
 
 ## Saida do diagnostico
 

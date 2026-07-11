@@ -53,6 +53,9 @@ Roadmap, plano e build só começam depois dessa aprovação.
 
 O Lovable importa **uma skill por vez**. Não use a URL do repositório inteiro.
 
+Se voce ja usa uma versao anterior e quer apagar/reimportar tudo sem terminal, siga o
+[guia canonico de substituicao](LOVABLE_IMPORT.md). Ele fixa a ordem, as 10 URLs e os dois conteudos de Knowledge.
+
 ### 1. Abrir Skills
 
 Na tela inicial do Lovable:

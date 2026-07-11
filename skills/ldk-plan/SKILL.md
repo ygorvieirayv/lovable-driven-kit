@@ -45,6 +45,11 @@ Planeje uma feature por vez e grave a revision aprovada em brief/plan.
 - Confirme o plano antes de `Status: approved`.
 - Aprovacao salva/aprova o plano; nunca inicia build nesta skill.
 - Aplique contracts/always-rules e common-lessons, se disponiveis.
+- Se houver trabalho concorrente/assincrono com efeito externo, planeje ownership duravel, revalidacao antes do
+  efeito e liberacao condicional.
+- Se houver cota/contador compartilhado, planeje reserva atomica e compensacao; nao use check-then-act separado.
+- Entrada privilegiada, worker ou agendamento exige autenticacao de servidor; chave publica/publicavel nao basta.
+- Quando a entrega depender de publicacao, separe e prove os estados sincronizado, aplicado e publicado.
 
 Tabela obrigatoria:
 

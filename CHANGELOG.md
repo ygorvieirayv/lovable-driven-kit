@@ -12,6 +12,7 @@
 - Acumulo de evidencia observavel durante build em `evidence.md` ou proof inline.
 - `SCHEMA_VERSION`, version markers e `ldk-instructions-check.mjs` para tratar instrucoes como codigo.
 - Contrato deterministico de frases criticas, limites de Knowledge/skill e genericidade do runtime.
+- Manifesto e guia canonicos para substituir a instalacao no Lovable sem terminal ou mistura de versoes.
 
 ### Changed
 
@@ -24,6 +25,8 @@
 - Workflow de proof nao mascara mais falha de `npm test`; ausencia de script e reportada como indisponivel.
 - Validators Bash/PowerShell passaram a checar discovery, revision, autonomy, version/schema, IDs numericos e
   coerencia entre roadmap, plans e proofs.
+- Regras de confiabilidade agora cobrem ownership de trabalho assincrono, reserva atomica de cotas, autenticacao de
+  entradas privilegiadas e a diferenca entre sync, aplicacao e publicacao.
 
 ### Migration
 

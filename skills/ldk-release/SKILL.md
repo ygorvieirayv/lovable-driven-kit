@@ -29,6 +29,7 @@ Qualquer divergencia produz `NO-GO` ate reconciliacao.
 - issues abertas
 - GitHub diff/CI
 - preview desktop/mobile
+- ambiente e URL realmente publicados, sem confundir sync/aplicacao com publicacao
 - console/logs
 - preocupacoes `applicable` no discovery/project
 - acesso, dados, transacoes e operacoes de alto impacto quando aplicaveis
@@ -41,6 +42,8 @@ Qualquer divergencia produz `NO-GO` ate reconciliacao.
 - Alguma feature esta `partial` ou `blocked`?
 - Existe Critical/High aberto?
 - Build/test/CI estao verdes?
+- O estado publicado foi verificado no ambiente/URL de destino?
+- Sync/import/export regenerou ou duplicou arquivos que ainda precisam de reconciliacao?
 - Preview principal foi aberto?
 - Mobile foi checado?
 - Fluxo principal foi testado?

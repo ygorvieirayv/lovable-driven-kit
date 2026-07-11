@@ -7,6 +7,7 @@ import { fileURLToPath } from 'node:url';
 const scriptDir = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(scriptDir, '..');
 const manifestPath = path.join(root, 'contracts', 'instruction-rules.json');
+const importManifestPath = path.join(root, 'lovable-import-manifest.json');
 const errors = [];
 const warnings = [];
 
@@ -55,6 +56,14 @@ try {
   process.exit(1);
 }
 
+let importManifest;
+try {
+  importManifest = JSON.parse(fs.readFileSync(importManifestPath, 'utf8'));
+} catch (cause) {
+  console.error(`ERROR invalid lovable-import-manifest.json: ${cause.message}`);
+  process.exit(1);
+}
+
 const version = read('VERSION').trim();
 const schemaText = read('SCHEMA_VERSION').trim();
 const schema = Number(schemaText);
@@ -71,10 +80,20 @@ if (manifest.version !== version) {
 if (manifest.schema !== schema) {
   error(`instruction manifest schema '${manifest.schema}' differs from SCHEMA_VERSION '${schema}'`);
 }
+if (importManifest.version !== version) {
+  error(`Lovable import manifest version '${importManifest.version}' differs from VERSION '${version}'`);
+}
+if (importManifest.schema !== schema) {
+  error(`Lovable import manifest schema '${importManifest.schema}' differs from SCHEMA_VERSION '${schema}'`);
+}
+if (importManifest.strategy !== 'replace-all') {
+  error("Lovable import manifest strategy must be 'replace-all'");
+}
 
 const allManifestFiles = new Set([
   ...(manifest.knowledgeFiles ?? []),
   ...(manifest.skillFiles ?? []),
+  ...(manifest.distributionFiles ?? []),
   ...(manifest.versionedFiles ?? []),
   ...(manifest.runtimeFilesForGenericity ?? []),
   ...((manifest.requiredRules ?? []).flatMap((rule) => rule.files ?? [])),
@@ -119,6 +138,69 @@ for (const file of manifest.skillFiles ?? []) {
   if (!nameMatch || nameMatch[1] !== expectedName) {
     error(`${file}: skill name must match folder '${expectedName}'`);
   }
+}
+
+const repository = importManifest.repository?.replace(/\/$/, '');
+const repositoryMatch = repository?.match(/^https:\/\/github\.com\/([^/]+\/[^/]+)$/);
+if (!repositoryMatch) {
+  error(`Lovable import manifest repository '${importManifest.repository}' must be a canonical GitHub URL`);
+}
+if (importManifest.ref !== 'main') {
+  error(`Lovable import manifest ref '${importManifest.ref}' must be 'main'`);
+}
+
+const distributedKnowledge = (importManifest.knowledge ?? []).map((entry) => entry.file);
+if (JSON.stringify(distributedKnowledge) !== JSON.stringify(manifest.knowledgeFiles ?? [])) {
+  error('Lovable import manifest knowledge does not match instruction manifest knowledgeFiles/order');
+}
+for (const entry of importManifest.knowledge ?? []) {
+  const expectedSource = repositoryMatch
+    ? `https://raw.githubusercontent.com/${repositoryMatch[1]}/${importManifest.ref}/${entry.file}`
+    : '';
+  if (!['workspace', 'project'].includes(entry.slot)) {
+    error(`Lovable import manifest has invalid Knowledge slot '${entry.slot}'`);
+  }
+  if (entry.source !== expectedSource) {
+    error(`Lovable import manifest source for '${entry.file}' is not canonical`);
+  }
+}
+
+const importableSkillPaths = (manifest.skillFiles ?? [])
+  .map((file) => path.posix.dirname(file))
+  .filter((skillPath) => path.posix.basename(skillPath) !== 'ldk-evaluate');
+const distributedSkillPaths = (importManifest.skills ?? []).map((entry) => entry.path);
+if (JSON.stringify(distributedSkillPaths) !== JSON.stringify(importableSkillPaths)) {
+  error('Lovable import manifest skills do not match importable skillFiles/order');
+}
+for (const entry of importManifest.skills ?? []) {
+  const expectedName = path.posix.basename(entry.path ?? '');
+  const expectedSource = `${repository}/tree/${importManifest.ref}/${entry.path}`;
+  if (entry.name !== expectedName) {
+    error(`Lovable import manifest skill '${entry.name}' does not match path '${entry.path}'`);
+  }
+  if (entry.source !== expectedSource) {
+    error(`Lovable import manifest source for '${entry.name}' is not canonical`);
+  }
+}
+const excludedSkillNames = (importManifest.excluded ?? []).map((entry) => entry.name);
+if (JSON.stringify(excludedSkillNames) !== JSON.stringify(['ldk-evaluate'])) {
+  error('Lovable import manifest must exclude only ldk-evaluate');
+}
+
+const importGuide = read('LOVABLE_IMPORT.md');
+if (!importGuide.includes(`LDK Version: ${version}`) || !importGuide.includes(`LDK Schema: ${schema}`)) {
+  error('LOVABLE_IMPORT.md version/schema differs from VERSION/SCHEMA_VERSION');
+}
+for (const entry of [...(importManifest.knowledge ?? []), ...(importManifest.skills ?? [])]) {
+  if (!importGuide.includes(entry.source)) {
+    error(`LOVABLE_IMPORT.md is missing canonical source '${entry.source}'`);
+  }
+}
+if (!importGuide.includes('Nao importe `ldk-evaluate`')) {
+  error('LOVABLE_IMPORT.md must explicitly exclude ldk-evaluate');
+}
+if (!read('README.md').includes('[guia canonico de substituicao](LOVABLE_IMPORT.md)')) {
+  error('README.md must link to LOVABLE_IMPORT.md');
 }
 
 for (const rule of manifest.requiredRules ?? []) {
