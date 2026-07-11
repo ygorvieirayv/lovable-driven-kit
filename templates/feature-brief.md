@@ -5,6 +5,9 @@ Risk: baixo
 Proof required: P2
 Discovery revision: 1
 
+`Status: planned` registra o snapshot de planejamento. O brief congela escopo/risco/AC e nao acompanha o ciclo
+posterior; o estado atual mora no ledger e no plan.
+
 ## Objetivo
 <O que sera construido e por que importa.>
 

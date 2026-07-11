@@ -5,7 +5,7 @@ description: 'Use when LDK project state may have drifted: ledger, proof, app co
 
 # ldk-doctor
 
-LDK Version: 0.2.1
+LDK Version: 0.2.2
 LDK Schema: 2
 
 Use esta skill para diagnosticar drift entre Knowledge, arquivos `ldk/`, app e GitHub.
@@ -91,6 +91,16 @@ Regras de interpretacao obrigatorias:
   `partial + blocked` podem ser coerentes quando dependencias/decisoes justificam a readiness.
 - So reporte discordancia quando texto, dependencia, proximo passo ou readiness contradizer fato atual; nao exija
   igualdade entre State e Readiness.
+- `Next recommended feature` e uma prioridade singular, nao lista exaustiva de toda readiness `ready`/`verify`.
+  Varias features podem estar `verify`; so ha contradicao se a escolhida estiver inelegivel, violar dependencia ou
+  tiver justificativa falsa/obsoleta.
+- `brief.md` congela escopo, risco e AC aprovados; ledger e plan registram o ciclo atual. `Status: planned` no brief
+  nao precisa acompanhar `building`, `partial`, `blocked` ou `done`, salvo contrato explicito diferente no projeto.
+- `evidence.md` e opcional e criado quando existe evidencia para registrar; nunca crie arquivo vazio preventivo.
+  Ausencia antes/durante planejamento nao e finding. Durante build, cobre apenas se o plano/proof exigir log separado
+  e evidencia observada estiver sendo perdida.
+- Antes de alegar arquivo ativo duplicado ou mistura com historico, procure os paths exatos. Conteudo somente sob
+  `ldk/history/` e congelado e nao compete com o estado ativo.
 
 ### T2 - Proof x realidade
 
@@ -137,6 +147,9 @@ this skill` nao significa que a plataforma permaneceu imutavel.
 
 ## Severidade e incerteza
 
+- Finding descreve violacao atual confirmada, nao problema futuro hipotetico.
+- Se o texto diz `aceitavel`, `esperado`, `baixo impacto atual` ou `so vira problema depois`, nao classifique como
+  Critical/High/Medium; remova de findings ou registre em Info/Expected.
 - Critical/High exigem violacao confirmada e impacto correspondente, nunca apenas inferencia sem fonte.
 - Regra machine-readable rejeitada pelo checker pode ser High/Critical conforme impacto.
 - Roadmap semanticamente antigo costuma ser Medium, salvo quando autoriza agora uma acao perigosa ou bloqueada.
@@ -169,6 +182,9 @@ Medium:
 Low:
 - ...
 
+Info/Expected:
+- condicao valida que ajuda a interpretar o estado, sem pedir correcao
+
 Nothing changed by this skill.
 Repository unchanged during diagnosis: yes | no (external mutation) | not available
 ```
@@ -193,6 +209,7 @@ Regras:
 - Antes de propor diff, releia os arquivos afetados, HEAD e CI; se mudaram, reinicie o diagnostico.
 - Corrija primeiro drift de codigo/CI que invalida as premissas; depois reconcilie roadmap/proof dependente.
 - Diga explicitamente quais fontes foram preservadas sem alteracao.
+- Nao proponha sincronizar brief com ledger/plan nem criar evidence vazio sem contrato explicito.
 - Mostrar diff.
 - Reexecutar check relevante.
 - Sem aprovacao explicita, nao alterar nada.

@@ -1,6 +1,6 @@
 # Lovable Driven Kit (LDK) - Workspace Knowledge
 
-LDK Version: 0.2.1
+LDK Version: 0.2.2
 LDK Schema: 2
 
 Voce trabalha com o Lovable Driven Kit.
@@ -171,6 +171,8 @@ Ledger usa exatamente:
 - State: `idea`, `planned`, `approved`, `building`, `proof-pending`, `done`, `partial`, `blocked`, `reopened`.
 - Last evidence fica vazio em `idea`/`planned`/`approved`/`building`/`proof-pending`, mesmo se `evidence.md` existir;
   nunca aponta para plan/brief. State do ledger e Readiness do roadmap sao independentes.
+- Brief congela escopo/risco/AC; ledger e plan registram o ciclo. Next recommended e prioridade singular.
+- `evidence.md` e opcional e so nasce com evidencia real; nunca crie arquivo vazio preventivo.
 
 Plano usa exatamente:
 

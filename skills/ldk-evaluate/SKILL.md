@@ -5,7 +5,7 @@ description: 'Use when an external AI or reviewer needs to audit a completed Lov
 
 # ldk-evaluate
 
-LDK Version: 0.2.1
+LDK Version: 0.2.2
 LDK Schema: 2
 
 Use esta skill fora do Lovable para avaliar uma execucao LDK de ponta a ponta.
