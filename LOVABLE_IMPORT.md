@@ -1,6 +1,6 @@
 # Substituir o LDK no Lovable
 
-LDK Version: 0.2.1
+LDK Version: 0.2.2
 LDK Schema: 2
 
 Este e o pacote canonico de importacao do LDK. Ele funciona pelo navegador no computador, celular ou tablet: nao
@@ -71,13 +71,13 @@ Sem alterar arquivos ou executar outro comando, informe apenas:
 4. qualquer divergencia encontrada.
 ```
 
-O resultado esperado nas duas Knowledges e `LDK Version: 0.2.1` e `LDK Schema: 2`, com as 10 skills disponiveis.
+O resultado esperado nas duas Knowledges e `LDK Version: 0.2.2` e `LDK Schema: 2`, com as 10 skills disponiveis.
 
 ## 5. Retome o projeto
 
 - App que ja usa schema 2: rode `/ldk-doctor` primeiro. Ele diagnostica sem corrigir nada automaticamente.
-- Artefatos `ldk/` criados em 0.2.0 podem permanecer como historico compativel: 0.2.1 nao muda o schema e nao exige
-  reescrever o estado do projeto apenas para trocar a patch.
+- Artefatos `ldk/` criados em 0.2.0/0.2.1 podem permanecer como historico compativel: 0.2.2 nao muda o schema e nao
+  exige reescrever o estado do projeto apenas para trocar a patch.
 - App antigo em schema 1: rode `/ldk-intake` para criar/aprovar o discovery e migrar o estado antes de continuar.
 - Projeto novo: rode `/ldk-intake`.
 

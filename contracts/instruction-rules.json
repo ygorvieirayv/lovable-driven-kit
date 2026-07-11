@@ -1,5 +1,5 @@
 {
-  "version": "0.2.1",
+  "version": "0.2.2",
   "schema": 2,
   "knowledgeFiles": [
     "workspace-knowledge.md",
@@ -24,6 +24,7 @@
   ],
   "evaluationFiles": [
     "evaluation/doctor-state-freshness-regression.md",
+    "evaluation/doctor-priority-brief-regression.md",
     "evaluation/mini-store-checklist.md"
   ],
   "versionedFiles": [
@@ -121,6 +122,37 @@
     {
       "id": "LDK-R009",
       "text": "Se HEAD mudar durante o diagnostico, reinicie a leitura no novo estado.",
+      "files": [
+        "skills/ldk-doctor/SKILL.md"
+      ]
+    },
+    {
+      "id": "LDK-R010",
+      "text": "`Next recommended feature` e uma prioridade singular, nao lista exaustiva de toda readiness `ready`/`verify`.",
+      "files": [
+        "contracts/state-markers.md",
+        "skills/ldk-doctor/SKILL.md"
+      ]
+    },
+    {
+      "id": "LDK-R011",
+      "text": "`brief.md` congela escopo, risco e AC aprovados; ledger e plan registram o ciclo atual.",
+      "files": [
+        "contracts/state-markers.md",
+        "skills/ldk-doctor/SKILL.md"
+      ]
+    },
+    {
+      "id": "LDK-R012",
+      "text": "`evidence.md` e opcional e criado quando existe evidencia para registrar; nunca crie arquivo vazio preventivo.",
+      "files": [
+        "contracts/state-markers.md",
+        "skills/ldk-doctor/SKILL.md"
+      ]
+    },
+    {
+      "id": "LDK-R013",
+      "text": "Finding descreve violacao atual confirmada, nao problema futuro hipotetico.",
       "files": [
         "skills/ldk-doctor/SKILL.md"
       ]

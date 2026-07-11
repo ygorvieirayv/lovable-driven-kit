@@ -5,7 +5,7 @@ description: Use when ordering project capabilities and features by dependencies
 
 # ldk-roadmap
 
-LDK Version: 0.2.1
+LDK Version: 0.2.2
 LDK Schema: 2
 
 Use esta skill para transformar o discovery aprovado em ordem de entrega.

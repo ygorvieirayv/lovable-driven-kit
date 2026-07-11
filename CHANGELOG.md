@@ -1,5 +1,25 @@
 # Changelog
 
+## [0.2.2] - 2026-07-11
+
+### Fixed
+
+- `Next recommended feature` e tratado como prioridade singular, nao espelho de todas as linhas `ready`/`verify`.
+- Brief permanece snapshot de escopo/risco/AC; doctor nao exige sincronizar seu status com ledger/plan.
+- `evidence.md` continua on-demand; doctor nao cria arquivo vazio nem pune feature ainda planejada.
+- Finding precisa representar violacao atual. Risco futuro e estado esperado nao recebem severidade corretiva.
+- Severidade nao pode contradizer o proprio texto do finding.
+- Doctor procura paths antes de alegar duplicidade entre estado ativo e historico congelado.
+
+### Added
+
+- Regressao `doctor-priority-brief-regression.md` e regras machine-readable para prioridade, brief e evidence.
+
+### Migration
+
+- Atualize os dois Knowledges e as 10 skills em conjunto.
+- Schema permanece 2; artefatos de projeto 0.2.0/0.2.1 seguem como historico de patch compativel.
+
 ## [0.2.1] - 2026-07-11
 
 ### Fixed

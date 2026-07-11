@@ -19,7 +19,7 @@ ldk/discovery.md
 Marcadores obrigatorios:
 
 ```md
-LDK Version: 0.2.1
+LDK Version: 0.2.2
 LDK Schema: 2
 Status: draft | external-review | awaiting-approval | approved
 Revision: <inteiro positivo>
@@ -37,7 +37,7 @@ Approved by: <usuario ou vazio>
 `ldk/project.md` registra:
 
 ```md
-LDK Version: 0.2.1
+LDK Version: 0.2.2
 LDK Schema: 2
 Discovery revision: <inteiro positivo>
 Autonomy mode: guided | balanced | autopilot
@@ -87,6 +87,12 @@ Regra:
 - `done` exige `Proof level achieved >= Proof level required`.
 
 ## Feature plan
+
+Antes do plan, `ldk/features/<feature>/brief.md` congela o recorte aprovado: objetivo, usuario, escopo, fora de
+escopo, AC, dependencias, concerns e `[VERIFY]`.
+`brief.md` congela escopo, risco e AC aprovados; ledger e plan registram o ciclo atual. Seu `Status: planned` nao
+precisa acompanhar estados posteriores, salvo contrato explicito
+do projeto.
 
 Arquivo:
 
@@ -148,6 +154,7 @@ Readiness permitido:
 Regra:
 
 - `State` do ledger e `Readiness` do roadmap sao dimensoes independentes.
+- `Next recommended feature` e uma prioridade singular, nao lista exaustiva de toda readiness `ready`/`verify`.
 - `planned + blocked`, `partial + verify` e `partial + blocked` podem ser coerentes quando a dependencia ou decisao
   registrada justificar a readiness.
 - Uma feature `blocked` nao deve ir para `ldk-plan` sem decisao consciente do usuario.
@@ -190,6 +197,9 @@ Arquivo opcional para features com varias tasks ou prova P3/P4:
 ```txt
 ldk/features/<feature>/evidence.md
 ```
+
+`evidence.md` e opcional e criado quando existe evidencia para registrar; nunca crie arquivo vazio preventivo.
+Ausencia em feature ainda planejada/aprovada nao e drift.
 
 Cada entrada registra task, acao/comando, fonte, resultado, exit code quando houver, observacao/output, AC coberto,
 referencia e limitacao. Alegacao sem fonte observavel nao e evidencia.

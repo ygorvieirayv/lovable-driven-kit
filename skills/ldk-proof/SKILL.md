@@ -5,7 +5,7 @@ description: Use when finishing an LDK feature after essential tasks are proof-p
 
 # ldk-proof
 
-LDK Version: 0.2.1
+LDK Version: 0.2.2
 LDK Schema: 2
 
 Sem prova, nao e done.

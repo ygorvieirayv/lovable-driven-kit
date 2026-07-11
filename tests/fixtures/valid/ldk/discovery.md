@@ -1,6 +1,6 @@
 # LDK Project Discovery
 
-LDK Version: 0.2.1
+LDK Version: 0.2.2
 LDK Schema: 2
 Status: approved
 Revision: 1

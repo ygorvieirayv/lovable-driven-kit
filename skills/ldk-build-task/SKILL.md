@@ -5,7 +5,7 @@ description: Use when implementing exactly one approved LDK task in guided/manua
 
 # ldk-build-task
 
-LDK Version: 0.2.1
+LDK Version: 0.2.2
 LDK Schema: 2
 
 Use esta skill para implementar exatamente uma task aprovada.
