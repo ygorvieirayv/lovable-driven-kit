@@ -5,7 +5,7 @@ description: Use when planning one feature after approved LDK discovery and a cu
 
 # ldk-plan
 
-LDK Version: 0.2.0
+LDK Version: 0.2.1
 LDK Schema: 2
 
 Use esta skill para planejar uma feature antes de construir.

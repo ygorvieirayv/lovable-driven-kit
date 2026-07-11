@@ -5,7 +5,7 @@ description: Use when reviewing an implemented LDK feature against its plan, pro
 
 # ldk-review
 
-LDK Version: 0.2.0
+LDK Version: 0.2.1
 LDK Schema: 2
 
 Use esta skill para revisar uma feature depois do proof, com foco em bugs, riscos, drift e testes.

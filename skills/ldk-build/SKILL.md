@@ -5,7 +5,7 @@ description: Use when executing one approved LDK feature after approved discover
 
 # ldk-build
 
-LDK Version: 0.2.0
+LDK Version: 0.2.1
 LDK Schema: 2
 
 Sem prova, nao e done.

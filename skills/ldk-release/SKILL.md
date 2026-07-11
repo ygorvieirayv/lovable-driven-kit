@@ -5,7 +5,7 @@ description: Use when preparing to publish or hand off a Lovable app and an LDK 
 
 # ldk-release
 
-LDK Version: 0.2.0
+LDK Version: 0.2.1
 LDK Schema: 2
 
 Use esta skill antes de publicar ou entregar uma versao.

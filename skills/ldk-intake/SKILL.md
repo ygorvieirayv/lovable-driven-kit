@@ -5,7 +5,7 @@ description: Use when starting, continuing, externally reviewing, or reconciling
 
 # ldk-intake
 
-LDK Version: 0.2.0
+LDK Version: 0.2.1
 LDK Schema: 2
 
 Use esta skill como porta obrigatoria de curadoria inicial do Lovable Driven Kit.

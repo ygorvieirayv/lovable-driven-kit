@@ -1,5 +1,28 @@
 # Changelog
 
+## [0.2.1] - 2026-07-11
+
+### Fixed
+
+- `ldk-doctor` nao confunde `evidence.md` intermediario com `Last evidence` de estado final.
+- Ledger `State` e roadmap `Readiness` passaram a ser tratados como dimensoes independentes.
+- CI, diff e proof temporal agora sao vinculados ao commit/branch/ambiente verificados; green antigo e historico.
+- Diagnostico read-only captura HEAD antes/depois e reinicia se sync externo mudar o estado durante a leitura.
+- Severidade High/Critical exige violacao confirmada; inferencia sem evidencia fica `[VERIFY]`.
+- Doctor diferencia infraestrutura inexistente, check nao executado, check falho e suite existente mas incompleta.
+- Workflow de proof usa runtime atual do checkout, sem o warning de Node depreciado observado nos apps.
+
+### Added
+
+- Cenario de regressao `evaluation/doctor-state-freshness-regression.md` baseado em state/readiness, CI obsoleto e
+  mutacao externa, sem acoplar o runtime a um nicho ou provedor.
+- Regras criticas do hotfix agora fazem parte do manifesto validado como codigo.
+
+### Migration
+
+- Atualize os dois Knowledges e as 10 skills em conjunto.
+- Schema permanece 2. Artefatos `ldk/` criados em 0.2.0 sao historico de patch compativel e nao exigem reescrita.
+
 ## [0.2.0] - 2026-07-10
 
 ### Added

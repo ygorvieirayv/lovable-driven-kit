@@ -1,5 +1,5 @@
 {
-  "version": "0.2.0",
+  "version": "0.2.1",
   "schema": 2,
   "knowledgeFiles": [
     "workspace-knowledge.md",
@@ -21,6 +21,10 @@
   "distributionFiles": [
     "LOVABLE_IMPORT.md",
     "lovable-import-manifest.json"
+  ],
+  "evaluationFiles": [
+    "evaluation/doctor-state-freshness-regression.md",
+    "evaluation/mini-store-checklist.md"
   ],
   "versionedFiles": [
     "workspace-knowledge.md",
@@ -88,6 +92,37 @@
         "workspace-knowledge.md",
         "skills/ldk-build/SKILL.md",
         "skills/ldk-proof/SKILL.md"
+      ]
+    },
+    {
+      "id": "LDK-R006",
+      "text": "Existir `evidence.md` nao autoriza preencher `Last evidence` em estado nao final.",
+      "files": [
+        "contracts/state-markers.md",
+        "skills/ldk-doctor/SKILL.md"
+      ]
+    },
+    {
+      "id": "LDK-R007",
+      "text": "`State` do ledger e `Readiness` do roadmap sao dimensoes independentes.",
+      "files": [
+        "contracts/state-markers.md",
+        "skills/ldk-doctor/SKILL.md"
+      ]
+    },
+    {
+      "id": "LDK-R008",
+      "text": "Evidencia de CI so vale para o commit e branch que ela verificou.",
+      "files": [
+        "contracts/state-markers.md",
+        "skills/ldk-doctor/SKILL.md"
+      ]
+    },
+    {
+      "id": "LDK-R009",
+      "text": "Se HEAD mudar durante o diagnostico, reinicie a leitura no novo estado.",
+      "files": [
+        "skills/ldk-doctor/SKILL.md"
       ]
     }
   ],
